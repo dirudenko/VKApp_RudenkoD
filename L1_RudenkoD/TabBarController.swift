@@ -33,10 +33,19 @@ class TabBarController: UITabBarController {
   
   
   func fillGroups() {
-    let group1 = Group(name: "test1", description: nil, groupImage: nil)
-    let group2 = Group(name: "test2", description: nil, groupImage: nil)
+    let group1 = Group(name: "GeekBrains", description: "Группа для студентов GeekBrains", groupImage:  UIImage(named: "gb"), status: true)
+    let group2 = Group(name: "Mobile Developer", description: "Группа для мобильных разработчиков", groupImage: UIImage(named: "mobile"), status: false)
+    let group3 = Group(name: "iOS Developer", description: "Группа для iOS разработчиков", groupImage: UIImage(named: "swift"), status: false)
+    let group4 = Group(name: "Forbes TOP 100", description: "Группа для членов Forbes TOP 100", groupImage: UIImage(named: "forbes"), status: false)
+    let group5 = Group(name: "Summer Vacation", description: "Обсуждение грядущих отпусков", groupImage: nil, status: true)
     DataStorage.shared.allGroup.append(group1)
+    DataStorage.shared.myGroup.append(group1)
     DataStorage.shared.allGroup.append(group2)
+    DataStorage.shared.allGroup.append(group3)
+    DataStorage.shared.allGroup.append(group4)
+    DataStorage.shared.allGroup.append(group5)
+    DataStorage.shared.myGroup.append(group5)
+
 
   }
   

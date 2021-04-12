@@ -8,18 +8,44 @@
 import UIKit
 
 class DetailedFriendCollectionViewCell: UICollectionViewCell {
- 
-  @IBOutlet weak var avatar: UIImageView!
+  
+  @IBOutlet weak var avatarLabel: UIImageView!
   
   @IBOutlet weak var nameLabel: UILabel!
   
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+  @IBOutlet weak var ageLabel: UILabel!
   
-  func configure(name: String, image: UIImage) {
-//    avatar.image = image
-    nameLabel.text = name
+  @IBOutlet weak var workLabel: UILabel!
+  
+  func clearCell() {
+    avatarLabel.image = nil
+    nameLabel.text = nil
+    ageLabel.text = nil
+    workLabel.text = nil
+  }
+  
+  override func prepareForReuse() {
+    clearCell()
+  }
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    clearCell()
+    // Initialization code
+  }
+  
+  func configure(name: String?, image: UIImage?, age: String?, work: String?) {
+    if let image = image {
+      avatarLabel.image = image
+    }
+    if let name = name {
+      nameLabel.text = name
+    }
+    if let age = age {
+      ageLabel.text = age
+    }
+    if let work = work {
+      workLabel.text = work
+    }
   }
 }

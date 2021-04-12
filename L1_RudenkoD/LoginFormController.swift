@@ -13,13 +13,13 @@ class LoginFormController: UIViewController {
   @IBOutlet weak var loginInput: UITextField!
   @IBOutlet weak var passwordInput: UITextField!
   
-//  func checkUser() -> Bool {
-//    let login = "admin"
-//    let password = "admin"
-//    guard self.loginInput.text?.trimmingCharacters(in: .whitespacesAndNewlines) == login,
-//          self.passwordInput.text?.trimmingCharacters(in: .whitespacesAndNewlines) == password else { return false }
-//    return true
-//  }
+  func checkUser() -> Bool {
+    let login = "admin"
+    let password = "admin"
+    guard self.loginInput.text?.trimmingCharacters(in: .whitespacesAndNewlines) == login,
+          self.passwordInput.text?.trimmingCharacters(in: .whitespacesAndNewlines) == password else { return false }
+    return true
+  }
   
   func showLoginError() {
     let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -31,13 +31,13 @@ class LoginFormController: UIViewController {
     })
   }
   
-//  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//    let checkResult = checkUser()
-//    if !checkResult {
-//      showLoginError()
-//    }
-//    return checkResult
-//  }
+  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    let checkResult = checkUser()
+    if !checkResult {
+      showLoginError()
+    }
+    return checkResult
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()

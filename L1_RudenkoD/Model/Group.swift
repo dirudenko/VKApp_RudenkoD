@@ -12,5 +12,14 @@ struct Group {
   var name: String
   var description: String?
   var groupImage: UIImage?
+  var status: Bool
   
 }
+
+extension Group: Equatable {
+  static func == (lhs: Group, rhs: Group) -> Bool {
+          return
+              lhs.name == rhs.name
+  }
+}
+      

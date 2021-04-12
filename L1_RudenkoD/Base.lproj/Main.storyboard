@@ -144,6 +144,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Vll-EG-qeI" kind="show" identifier="info" id="rkt-CG-fHt"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="n3Z-v2-Nn3">
                                 <rect key="frame" x="0.0" y="71.5" width="414" height="43.5"/>
@@ -266,9 +269,9 @@
         <!--Мои группы-->
         <scene sceneID="rGZ-Pm-Om0">
             <objects>
-                <tableViewController id="Yut-F3-jeF" sceneMemberID="viewController">
+                <tableViewController id="Yut-F3-jeF" customClass="UserGroupTableViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="eOs-5Z-xIk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -294,6 +297,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="myGroupTableView" destination="eOs-5Z-xIk" id="b8b-yD-aRQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y3N-Ay-fne" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -302,9 +308,9 @@
         <!--Группы-->
         <scene sceneID="hjs-Ez-OaM">
             <objects>
-                <tableViewController id="hww-Qn-CC1" sceneMemberID="viewController">
+                <tableViewController id="hww-Qn-CC1" customClass="AllGroupsTableViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qrP-tE-sCP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -315,6 +321,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Yut-F3-jeF" kind="show" identifier="addGroup" id="3PT-4r-yan"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -325,10 +334,13 @@
                     <navigationItem key="navigationItem" title="Группы" id="Mtv-rp-bXc">
                         <barButtonItem key="backBarButtonItem" title="Назад" id="kPd-CL-2LZ"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="allGroupsTableView" destination="qrP-tE-sCP" id="4zt-JQ-dxx"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fwc-rP-7O4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4277" y="419"/>
+            <point key="canvasLocation" x="4297" y="419"/>
         </scene>
         <!--Группы-->
         <scene sceneID="4I8-SM-br0">
@@ -348,6 +360,10 @@
             <point key="canvasLocation" x="2609" y="419"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="3PT-4r-yan"/>
+        <segue reference="rkt-CG-fHt"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="logo" width="266" height="190"/>
         <image name="plus" catalog="system" width="128" height="113"/>

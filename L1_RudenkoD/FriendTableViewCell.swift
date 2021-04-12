@@ -13,20 +13,14 @@ class FriendTableViewCell: UITableViewCell {
   @IBOutlet weak var avatarImage: UIImageView!
   @IBOutlet weak var userName: UILabel!
   
-  
- 
-
-  //let nibIdentifier = "FriendTableViewCell"
-  //let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
-   
-  func clearCell(){
-    avatarImage = nil
-    userName = nil
+  func clearCell() {
+    avatarImage.image = nil
+    userName.text = nil
   }
   
     override func awakeFromNib() {
         super.awakeFromNib()
-        //clearCell()
+        clearCell()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -36,12 +30,15 @@ class FriendTableViewCell: UITableViewCell {
     }
   
   override func prepareForReuse() {
-    //clearCell()
+    clearCell()
   }
   
-  func configure(name: String, age: String, image: UIImage) {
+  func configure(name: String?, image: UIImage?) {
+    if let image = image {
     avatarImage.image = image
+    }
+    if let name = name {
     userName.text = name
+    }
   }
-  
 }
