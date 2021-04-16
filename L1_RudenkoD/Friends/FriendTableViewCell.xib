@@ -23,6 +23,11 @@
                             <constraint firstAttribute="width" secondItem="3Je-m9-ESq" secondAttribute="height" multiplier="85:85" id="UGD-co-21v"/>
                             <constraint firstAttribute="width" constant="72" id="cgT-FB-41i"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                <integer key="value" value="35"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pJ-Y3-eY8">
                         <rect key="frame" x="80" y="26" width="137" height="21"/>

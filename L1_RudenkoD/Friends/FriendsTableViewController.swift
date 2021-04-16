@@ -11,6 +11,8 @@ class FriendsTableViewController: UITableViewController {
   
   @IBOutlet var friendsTableView: UITableView!
   
+  var friendIndex: Int?
+  
   let nibIdentifier = "FriendTableViewCell"
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -36,22 +38,10 @@ class FriendsTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
     let name = DataStorage.shared.usersArray[indexPath.row].name
-    let image = DataStorage.shared.usersArray[indexPath.row].avatar!
+    let image = DataStorage.shared.usersArray[indexPath.row].avatar ?? UIImage()
     cell.configure(name: name, image: image)
     return cell
   }
-  
-  
-  
-  
-  /*
-   // Override to support conditional editing of the table view.
-   override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-   // Return false if you do not want the specified item to be editable.
-   return true
-   }
-   */
-  
   
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
@@ -61,19 +51,16 @@ class FriendsTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let item = DataStorage.shared.usersArray[indexPath.row]
-    DataStorage.shared.selectedUser.append(indexPath.row)
-    performSegue(withIdentifier: "FriendInfo", sender: item)
+    friendIndex = indexPath.row
+    performSegue(withIdentifier: "FriendInfo", sender: (Any).self)
   }
   
-  //  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  //    if segue.identifier == "FriendInfo" {
-  //
-  //      let controller = segue.destination as! DetailedFriendCollectionViewController
-  //      controller.performSegue(withIdentifier: "FriendInfo", sender: <#T##Any?#>)
-  //
-  //    }
-  //}
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "FriendInfo" {
+      let controller = segue.destination as! DetailedFriendCollectionViewController
+      controller.index.self = friendIndex
+    }
+  }
 }
 /*
  // Override to support rearranging the table view.

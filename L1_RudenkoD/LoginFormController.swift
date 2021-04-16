@@ -8,6 +8,7 @@
 import UIKit
 
 class LoginFormController: UIViewController {
+  
   let fromLoginToTabbbarSegue = "fromLoginToTabbbarSegue"
   
   @IBOutlet weak var loginInput: UITextField!
@@ -31,13 +32,13 @@ class LoginFormController: UIViewController {
     })
   }
   
-  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-    let checkResult = checkUser()
-    if !checkResult {
-      showLoginError()
-    }
-    return checkResult
-  }
+//  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//    let checkResult = checkUser()
+//    if !checkResult {
+//      showLoginError()
+//    }
+//    return checkResult
+//  }
   
   override func viewDidLoad() {
     super.viewDidLoad()

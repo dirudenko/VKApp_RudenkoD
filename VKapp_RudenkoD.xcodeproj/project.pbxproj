@@ -84,28 +84,44 @@
 		695F08C92618D394001DC492 /* VKapp_RudenkoD */ = {
 			isa = PBXGroup;
 			children = (
-				695F08D82618D395001DC492 /* Info.plist */,
 				695F08CA2618D394001DC492 /* AppDelegate.swift */,
-				691F6EAA26231F0B00CA7957 /* FriendTableViewCell.swift */,
-				691F6EAB26231F0B00CA7957 /* FriendTableViewCell.xib */,
-				69BF44192622F7AA00D03109 /* FriendsTableViewController.swift */,
-				69D332272618DF76009D4411 /* LoginFormController.swift */,
-				695F08CC2618D394001DC492 /* SceneDelegate.swift */,
-				691F6EB226233DD900CA7957 /* DetailedFriendCollectionViewCell.swift */,
-				691F6EB326233DD900CA7957 /* DetailedFriendCollectionViewCell.xib */,
-				6996570526246925008650B8 /* AllGroupsTableViewController.swift */,
-				69BF44252622FF7900D03109 /* TabBarController.swift */,
-				691F6EAF26233D8E00CA7957 /* DetailedFriendCollectionViewController.swift */,
-				699656FD26245702008650B8 /* UserGroupTableViewController.swift */,
 				695F08D32618D395001DC492 /* Assets.xcassets */,
-				699657002624595D008650B8 /* GroupTableViewCell.swift */,
-				699657012624595D008650B8 /* GroupTableViewCell.xib */,
+				699657082625F8CB008650B8 /* Friends */,
+				6996570A2625F8E6008650B8 /* Groups */,
+				695F08D82618D395001DC492 /* Info.plist */,
 				695F08D52618D395001DC492 /* LaunchScreen.storyboard */,
+				69D332272618DF76009D4411 /* LoginFormController.swift */,
 				695F08D02618D394001DC492 /* Main.storyboard */,
 				69BF44122622F6E300D03109 /* Model */,
+				695F08CC2618D394001DC492 /* SceneDelegate.swift */,
+				69BF44252622FF7900D03109 /* TabBarController.swift */,
 			);
 			name = VKapp_RudenkoD;
 			path = L1_RudenkoD;
+			sourceTree = "<group>";
+		};
+		699657082625F8CB008650B8 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				691F6EAA26231F0B00CA7957 /* FriendTableViewCell.swift */,
+				691F6EAB26231F0B00CA7957 /* FriendTableViewCell.xib */,
+				69BF44192622F7AA00D03109 /* FriendsTableViewController.swift */,
+				691F6EB226233DD900CA7957 /* DetailedFriendCollectionViewCell.swift */,
+				691F6EB326233DD900CA7957 /* DetailedFriendCollectionViewCell.xib */,
+				691F6EAF26233D8E00CA7957 /* DetailedFriendCollectionViewController.swift */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		6996570A2625F8E6008650B8 /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				6996570526246925008650B8 /* AllGroupsTableViewController.swift */,
+				699657002624595D008650B8 /* GroupTableViewCell.swift */,
+				699657012624595D008650B8 /* GroupTableViewCell.xib */,
+				699656FD26245702008650B8 /* UserGroupTableViewController.swift */,
+			);
+			path = Groups;
 			sourceTree = "<group>";
 		};
 		69BF44122622F6E300D03109 /* Model */ = {

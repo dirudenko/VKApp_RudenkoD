@@ -12,13 +12,27 @@ class GroupTableViewCell: UITableViewCell {
   @IBOutlet weak var groupAvatar: UIImageView!
   @IBOutlet weak var groupName: UILabel!
   @IBOutlet weak var groupDescription: UILabel!
+  @IBOutlet weak var groupMember: UIImageView!
   
   func clearCell() {
     groupAvatar.image = nil
     groupName.text = nil
     groupDescription.text = nil
-
+    //groupMember.image = nil
   }
+  
+//  func findMember() {
+//    for allGroup in DataStorage.shared.allGroup {
+//      for myGroup in DataStorage.shared.myGroup{
+//        if allGroup.name.contains(myGroup.name)  {
+//          groupMember.image = nil
+//        }
+//        else {
+//          groupMember.image = UIImage(named: "swift")
+//        }
+//      }
+//    }
+//  }
   
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,7 +43,7 @@ class GroupTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+      
     }
   
   override func prepareForReuse() {
@@ -46,6 +60,9 @@ class GroupTableViewCell: UITableViewCell {
     if let descr = descr {
     groupDescription.text = descr
     }
+//     if let member = member {
+//      groupMember.image = member
+//    }
   }
 }
     

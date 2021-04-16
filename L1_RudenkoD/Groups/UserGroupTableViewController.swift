@@ -15,14 +15,16 @@ class UserGroupTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.reloadData()
+    //tableView.reloadData()
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
     myGroupTableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
   }
   
-  override func viewDidAppear(_ animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
     tableView.reloadData()
   }
+  
   // MARK: - Table view data source
   
   override func numberOfSections(in tableView: UITableView) -> Int {
@@ -56,20 +58,9 @@ class UserGroupTableViewController: UITableViewController {
     if editingStyle == .delete {
       DataStorage.shared.myGroup.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)
-      DataStorage.shared.allGroup[indexPath.row].status = false
     }
   }
   
-  /*
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "info" {
-      let friend = segue.destination as! DetailedFriendCollectionViewController
-      let indexPath = sender as! IndexPath
-      let friend1 = DataStorage.shared.usersArray[indexPath.row]
-      friend.friendInfo = friend1
-    }
-  }
-  */
   /*
    // Override to support rearranging the table view.
    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

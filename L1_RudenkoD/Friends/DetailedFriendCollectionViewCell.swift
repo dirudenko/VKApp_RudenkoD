@@ -49,3 +49,16 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
     }
   }
 }
+
+extension DetailedFriendCollectionViewCell: UICollectionViewDelegateFlowLayout {
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: 500.0, height: 500.0)
+  }
+}
+
+//extension DetailedFriendCollectionViewCell: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: 200.0, height: 200.0)
+//    }
+//}

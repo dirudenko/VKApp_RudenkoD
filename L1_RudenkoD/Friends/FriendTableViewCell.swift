@@ -23,6 +23,8 @@ class FriendTableViewCell: UITableViewCell {
         clearCell()
     }
 
+  
+  
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -40,5 +42,11 @@ class FriendTableViewCell: UITableViewCell {
     if let name = name {
     userName.text = name
     }
+  }
+}
+
+extension FriendTableViewCell: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: 400, height: 600)
   }
 }

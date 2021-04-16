@@ -13,6 +13,8 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   
   let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
   
+  var index: Int?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
@@ -26,9 +28,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
     // Do any additional setup after loading the view.
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    DataStorage.shared.selectedUser.removeAll()
-  }
+
   
   /*
    // MARK: - Navigation
@@ -56,11 +56,11 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as? DetailedFriendCollectionViewCell else
     { return UICollectionViewCell() }
-    let index = DataStorage.shared.selectedUser[0]
-    let name = DataStorage.shared.usersArray[index].name
-    let age = String(DataStorage.shared.usersArray[index].age)
-    let image = DataStorage.shared.usersArray[index].avatar!
-    let work = DataStorage.shared.usersArray[index].job
+    guard let userIndex = index else { return UICollectionViewCell()}
+    let name = DataStorage.shared.usersArray[userIndex].name
+    let age = String(DataStorage.shared.usersArray[userIndex].age)
+    let image = DataStorage.shared.usersArray[userIndex].avatar ?? UIImage()
+    let work = DataStorage.shared.usersArray[userIndex].job
     cell.configure(name: name, image: image, age: age, work: work!)
     return cell
   }
@@ -95,4 +95,11 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
    }
    */
   
+}
+
+extension DetailedFriendCollectionViewController: UICollectionViewDelegateFlowLayout {
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: 400.0, height: 900.0)
+  }
 }

@@ -15,14 +15,13 @@ class AllGroupsTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.reloadData()
+    //tableView.reloadData()
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
     allGroupsTableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     //self.navigationItem.rightBarButtonItem = self.editButtonItem
   }
-  
   // MARK: - Table view data source
   
   override func numberOfSections(in tableView: UITableView) -> Int {
@@ -40,17 +39,20 @@ class AllGroupsTableViewController: UITableViewController {
     let name = DataStorage.shared.allGroup[indexPath.row].name
     let image = DataStorage.shared.allGroup[indexPath.row].groupImage ?? UIImage()
     let descr = DataStorage.shared.allGroup[indexPath.row].description
+    for item in DataStorage.shared.myGroup {
+      if item.name == name
+      { cell.groupMember.image = UIImage(named: "kiss") }
+    }
     cell.configure(name: name, image: image, descr: descr)
     return cell
+    
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let group = DataStorage.shared.allGroup[indexPath.row]
     if !DataStorage.shared.myGroup.contains(group) {
       DataStorage.shared.myGroup.append(group)
-      DataStorage.shared.allGroup[indexPath.row].status = true
-      performSegue(withIdentifier: "addGroup", sender: (Any).self)
-      showAlert(title: "Группа добавлена", message: nil)
+      self.navigationController?.popViewController(animated: true)
     } else {
       showAlert(title: "Ошибка", message: "Вы уже состоите в этой группе")
     }
@@ -79,6 +81,9 @@ class AllGroupsTableViewController: UITableViewController {
   //     //tableView.deleteRows(at: [indexPath], with: .fade)
   //     }
   //     }
+  
+  
+  
 }
 
 

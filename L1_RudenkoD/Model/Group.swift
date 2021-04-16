@@ -12,8 +12,7 @@ struct Group {
   var name: String
   var description: String?
   var groupImage: UIImage?
-  var status: Bool
-  
+  var isMember: Bool = false
 }
 
 extension Group: Equatable {

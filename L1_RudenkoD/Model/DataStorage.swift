@@ -13,7 +13,7 @@ class DataStorage: NSObject {
     super.init()
   }
   
-  var selectedUser = [Int]()
+  //var selectedUser = [Int]()
   
   var usersArray = [User]()
   var myFriendsArray = [User]()

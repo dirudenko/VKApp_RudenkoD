@@ -144,9 +144,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="Vll-EG-qeI" kind="show" identifier="info" id="rkt-CG-fHt"/>
-                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="n3Z-v2-Nn3">
                                 <rect key="frame" x="0.0" y="71.5" width="414" height="43.5"/>
@@ -207,8 +204,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="p9C-uo-5tA">
-                            <size key="itemSize" width="181" height="199"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="p9C-uo-5tA">
+                            <size key="itemSize" width="400" height="2000"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -234,7 +231,7 @@
         <scene sceneID="uwb-Lm-4O5">
             <objects>
                 <navigationController id="4Rx-Sr-vYi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Друзья" id="Zm2-UC-a6m"/>
+                    <tabBarItem key="tabBarItem" title="Друзья" image="person.fill" catalog="system" selectedImage="person.fill" id="Zm2-UC-a6m"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="keQ-qd-sYH">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -271,7 +268,7 @@
             <objects>
                 <tableViewController id="Yut-F3-jeF" customClass="UserGroupTableViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="eOs-5Z-xIk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -308,9 +305,9 @@
         <!--Группы-->
         <scene sceneID="hjs-Ez-OaM">
             <objects>
-                <tableViewController id="hww-Qn-CC1" customClass="AllGroupsTableViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController wantsFullScreenLayout="YES" id="hww-Qn-CC1" customClass="AllGroupsTableViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qrP-tE-sCP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -321,9 +318,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="Yut-F3-jeF" kind="show" identifier="addGroup" id="3PT-4r-yan"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -340,13 +334,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fwc-rP-7O4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4297" y="419"/>
+            <point key="canvasLocation" x="4277" y="419"/>
         </scene>
         <!--Группы-->
         <scene sceneID="4I8-SM-br0">
             <objects>
                 <navigationController id="yG1-7x-NuZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Группы" id="B0K-mD-rxO"/>
+                    <tabBarItem key="tabBarItem" title="Группы" image="rosette" catalog="system" id="B0K-mD-rxO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="t0x-Xz-E0J">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -360,13 +354,11 @@
             <point key="canvasLocation" x="2609" y="419"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="3PT-4r-yan"/>
-        <segue reference="rkt-CG-fHt"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="logo" width="266" height="190"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="rosette" catalog="system" width="106" height="128"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
