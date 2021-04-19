@@ -9,15 +9,13 @@ import UIKit
 
 class AllGroupsTableViewController: UITableViewController {
   
-  @IBOutlet var allGroupsTableView: UITableView!
-  
   let nibIdentifier = "GroupTableViewCell"
   
   override func viewDidLoad() {
     super.viewDidLoad()
     //tableView.reloadData()
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
-    allGroupsTableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
+    self.tableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     //self.navigationItem.rightBarButtonItem = self.editButtonItem

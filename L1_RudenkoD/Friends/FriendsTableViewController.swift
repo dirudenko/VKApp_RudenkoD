@@ -8,16 +8,21 @@
 import UIKit
 
 class FriendsTableViewController: UITableViewController {
-  
-  @IBOutlet var friendsTableView: UITableView!
+  @IBOutlet weak var button: UIButton!
   
   var friendIndex: Int?
-  
+  var charIndex = [String]()
   let nibIdentifier = "FriendTableViewCell"
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    charIndex = findChars()
+    print(charIndex)
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
-    friendsTableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
+    self.tableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
+    button.setTitle(String(charIndex[0]), for: .normal)
+      
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -39,6 +44,7 @@ class FriendsTableViewController: UITableViewController {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
     let name = DataStorage.shared.usersArray[indexPath.row].name
     let image = DataStorage.shared.usersArray[indexPath.row].avatar ?? UIImage()
+    
     cell.configure(name: name, image: image)
     return cell
   }
@@ -62,6 +68,20 @@ class FriendsTableViewController: UITableViewController {
     }
   }
 }
+
+
+extension FriendsTableViewController {
+  func findChars() -> [String] {
+    var unsortedChars = Set<String>()
+    for item in DataStorage.shared.usersArray {
+      let char = item.name.first
+      unsortedChars.insert(String(char!))
+    }
+    let sortedChars = Array(unsortedChars.sorted())
+    return Array(sortedChars)
+  }
+}
+
 /*
  // Override to support rearranging the table view.
  override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

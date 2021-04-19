@@ -51,6 +51,7 @@ class GroupTableViewCell: UITableViewCell {
   }
   
   func configure(name: String?, image: UIImage?, descr: String?) {
+    
     if let image = image {
     groupAvatar.image = image
     }

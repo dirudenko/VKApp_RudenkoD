@@ -24,9 +24,7 @@
                             <constraint firstAttribute="width" constant="72" id="cgT-FB-41i"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
-                                <integer key="value" value="35"/>
-                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="string" keyPath="" value=""/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pJ-Y3-eY8">
@@ -46,6 +44,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="avatarImage" destination="3Je-m9-ESq" id="0FH-eH-cIw"/>
+                <outlet property="cellLabel" destination="H2p-sc-9uM" id="GNb-jR-YVT"/>
                 <outlet property="userName" destination="8pJ-Y3-eY8" id="pbZ-ZG-ngG"/>
             </connections>
             <point key="canvasLocation" x="128.98550724637681" y="141.29464285714286"/>

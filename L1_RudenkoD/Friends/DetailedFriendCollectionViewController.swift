@@ -9,16 +9,15 @@ import UIKit
 
 class DetailedFriendCollectionViewController: UICollectionViewController {
   
-  @IBOutlet var DetailedFreindsOutlet: UICollectionView!
-  
+  @IBOutlet weak var photoAlbumButton: UIBarButtonItem!
   let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
-  
   var index: Int?
+  var isPressed = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
-    DetailedFreindsOutlet.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
+    self.collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     
@@ -47,6 +46,9 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
     return 1
   }
   
+  @IBAction func photoAlbumButton(_ sender: Any) {
+    performSegue(withIdentifier: "allPhotos", sender: self)
+  }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of items
@@ -61,9 +63,23 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
     let age = String(DataStorage.shared.usersArray[userIndex].age)
     let image = DataStorage.shared.usersArray[userIndex].avatar ?? UIImage()
     let work = DataStorage.shared.usersArray[userIndex].job
+    cell.avatarLabel.clipsToBounds = true
+    cell.avatarLabel.layer.cornerRadius = cell.avatarLabel.frame.height / 2
+    //cell.avatarLabel.addShadow(offset: CGSize.init(width: 0, height: 3), color: UIColor.black, radius: 2.0, opacity: 0.35)
     cell.configure(name: name, image: image, age: age, work: work!)
+
+//    if isPressed == true {
+//      performSegue(withIdentifier: "photoLibrary", sender: Any?.self)
+//    }
     return cell
   }
+
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    self.performSegue(withIdentifier: "allPhotos", sender: Any?.self)
+  }
+  
+  
+}
   // MARK: UICollectionViewDelegate
   
   /*
@@ -73,12 +89,9 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
    }
    */
   
-  /*
+  
    // Uncomment this method to specify if the specified item should be selected
-   override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-   return true
-   }
-   */
+   
   
   /*
    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
@@ -95,7 +108,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
    }
    */
   
-}
+
 
 extension DetailedFriendCollectionViewController: UICollectionViewDelegateFlowLayout {
   

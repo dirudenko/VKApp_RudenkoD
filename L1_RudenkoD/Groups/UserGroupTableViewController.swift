@@ -9,15 +9,13 @@ import UIKit
 
 class UserGroupTableViewController: UITableViewController {
   
-  @IBOutlet var myGroupTableView: UITableView!
-  
   let nibIdentifier = "GroupTableViewCell"
   
   override func viewDidLoad() {
     super.viewDidLoad()
     //tableView.reloadData()
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
-    myGroupTableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
+    self.tableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
   }
   
   override func viewWillAppear(_ animated: Bool) {

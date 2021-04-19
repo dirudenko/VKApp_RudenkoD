@@ -22,6 +22,9 @@
                             <constraint firstAttribute="width" constant="85" id="eTA-of-fDS"/>
                             <constraint firstAttribute="width" secondItem="jJf-0O-kdk" secondAttribute="height" multiplier="1:1" id="p7K-UN-eg7"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="groupName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6YP-dQ-mBy">
                         <rect key="frame" x="95" y="14" width="135" height="25"/>

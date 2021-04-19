@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yD-4f-qba">
-                        <rect key="frame" x="20" y="366" width="42" height="21"/>
+                        <rect key="frame" x="20" y="366" width="42" height="20.5"/>
                         <accessibility key="accessibilityConfiguration">
                             <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                         </accessibility>
@@ -26,7 +26,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nameLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y0-EY-sO1">
-                        <rect key="frame" x="130" y="350" width="300" height="53"/>
+                        <rect key="frame" x="129.5" y="350" width="300" height="52.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="300" id="k7h-JS-hAL"/>
                         </constraints>
@@ -41,35 +41,61 @@
                             <constraint firstAttribute="width" secondItem="SA2-W9-lGM" secondAttribute="height" multiplier="1:1" id="UAL-wJ-vqL"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
-                                <integer key="value" value="50"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="">
+                                <integer key="value" value="40"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Возраст:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olX-cL-IRu">
-                        <rect key="frame" x="20" y="427" width="70" height="21"/>
+                        <rect key="frame" x="20" y="426.5" width="69.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Работа:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XC2-fc-qWe">
-                        <rect key="frame" x="20" y="488" width="123.5" height="21"/>
+                        <rect key="frame" x="20" y="487" width="123" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ageLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evC-hL-RdN">
-                        <rect key="frame" x="130" y="427" width="70" height="21"/>
+                        <rect key="frame" x="129.5" y="426.5" width="69.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ageLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daw-DC-6eS">
-                        <rect key="frame" x="130" y="487" width="243" height="21"/>
+                        <rect key="frame" x="129.5" y="486" width="243.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdT-15-1ju">
+                        <rect key="frame" x="359" y="334" width="31" height="22"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74a-6a-Wko">
+                                <rect key="frame" x="0.0" y="0.0" width="10.5" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6o-Ec-zmU">
+                                <rect key="frame" x="10.5" y="0.0" width="20.5" height="22"/>
+                                <state key="normal" image="heart" catalog="system"/>
+                                <connections>
+                                    <action selector="pressLikeButton:" destination="7WB-db-Mch" eventType="touchUpInside" id="Txq-mV-Rig"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5d-oT-OAJ">
+                        <rect key="frame" x="20" y="540" width="119" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Все фотографии"/>
+                        <connections>
+                            <action selector="allPhotoButton:" destination="7WB-db-Mch" eventType="touchUpInside" id="mga-Us-dhz"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="evC-hL-RdN" firstAttribute="leading" secondItem="daw-DC-6eS" secondAttribute="leading" id="2Pa-3s-5QJ"/>
@@ -84,6 +110,8 @@
                     <constraint firstItem="olX-cL-IRu" firstAttribute="leading" secondItem="dx6-Vy-Coe" secondAttribute="leading" constant="20" id="Xoi-hG-MiH"/>
                     <constraint firstItem="SA2-W9-lGM" firstAttribute="centerX" secondItem="dx6-Vy-Coe" secondAttribute="centerX" id="bti-cM-50L"/>
                     <constraint firstItem="olX-cL-IRu" firstAttribute="leading" secondItem="XC2-fc-qWe" secondAttribute="leading" id="ceD-Kj-ECO"/>
+                    <constraint firstItem="cdT-15-1ju" firstAttribute="top" secondItem="SA2-W9-lGM" secondAttribute="bottom" constant="8" symbolic="YES" id="e1p-6h-uQr"/>
+                    <constraint firstItem="cdT-15-1ju" firstAttribute="leading" secondItem="SA2-W9-lGM" secondAttribute="trailing" constant="-31" id="eWL-x0-pD1"/>
                     <constraint firstItem="olX-cL-IRu" firstAttribute="baseline" secondItem="evC-hL-RdN" secondAttribute="baseline" id="gAe-c1-9ze"/>
                     <constraint firstItem="5yD-4f-qba" firstAttribute="top" secondItem="SA2-W9-lGM" secondAttribute="bottom" constant="40" id="ig8-cW-nWR"/>
                     <constraint firstItem="evC-hL-RdN" firstAttribute="leading" secondItem="olX-cL-IRu" secondAttribute="trailing" constant="40" id="j74-no-7si"/>
@@ -95,10 +123,15 @@
             <connections>
                 <outlet property="ageLabel" destination="evC-hL-RdN" id="D9L-qg-SXJ"/>
                 <outlet property="avatarLabel" destination="SA2-W9-lGM" id="lYi-bq-u0L"/>
+                <outlet property="likeButton" destination="w6o-Ec-zmU" id="KZQ-WE-G4K"/>
+                <outlet property="likeLabel" destination="74a-6a-Wko" id="pPr-Z4-eEn"/>
                 <outlet property="nameLabel" destination="6y0-EY-sO1" id="gFF-p5-5lv"/>
                 <outlet property="workLabel" destination="daw-DC-6eS" id="8Nv-wK-54T"/>
             </connections>
             <point key="canvasLocation" x="665.21739130434787" y="378.34821428571428"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="heart" catalog="system" width="128" height="109"/>
+    </resources>
 </document>
