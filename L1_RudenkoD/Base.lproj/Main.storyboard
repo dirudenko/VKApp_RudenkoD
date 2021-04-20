@@ -204,11 +204,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="2000"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionViewCellContentView>
+                                <connections>
+                                    <segue destination="K5m-Eb-t73" kind="show" identifier="allPhotos" id="Czq-qe-HhY"/>
+                                </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vjY-j7-HRJ">
                                 <rect key="frame" x="7" y="2010" width="400" height="2000"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d0l-BJ-Zl5">
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="d0l-BJ-Zl5">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="2000"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionViewCellContentView>
@@ -229,30 +232,16 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="Фото" id="8EO-2q-Ied">
                         <barButtonItem key="backBarButtonItem" title="Назад" id="V01-19-VuN"/>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="LNM-8o-koO">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="0Oh-As-bmH">
-                                <rect key="frame" x="302" y="7" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Фотоальбом"/>
-                            </button>
-                            <connections>
-                                <action selector="photoAlbumButton:" destination="Vll-EG-qeI" id="Uom-cj-3d1"/>
-                                <segue destination="K5m-Eb-t73" kind="show" identifier="allPhotos" id="krV-zq-84k"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="photoAlbumButton" destination="LNM-8o-koO" id="NEz-ls-sBz"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVe-K4-z0H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4333" y="-267"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Photos Collection View Controller-->
         <scene sceneID="2jW-gC-qum">
             <objects>
-                <collectionViewController id="K5m-Eb-t73" sceneMemberID="viewController">
+                <collectionViewController id="K5m-Eb-t73" customClass="PhotosCollectionViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="pig-AC-Q9Z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -264,10 +253,10 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ovB-dz-Qfg">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ovB-dz-Qfg" customClass="DetailedFriendCollectionViewCell" customModule="VKapp_RudenkoD" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="emp-4v-lNq">
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" id="emp-4v-lNq">
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionViewCellContentView>
@@ -279,6 +268,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="p6V-DP-KFP"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="414" height="896"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uIa-iV-9kD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

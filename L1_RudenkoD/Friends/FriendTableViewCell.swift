@@ -60,17 +60,3 @@ class FriendTableViewCell: UITableViewCell {
   }
 }
 
-//extension UIImageView {
-//  public func maskCircle(anyImage: UIImage) {
-//    self.contentMode = UIView.ContentMode.scaleAspectFill
-//    self.layer.cornerRadius = self.frame.height / 2
-//    self.layer.masksToBounds = false
-//    self.clipsToBounds = true
-//   self.image = anyImage
-//  }
-//}
-//extension FriendTableViewCell: UICollectionViewDelegateFlowLayout {
-//  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//    return CGSize(width: 400, height: 600)
-//  }
-//}

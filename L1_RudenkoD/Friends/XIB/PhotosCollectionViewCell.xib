@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PhotosCollectionViewCell" customModule="VKapp_RudenkoD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="264" height="237"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="264" height="237"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vFr-NH-6dv">
+                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="128" id="QGZ-CQ-cqQ"/>
+                            <constraint firstAttribute="width" constant="128" id="tei-yL-ysj"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wbo-FO-E3j">
+                        <rect key="frame" x="89" y="133" width="31" height="22"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hER-Aj-evY">
+                                <rect key="frame" x="0.0" y="0.0" width="10.5" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6p-ro-8d3">
+                                <rect key="frame" x="10.5" y="0.0" width="20.5" height="22"/>
+                                <state key="normal" image="heart" catalog="system"/>
+                                <connections>
+                                    <action selector="pressLikeButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="mhi-JG-5p0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="vFr-NH-6dv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0pj-Wh-fmQ"/>
+                <constraint firstItem="vFr-NH-6dv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="BhE-W0-tW7"/>
+                <constraint firstItem="Wbo-FO-E3j" firstAttribute="top" secondItem="vFr-NH-6dv" secondAttribute="bottom" constant="5" id="den-GH-YfM"/>
+                <constraint firstItem="Wbo-FO-E3j" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="89" id="dxL-YY-zTM"/>
+            </constraints>
+            <size key="customSize" width="264" height="237"/>
+            <connections>
+                <outlet property="likeButton" destination="X6p-ro-8d3" id="MTn-TL-a4d"/>
+                <outlet property="likeLabel" destination="hER-Aj-evY" id="yVI-D4-07b"/>
+                <outlet property="photoView" destination="vFr-NH-6dv" id="4wm-rE-oL9"/>
+            </connections>
+            <point key="canvasLocation" x="88.405797101449281" y="131.58482142857142"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="heart" catalog="system" width="128" height="109"/>
+    </resources>
+</document>
