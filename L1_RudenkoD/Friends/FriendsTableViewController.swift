@@ -8,7 +8,8 @@
 import UIKit
 
 class FriendsTableViewController: UITableViewController {
-  @IBOutlet weak var button: UIButton!
+  
+  @IBOutlet var buttons: [UIButton]!
   
   var friendIndex: Int?
   var charIndex = [String]()
@@ -21,10 +22,6 @@ class FriendsTableViewController: UITableViewController {
     print(charIndex)
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
     self.tableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
-    button.setTitle(String(charIndex[0]), for: .normal)
-      
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
     self.navigationItem.rightBarButtonItem = self.editButtonItem
   }
   
@@ -107,4 +104,18 @@ extension FriendsTableViewController {
  }
  */
 
+extension FriendsTableViewController {
+  func makeButtonWithText(text:String) -> UIButton {
+      //Initalize a button
+    let myButton = UIButton(type: UIButton.ButtonType.system)
+      //Set a frame for the button. Ignored in AutoLayout/ Stack Views
+      myButton.frame = CGRect(x: 30, y: 30, width: 150, height: 150)
+     //Set background color
+    myButton.backgroundColor = UIColor.blue
+     //State dependent properties title and title color
+    myButton.setTitle(text, for: .normal)
+    myButton.setTitleColor(UIColor.white, for: .normal)
+     return myButton
+  }
+}
 

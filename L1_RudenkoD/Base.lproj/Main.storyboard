@@ -130,6 +130,64 @@
             <point key="canvasLocation" x="985.50724637681162" y="75.669642857142847"/>
         </scene>
         <!--Друзья-->
+        <scene sceneID="vga-EB-s4E">
+            <objects>
+                <viewController id="YyK-vH-l6h" customClass="FriendsViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="b4j-Up-veU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KXK-Db-fTE">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="j7b-Sj-f6W">
+                                    <rect key="frame" x="0.0" y="99.5" width="414" height="725"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </tableView>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Cl9-eY-Juy">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cl9-eY-Juy" id="OvQ-yH-TAU">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Vll-EG-qeI" kind="show" identifier="FriendInfo" id="hCb-wW-OFm"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" id="8ZC-DD-OJy" customClass="CharPeekerControl" customModule="VKapp_RudenkoD" customModuleProvider="target">
+                                <rect key="frame" x="335" y="387" width="59" height="117"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <action selector="test:" destination="YyK-vH-l6h" eventType="touchUpOutside" id="FgR-HS-NLO"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eMd-jl-kub"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eMd-jl-kub" firstAttribute="bottom" secondItem="KXK-Db-fTE" secondAttribute="bottom" id="NxN-3t-X1p"/>
+                            <constraint firstItem="eMd-jl-kub" firstAttribute="trailing" secondItem="KXK-Db-fTE" secondAttribute="trailing" id="Nzt-FB-9bw"/>
+                            <constraint firstItem="KXK-Db-fTE" firstAttribute="leading" secondItem="eMd-jl-kub" secondAttribute="leading" id="dVc-TD-Xbq"/>
+                            <constraint firstItem="KXK-Db-fTE" firstAttribute="top" secondItem="eMd-jl-kub" secondAttribute="top" id="znD-yT-hBB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Друзья" id="Gr5-qY-3yE"/>
+                    <connections>
+                        <outlet property="charPeekerControl" destination="8ZC-DD-OJy" id="sdc-j8-qR6"/>
+                        <outlet property="friendsTableView" destination="KXK-Db-fTE" id="FtC-b9-DGL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TWv-AT-KFS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3695.652173913044" y="-913.39285714285711"/>
+        </scene>
+        <!--Друзья-->
         <scene sceneID="4q9-oM-HQ4">
             <objects>
                 <tableViewController id="78L-fn-eRa" customClass="FriendsTableViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
@@ -137,22 +195,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <stackView key="tableFooterView" opaque="NO" contentMode="scaleToFill" axis="vertical" id="0Ss-vh-YDD">
+                        <stackView key="tableFooterView" opaque="NO" contentMode="scaleToFill" axis="vertical" id="mzy-cJ-E0M">
                             <rect key="frame" x="0.0" y="99.5" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4g-aL-Tag">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="14"/>
-                                    <state key="normal" title="Button"/>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXm-r9-kDm">
-                                    <rect key="frame" x="0.0" y="14" width="414" height="30"/>
-                                    <state key="normal" title="Button"/>
-                                </button>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="p4g-aL-Tag" secondAttribute="trailing" id="pyX-gY-bRs"/>
-                            </constraints>
                         </stackView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Va4-pf-ShF">
@@ -173,10 +218,6 @@
                     <navigationItem key="navigationItem" title="Друзья" id="iYi-dU-oj3">
                         <barButtonItem key="backBarButtonItem" title="Назад" id="NUf-pc-24S"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="button" destination="yXm-r9-kDm" id="5Uh-0z-ylx"/>
-                        <segue destination="Vll-EG-qeI" kind="show" identifier="FriendInfo" id="hGP-3C-FUw"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Axe-Dj-YFV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -284,7 +325,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="78L-fn-eRa" kind="relationship" relationship="rootViewController" id="ksP-go-5oz"/>
+                        <segue destination="YyK-vH-l6h" kind="relationship" relationship="rootViewController" id="dHK-Ox-toe"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IDf-44-BUb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
