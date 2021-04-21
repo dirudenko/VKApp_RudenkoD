@@ -61,7 +61,7 @@ class FriendsTableViewController: UITableViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "FriendInfo" {
       let controller = segue.destination as! DetailedFriendCollectionViewController
-      controller.index.self = friendIndex
+      controller.row.self = friendIndex
     }
   }
 }

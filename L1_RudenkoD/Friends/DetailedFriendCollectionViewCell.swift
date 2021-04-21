@@ -80,8 +80,8 @@ extension UIImageView {
   public func maskCircle(anyImage: UIImage) {
     self.image = anyImage
     self.contentMode = UIView.ContentMode.scaleAspectFill
-    self.layer.borderColor = UIColor.systemBlue.cgColor
-    self.layer.borderWidth = 1
+    //self.layer.borderColor = UIColor.systemBlue.cgColor
+    //self.layer.borderWidth = 1
     self.layer.cornerRadius = self.frame.height / 2
   }
   public func shadow(anyImage: UIImage, anyView: UIView) {

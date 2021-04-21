@@ -14,14 +14,13 @@ class DataStorage: NSObject {
   }
   
   //var selectedUser = [Int]()
-  
   var usersArray = [User]()
   var myFriendsArray = [User]()
   var sortedChars = [String]()
   var charIndex = Int()
   var allGroup = [Group]()
   var myGroup = [Group]()
-  
+  var groupedPeople = [(char:Character, User:[User])]()
   
   
   

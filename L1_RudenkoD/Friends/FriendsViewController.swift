@@ -8,9 +8,19 @@
 import UIKit
 
 class FriendsViewController: UIViewController {
-  var friendIndex: Int?
-  var charIndex: Int?
-  let nibIdentifier = "FriendTableViewCell"
+  var chosenFriend: User?
+  private var friendRow: Int?
+  private var friendSection: Int?
+  private var charIndex: Int?
+  private let nibIdentifier = "FriendTableViewCell"
+  var index: Int?
+  
+  private struct Section {
+      let char : String
+      let user : [User]
+  }
+  
+  private var sections = [Section]()
   
   @IBOutlet weak var friendsTableView: UITableView!
   
@@ -25,17 +35,29 @@ class FriendsViewController: UIViewController {
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
     friendsTableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
     //button.setTitle(String(charIndex[0]), for: .normal)
-    self.view.bringSubviewToFront(charPeekerControl)
+    self.view.sendSubviewToBack(charPeekerControl)
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     self.navigationItem.rightBarButtonItem = self.editButtonItem
+    for (key, value) in DataStorage.shared.groupedPeople {
+      sections.append(Section(char: String(key), user: value))
+    }
+    print(type(of: sections) )
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "FriendInfo" {
       let controller = segue.destination as! DetailedFriendCollectionViewController
-      controller.index.self = friendIndex
+      chosenFriend = sections[friendSection!].user[friendRow!]
+      var i = 0
+      for item in DataStorage.shared.usersArray {
+        if item.name == chosenFriend?.name {
+          index = i
+        }
+        i += 1
+      }
+      controller.index = index
     }
   }
 }
@@ -43,33 +65,54 @@ class FriendsViewController: UIViewController {
 
 extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
   
-  func numberOfSections(in tableView: UITableView) -> Int {
-    // #warning Incomplete implementation, return the number of sections
-    return 1
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return DataStorage.shared.usersArray.count
-  }
-  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
-    let name = DataStorage.shared.usersArray[indexPath.row].name
-    let image = DataStorage.shared.usersArray[indexPath.row].avatar ?? UIImage()
-    cell.configure(name: name, image: image)
-    return cell
+      let section = sections[indexPath.section]
+      let username = section.user[indexPath.row]
+    cell.configure(name: username.name, image: username.avatar)
+   
+      return cell
+  }
+
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return sections[section].user.count
+  }
+
+  func numberOfSections(in tableView: UITableView) -> Int {
+      return sections.count
+  }
+
+  func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+      return sections.map{$0.char}
+  }
+
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+      return sections[section].char
   }
   
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-      DataStorage.shared.usersArray.remove(at: indexPath.row)
-      tableView.deleteRows(at: [indexPath], with: .fade)
-    }
+  func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+    
+   view.tintColor = UIColor.lightGray
+      let header = view as! UITableViewHeaderFooterView
+      header.textLabel?.textColor = UIColor.systemBlue
+   
   }
+  
+//  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//    if editingStyle == .delete {
+//      sections.remove(at: indexPath.row)
+//      tableView.beginUpdates()
+//      tableView.deleteRows(at: [indexPath], with: .fade)
+//      tableView.deleteSections([1], with: .fade)
+//      tableView.endUpdates()
+//    }
+//    tableView.reloadData()
+//  }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    friendIndex = indexPath.row
-    performSegue(withIdentifier: "FriendInfo", sender: (Any).self)
+    friendRow = indexPath.row
+    friendSection = indexPath.section
+      performSegue(withIdentifier: "FriendInfo", sender: (Any).self)
   }
 }
 
@@ -77,19 +120,19 @@ extension FriendsViewController: NameDelegate {
   func didPressButton(button: UIButton) {
     let char = button.titleLabel!.text
     var names = [String]()
-    for item in DataStorage.shared.usersArray{
-      names.append(item.name)
+    var row = 0
+    var userSection: Int?
+    for section in sections {
+      if section.char == char {
+        userSection = row
+      }
+      row += 1
     }
-    for item in names {
-      if item.first == char?.first {
-        print(item.self.startIndex)
-        let index = names.firstIndex(of: item.self)!
-        let indexPath = IndexPath(row:  index, section: 0)
+        let indexPath = IndexPath(row: 0, section: userSection!)
         friendsTableView.scrollToRow(at: indexPath, at: .top, animated: true)
       }
     }
-  }
-}
+ 
 
 
 

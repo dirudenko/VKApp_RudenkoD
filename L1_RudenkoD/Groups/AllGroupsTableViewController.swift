@@ -7,15 +7,25 @@
 
 import UIKit
 
-class AllGroupsTableViewController: UITableViewController {
+class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
+  
+  @IBOutlet weak var searchBar: UISearchBar!
   
   let nibIdentifier = "GroupTableViewCell"
+  private var filteredData = [String]()
+  private var data = [String]()
+  private var isSearch = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
     //tableView.reloadData()
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
     self.tableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
+    searchBar.delegate = self
+    for item in DataStorage.shared.allGroup{
+      filteredData.append(item.name)
+      data.append(item.name)
+    }
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     //self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -29,11 +39,13 @@ class AllGroupsTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
-    return  DataStorage.shared.allGroup.count
+    return  filteredData.count
   }
     
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as! GroupTableViewCell
+    if isSearch == false {
+
     let name = DataStorage.shared.allGroup[indexPath.row].name
     let image = DataStorage.shared.allGroup[indexPath.row].groupImage ?? UIImage()
     let descr = DataStorage.shared.allGroup[indexPath.row].description
@@ -42,6 +54,12 @@ class AllGroupsTableViewController: UITableViewController {
       { cell.groupMember.image = UIImage(named: "kiss") }
     }
     cell.configure(name: name, image: image, descr: descr)
+    }
+    else {
+      let name = filteredData[indexPath.row]
+      cell.configure(name: name, image: nil, descr: nil)
+      cell.groupMember.image = nil
+    }
     return cell
     
   }
@@ -62,6 +80,23 @@ class AllGroupsTableViewController: UITableViewController {
     alert.addAction(action)
     present(alert, animated: true, completion: {})
   }
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+   // var newfilteredData: [Group]?
+    
+    filteredData = searchText.isEmpty ? data : data.filter { (item: String) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+                return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+          isSearch = true
+          tableView.reloadData()
+      }
+  
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+          isSearch = false
+          
+         tableView.reloadData()
+      }
   
   /*
    // Override to support conditional editing of the table view.

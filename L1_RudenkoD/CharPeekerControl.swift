@@ -6,7 +6,7 @@
 //
 
 import UIKit
-protocol NameDelegate {
+protocol NameDelegate: class {
   func didPressButton(button: UIButton)
 }
 
@@ -17,7 +17,7 @@ protocol NameDelegate {
   private var buttons: [UIButton] = []
   private var stackView: UIStackView!
   var isPressed = true
-  var delegate: NameDelegate!
+  weak var delegate: NameDelegate!
   
   private func setupView() {
     let char = findChars()
@@ -73,9 +73,6 @@ protocol NameDelegate {
     else { return }
     let button = self.buttons[index]
     DataStorage.shared.charIndex = Int(index)
-//    print(DataStorage.shared.charIndex)
-//    isPressed = !isPressed
-   // DataStorage.shared.charIndex = index
     delegate?.didPressButton(button: button)
   }
   
