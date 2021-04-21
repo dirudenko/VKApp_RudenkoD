@@ -12,7 +12,9 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
   @IBOutlet weak var searchBar: UISearchBar!
   
   let nibIdentifier = "GroupTableViewCell"
-  private var filteredData = [String]()
+  private var filteredNames = [String]()
+  private var filteredDescription = [String]()
+  private var filteredAvatars = [UIImage]()
   private var data = [String]()
   private var isSearch = false
   
@@ -23,9 +25,13 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     self.tableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
     searchBar.delegate = self
     for item in DataStorage.shared.allGroup{
-      filteredData.append(item.name)
+      filteredNames.append(item.name)
+      filteredAvatars.append(item.groupImage ??  UIImage())
+      filteredDescription.append(item.description ?? "")
       data.append(item.name)
     }
+  
+    //searchBar.showsCancelButton = true
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     //self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -39,38 +45,54 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
-    return  filteredData.count
+    return  filteredNames.count
   }
-    
+  
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as! GroupTableViewCell
     if isSearch == false {
-
-    let name = DataStorage.shared.allGroup[indexPath.row].name
-    let image = DataStorage.shared.allGroup[indexPath.row].groupImage ?? UIImage()
-    let descr = DataStorage.shared.allGroup[indexPath.row].description
-    for item in DataStorage.shared.myGroup {
-      if item.name == name
-      { cell.groupMember.image = UIImage(named: "kiss") }
-    }
-    cell.configure(name: name, image: image, descr: descr)
+      let name = DataStorage.shared.allGroup[indexPath.row].name
+      let image = DataStorage.shared.allGroup[indexPath.row].groupImage ?? UIImage()
+      let descr = DataStorage.shared.allGroup[indexPath.row].description
+      for item in DataStorage.shared.myGroup {
+        if item.name == name
+        { cell.groupMember.image = UIImage(systemName: "checkmark") }
+      }
+      cell.configure(name: name, image: image, descr: descr)
+    
     }
     else {
-      let name = filteredData[indexPath.row]
+      let name = filteredNames[indexPath.row]
+      for item in DataStorage.shared.myGroup {
+        if item.name == name
+        { cell.groupMember.image = UIImage(systemName: "checkmark") }
+      }
       cell.configure(name: name, image: nil, descr: nil)
-      cell.groupMember.image = nil
     }
     return cell
-    
   }
   
+  
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    if isSearch == false {
     let group = DataStorage.shared.allGroup[indexPath.row]
     if !DataStorage.shared.myGroup.contains(group) {
       DataStorage.shared.myGroup.append(group)
       self.navigationController?.popViewController(animated: true)
     } else {
       showAlert(title: "Ошибка", message: "Вы уже состоите в этой группе")
+    }
+    }
+    else {
+      let index = searchGroup()
+      let group = DataStorage.shared.allGroup[index]
+      if !DataStorage.shared.myGroup.contains(group) {
+        DataStorage.shared.myGroup.append(group)
+        self.navigationController?.popViewController(animated: true)
+      } else {
+        showAlert(title: "Ошибка", message: "Вы уже состоите в этой группе")
+      }
     }
   }
   
@@ -82,21 +104,27 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
   }
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-   // var newfilteredData: [Group]?
-    
-    filteredData = searchText.isEmpty ? data : data.filter { (item: String) -> Bool in
-                // If dataItem matches the searchText, return true to include it
-                return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-            }
-          isSearch = true
-          tableView.reloadData()
-      }
+    if searchText.isEmpty { isSearch = false}
+    filteredNames = searchText.isEmpty  ? data : data.filter { (item: String) -> Bool in
+      isSearch = true
+      return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+    }
+    tableView.reloadData()
+  }
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-          isSearch = false
-          
-         tableView.reloadData()
-      }
+    isSearch = false
+    tableView.reloadData()
+  }
+  
+  func searchGroup() -> Int {
+    var groupsname = [String]()
+    for item in DataStorage.shared.allGroup {
+      groupsname.append(item.name)
+    }
+    let tmp = groupsname.filter () { filteredNames.contains($0) }
+    return groupsname.firstIndex(of: tmp[0])!
+  }
   
   /*
    // Override to support conditional editing of the table view.

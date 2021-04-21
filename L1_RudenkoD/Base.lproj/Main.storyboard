@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gT-91-zSf">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="948"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="8rt-CJ-lQw">
                                                 <rect key="frame" x="74" y="30" width="266" height="190"/>
@@ -102,7 +102,7 @@
                                     <constraint firstItem="7gT-91-zSf" firstAttribute="leading" secondItem="zTl-dr-bId" secondAttribute="leading" id="0Sh-UI-MEp"/>
                                     <constraint firstItem="7gT-91-zSf" firstAttribute="top" secondItem="jU2-xX-9yp" secondAttribute="top" id="2Uv-hy-54r"/>
                                     <constraint firstAttribute="trailing" secondItem="7gT-91-zSf" secondAttribute="trailing" id="9i7-JU-z70"/>
-                                    <constraint firstItem="7gT-91-zSf" firstAttribute="bottom" secondItem="zTl-dr-bId" secondAttribute="bottom" constant="130" id="K1L-Ux-imD"/>
+                                    <constraint firstItem="7gT-91-zSf" firstAttribute="bottom" secondItem="zTl-dr-bId" secondAttribute="bottom" id="K1L-Ux-imD"/>
                                     <constraint firstItem="7gT-91-zSf" firstAttribute="centerX" secondItem="grh-1c-1BH" secondAttribute="centerX" id="O4Q-1p-y1r"/>
                                     <constraint firstAttribute="bottom" secondItem="7gT-91-zSf" secondAttribute="bottom" id="orY-im-Pw2"/>
                                 </constraints>
@@ -293,6 +293,10 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <imageView key="backgroundView" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" id="Lgn-zp-pfp">
+                            <rect key="frame" x="0.0" y="-88" width="414" height="896"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ovB-dz-Qfg" customClass="DetailedFriendCollectionViewCell" customModule="VKapp_RudenkoD" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -445,6 +449,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="check" width="128" height="128"/>
         <image name="logo" width="266" height="190"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus" catalog="system" width="128" height="113"/>

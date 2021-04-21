@@ -23,7 +23,6 @@ class TabBarController: UITabBarController {
     //allPeople = [Person(name: "a", state: "Alaska"), Person(name: "x", state: "Florida"),Person(name: "c", state: "California")]
     let usersDictionary = Dictionary(grouping: DataStorage.shared.usersArray, by: { $0.name.first! }).sorted(by: { $0.key < $1.key }).map({ (char:$0.key, User:$0.value)})
     DataStorage.shared.groupedPeople.append(contentsOf: usersDictionary)
-    print(DataStorage.shared.groupedPeople)
   }
   
   func fillGroups() {

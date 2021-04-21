@@ -18,22 +18,9 @@ class GroupTableViewCell: UITableViewCell {
     groupAvatar.image = nil
     groupName.text = nil
     groupDescription.text = nil
-    //groupMember.image = nil
+    groupMember.image = nil
   }
-  
-//  func findMember() {
-//    for allGroup in DataStorage.shared.allGroup {
-//      for myGroup in DataStorage.shared.myGroup{
-//        if allGroup.name.contains(myGroup.name)  {
-//          groupMember.image = nil
-//        }
-//        else {
-//          groupMember.image = UIImage(named: "swift")
-//        }
-//      }
-//    }
-//  }
-  
+
     override func awakeFromNib() {
         super.awakeFromNib()
         clearCell()
@@ -61,9 +48,6 @@ class GroupTableViewCell: UITableViewCell {
     if let descr = descr {
     groupDescription.text = descr
     }
-//     if let member = member {
-//      groupMember.image = member
-//    }
   }
 }
     
