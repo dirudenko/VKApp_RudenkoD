@@ -408,6 +408,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Vll-EG-qeI" kind="show" identifier="friendFromNews" id="1Hz-9E-fBz"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -495,6 +498,9 @@
             <point key="canvasLocation" x="2609" y="419"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="1Hz-9E-fBz"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="check" width="128" height="128"/>
         <image name="logo" width="266" height="190"/>

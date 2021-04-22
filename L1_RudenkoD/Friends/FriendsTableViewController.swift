@@ -11,10 +11,9 @@ class FriendsTableViewController: UITableViewController {
   
   @IBOutlet var buttons: [UIButton]!
   
-  var friendIndex: Int?
+  private var friendIndex: Int?
   var charIndex = [String]()
   let nibIdentifier = "FriendTableViewCell"
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -106,16 +105,12 @@ extension FriendsTableViewController {
 
 extension FriendsTableViewController {
   func makeButtonWithText(text:String) -> UIButton {
-      //Initalize a button
     let myButton = UIButton(type: UIButton.ButtonType.system)
-      //Set a frame for the button. Ignored in AutoLayout/ Stack Views
-      myButton.frame = CGRect(x: 30, y: 30, width: 150, height: 150)
-     //Set background color
+    myButton.frame = CGRect(x: 30, y: 30, width: 150, height: 150)
     myButton.backgroundColor = UIColor.blue
-     //State dependent properties title and title color
     myButton.setTitle(text, for: .normal)
     myButton.setTitleColor(UIColor.white, for: .normal)
-     return myButton
+    return myButton
   }
 }
 

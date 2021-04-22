@@ -11,6 +11,7 @@ class NewsTableViewController: UITableViewController {
   
   let nibIdentifier = "NewsTableViewCell"
   var news = [Post]()
+  private var friendIndex: Int?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -19,6 +20,7 @@ class NewsTableViewController: UITableViewController {
     news = DataStorage.shared.postedNews
     self.tableView.rowHeight = UITableView.automaticDimension;
     self.tableView.estimatedRowHeight = 44.0;
+    
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     
@@ -43,20 +45,45 @@ class NewsTableViewController: UITableViewController {
     let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as! NewsTableViewCell
     let image = news[indexPath.row].createdBy.avatar
     let name = news[indexPath.row].createdBy.name
-    let posted = "Yesterday"
+    let posted = generateDay()
     let newNews = news[indexPath.row].caption
-    let imageNews = news[indexPath.row].image
+    let imageNews1 = news[indexPath.row].image1
+    let imageNews2 = news[indexPath.row].image2
     let numberOfLikes = news[indexPath.row].numberOfLikes
-    cell.configure(image: image, name: name, posted: posted, newNews: newNews, imageNews: imageNews)
+    let shared = String(news[indexPath.row].numberOfShares)
+    cell.userImage.shadow(anyImage: image!, anyView: cell.viewForShadow)
+    
+    cell.configure(image: image, name: name, posted: posted, newNews: newNews, imageNews1: imageNews1, imageNews2: imageNews2, shared: shared)
     cell.likeCounter.text = String(numberOfLikes)
-    print(numberOfLikes)
     cell.delegate = self
     
     return cell
   }
+  func generateDay() -> String? {
+    let date = Date()
+    let calendar = Calendar.current
+    var dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+    guard
+      let days = calendar.range(of: .day, in: .month, for: date),
+      let randomDay = days.randomElement()
+    else {
+      return nil
+    }
+    dateComponents.setValue(randomDay, for: .day)
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd/MM/YY"
+    let tmp = calendar.date(from: dateComponents)
+    return dateFormatter.string(from: tmp!)
+  }
   
-  
-  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "friendFromNews" {
+      let controller = segue.destination as! DetailedFriendCollectionViewController
+      controller.index.self = friendIndex
+    }
+    
+    
+  }
   /*
    // Override to support conditional editing of the table view.
    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -105,6 +132,25 @@ class NewsTableViewController: UITableViewController {
 }
 
 extension NewsTableViewController: NewsButtonsDelegate {
+  func namePressed(button: UIButton) {
+    let name = button.titleLabel!.text
+    var users = [String]()
+    for item in DataStorage.shared.usersArray {
+      users.append(item.name)
+    }
+    var i = 0
+    for item in users {
+      if item == name {
+        friendIndex = i
+      } else {
+        i += 1
+      }
+    }
+    performSegue(withIdentifier: "friendFromNews", sender: self)
+  }
+  
+   
+  
   
   func share() {
     let text = "Смотри какой интересный текст"
@@ -114,5 +160,4 @@ extension NewsTableViewController: NewsButtonsDelegate {
     activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.mail, UIActivity.ActivityType.postToFacebook ]
     self.present(activityViewController, animated: true, completion: nil)
   }
-  
 }
