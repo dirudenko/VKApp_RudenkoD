@@ -13,7 +13,6 @@ class DataStorage: NSObject {
     super.init()
   }
   
-  //var selectedUser = [Int]()
   var usersArray = [User]()
   var myFriendsArray = [User]()
   var sortedChars = [String]()
@@ -21,6 +20,8 @@ class DataStorage: NSObject {
   var allGroup = [Group]()
   var myGroup = [Group]()
   var groupedPeople = [(char:Character, User:[User])]()
+  
+  var postedNews = [Post]()
   
   
   

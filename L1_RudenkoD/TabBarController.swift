@@ -19,8 +19,6 @@ class TabBarController: UITabBarController {
     
     let users: [User] = [user1, user2, user3, user4, user5, user6]
     DataStorage.shared.usersArray.append(contentsOf: users)
-    
-    //allPeople = [Person(name: "a", state: "Alaska"), Person(name: "x", state: "Florida"),Person(name: "c", state: "California")]
     let usersDictionary = Dictionary(grouping: DataStorage.shared.usersArray, by: { $0.name.first! }).sorted(by: { $0.key < $1.key }).map({ (char:$0.key, User:$0.value)})
     DataStorage.shared.groupedPeople.append(contentsOf: usersDictionary)
   }
@@ -38,9 +36,17 @@ class TabBarController: UITabBarController {
     DataStorage.shared.myGroup.append(contentsOf: myGroups)
   }
   
+  func fillPosts() {
+    let post1  = Post(createdBy: DataStorage.shared.usersArray[1], caption: "Печальная реальность в том, что COVID-19, возможно, не последняя пандемия. Мы не знаем, когда наступит следующий удар, будет ли это грипп, коронавирус или какая-то новая болезнь, которую мы никогда раньше не видели. Но мы точно знаем, что не можем позволить, чтобы нас снова застали врасплох. Угроза следующей пандемии всегда будет висеть над нашими головами — если только мир не предпримет шаги для ее предотвращения", numberOfLikes: Int.random(in: 100...500), numberOfComments: 10, numberOfShares: Int.random(in: 10...50), image: nil)
+    let post2 = Post(createdBy: DataStorage.shared.usersArray[2], caption: "Транспортная система The LVCC Loop system была построена примерно за один год с использованием туннельной бурильной машины Godot. Стоимость LVCC Loop составила приблизительно 52,5 миллионов долларов — в эту сумму входят как затраты на туннельные работы, так и на наземные станции.\n Длина каждой из четырех секций туннеля равна 0,4 мили (0,6 км) — в общей сложности «петля» тоннеля равна 1,7 мили (2,7 км). Поездка сопровождается светом динамичных разноцветных огней, из-за чего сотрудники проекта прозвали тоннель «Радужная дорога».\n Проект создан по заказу выставочного комплекса Las Vegas Convention Center (LVCVA) в Уинчестере, Невада. Туннель соединяет новый выставочный зал LVCC с существующим кампусом из трех других залов. Идея заключалась в том, чтобы перемещать посетителей мероприятий центра по территории пространства. До пандемии коронавируса центр собирал десятки тысяч человек в четырех выставочных залах. Парк включает в себя модифицированные седаны Tesla. Благодаря тоннелю 45-минутный путь по кампусу для посетителей сократится примерно до 2 минут.", numberOfLikes: Int.random(in: 100...900), numberOfComments: 2, numberOfShares: Int.random(in: 10...50), image: UIImage(named: "lvcc"))
+    let posts = [post1, post2]
+    DataStorage.shared.postedNews.append(contentsOf: posts)
+  }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         fillUsers()
         fillGroups()
+        fillPosts()
     }
 }
