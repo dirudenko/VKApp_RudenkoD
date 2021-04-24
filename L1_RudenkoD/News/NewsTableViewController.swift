@@ -20,6 +20,7 @@ class NewsTableViewController: UITableViewController {
     news = DataStorage.shared.postedNews
     self.tableView.rowHeight = UITableView.automaticDimension;
     self.tableView.estimatedRowHeight = 44.0;
+   
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
@@ -48,12 +49,12 @@ class NewsTableViewController: UITableViewController {
     let posted = generateDay()
     let newNews = news[indexPath.row].caption
     let imageNews1 = news[indexPath.row].image1
-    let imageNews2 = news[indexPath.row].image2
     let numberOfLikes = news[indexPath.row].numberOfLikes
     let shared = String(news[indexPath.row].numberOfShares)
+    let views = String("\(news[indexPath.row].numberOfViews)K")
+    let comments = String(news[indexPath.row].numberOfComments)
     cell.userImage.shadow(anyImage: image!, anyView: cell.viewForShadow)
-    
-    cell.configure(image: image, name: name, posted: posted, newNews: newNews, imageNews1: imageNews1, imageNews2: imageNews2, shared: shared)
+    cell.configure(image: image, name: name, posted: posted, newNews: newNews, imageNews1: imageNews1, shared: shared, view: views, comments: comments)
     cell.likeCounter.text = String(numberOfLikes)
     cell.delegate = self
     
@@ -148,9 +149,6 @@ extension NewsTableViewController: NewsButtonsDelegate {
     }
     performSegue(withIdentifier: "friendFromNews", sender: self)
   }
-  
-   
-  
   
   func share() {
     let text = "Смотри какой интересный текст"

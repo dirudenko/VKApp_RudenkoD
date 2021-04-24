@@ -19,10 +19,13 @@ class FriendTableViewCell: UITableViewCell {
     userName.text = nil
   }
   
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        clearCell()
-    }
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    clearCell()
+    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
+    self.avatarImage.addGestureRecognizer(tapRecognizer)
+    self.avatarImage.isUserInteractionEnabled = true
+  }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -30,6 +33,17 @@ class FriendTableViewCell: UITableViewCell {
   
   override func prepareForReuse() {
     clearCell()
+  }
+  
+  @objc func animateAvatar(_ gestureRecognizer: UIGestureRecognizer) {
+    avatarImage.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+    UIView.animate(withDuration: 0.5,
+                   delay: 0,
+                   options: .curveEaseOut,
+                   animations: { [weak self] in
+                    self?.avatarImage.transform = .identity
+                   },
+                   completion: nil)
   }
   
   func gradient() {

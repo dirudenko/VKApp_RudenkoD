@@ -21,7 +21,6 @@ class NewsTableViewCell: UITableViewCell {
   @IBOutlet weak var postedDate: UILabel!
   @IBOutlet weak var postedNews: UILabel!
   @IBOutlet weak var imageForNews1: UIImageView!
-  @IBOutlet weak var imageForNews2: UIImageView!
   @IBOutlet weak var likeButton: UIButton!
   @IBOutlet weak var likeCounter: UILabel!
   @IBOutlet weak var commentCounter: UILabel!
@@ -29,8 +28,8 @@ class NewsTableViewCell: UITableViewCell {
   @IBOutlet weak var sharedCounter: UILabel!
   @IBOutlet weak var sharedButton: UIButton!
   @IBOutlet weak var constraintHeight1: NSLayoutConstraint!
-  @IBOutlet weak var constraintHeight2: NSLayoutConstraint!
   @IBOutlet weak var viewForShadow: UIView!
+  @IBOutlet weak var viewCounter: UILabel!
   var isLiked = true
   weak var delegate: NewsButtonsDelegate?
   
@@ -41,11 +40,11 @@ class NewsTableViewCell: UITableViewCell {
     postedDate.text = nil
     postedNews.text = nil
     imageForNews1.image = nil
-    imageForNews2.image = nil
     likeCounter.text = nil
     constraintHeight1.constant = 0
-    //commentCounter.text = nil
-    //sharedCounter.text = nil
+    viewCounter.text = nil
+    sharedCounter.text = nil
+    commentCounter.text = nil
   }
   
   override func prepareForReuse() {
@@ -54,11 +53,10 @@ class NewsTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
         super.awakeFromNib()
+    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
+    self.userImage.addGestureRecognizer(tapRecognizer)
+    self.userImage.isUserInteractionEnabled = true
         clearCell()
-//    userName.isUserInteractionEnabled = true
-//    let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("pressShareButton"))
-//    let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.namePressed(_:)))
-//    userName.addGestureRecognizer(labelTap)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -90,24 +88,26 @@ class NewsTableViewCell: UITableViewCell {
       likeButton.tintColor = UIColor.systemBlue
     }
     isLiked = !isLiked
-
   }
   
+  @objc func animateAvatar(_ gestureRecognizer: UIGestureRecognizer) {
+    userImage.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+    UIView.animate(withDuration: 0.5,
+                   delay: 0,
+                   options: .curveEaseOut,
+                   animations: { [weak self] in
+                    self?.userImage.transform = .identity
+                   },
+                   completion: nil)
+  }
   
-  func configure (image: UIImage?, name: String?, posted: String?, newNews: String?, imageNews1: UIImage?, imageNews2: UIImage?, shared: String?){
+  func configure (image: UIImage?, name: String?, posted: String?, newNews: String?, imageNews1: UIImage?, shared: String?, view: String?, comments: String?) {
     if let image = image {
       userImage.image = image
     }
     if let name = name {
       userName.setTitle(name, for: .normal)
       userName.setTitleColor(.systemBlue, for: .selected)
-    }
-    if let posted = posted {
-      
-      postedDate.text = posted.description
-    }
-    if let newNews = newNews {
-      postedNews.text = newNews
     }
     if let imageNews1 = imageNews1 {
       imageForNews1.image = imageNews1
@@ -117,18 +117,22 @@ class NewsTableViewCell: UITableViewCell {
       constraintHeight1.constant = newHeight
       }
     }
-    if let imageNews2 = imageNews2 {
-      imageForNews2.image = imageNews2
-      if imageForNews2.image != nil {
-      let ratio = imageNews2.size.width / imageNews2.size.height
-      let newHeight = imageForNews2.frame.width / ratio
-      constraintHeight2.constant = newHeight
-      }
+    
+    if let posted = posted {
+      postedDate.text = posted.description
     }
+    if let newNews = newNews {
+      postedNews.text = newNews
+    }
+    
     if let shared = shared {
       sharedCounter.text = shared
     }
+    if let view = view {
+      viewCounter.text = view
+    }
+    if let comments = comments {
+      commentCounter.text = comments
+    }
   }
-  
-    
 }

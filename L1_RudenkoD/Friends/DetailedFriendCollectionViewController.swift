@@ -68,8 +68,8 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
     let work = DataStorage.shared.usersArray[userIndex].job
     cell.avatarLabel.shadow(anyImage: image, anyView: cell.viewForShadow)
     cell.configure(name: name, image: image, age: age, work: work!)
-    cell.buttonPressed = {
-      self.performSegue(withIdentifier: "allPhotos", sender: (Any).self)
+    cell.buttonPressed = { [weak self] in
+      self?.performSegue(withIdentifier: "allPhotos", sender: (Any).self)
     }
     return cell
   }

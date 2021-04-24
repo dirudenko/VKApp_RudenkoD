@@ -14,6 +14,7 @@ struct Post {
   var numberOfLikes: Int
   var numberOfComments: Int
   var numberOfShares: Int
+  var numberOfViews: Int
   var image1: UIImage?
   var image2: UIImage?
 }

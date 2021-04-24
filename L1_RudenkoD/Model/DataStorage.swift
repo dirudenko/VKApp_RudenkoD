@@ -20,9 +20,5 @@ class DataStorage: NSObject {
   var allGroup = [Group]()
   var myGroup = [Group]()
   var groupedPeople = [(char:Character, User:[User])]()
-  
   var postedNews = [Post]()
-  
-  
-  
 }

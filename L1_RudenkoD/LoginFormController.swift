@@ -13,6 +13,14 @@ class LoginFormController: UIViewController {
   
   @IBOutlet weak var loginInput: UITextField!
   @IBOutlet weak var passwordInput: UITextField!
+  @IBOutlet weak var loginInterface: UIScrollView!
+  
+  @IBOutlet weak var animationView: UIView!
+  @IBOutlet weak var loadingImage1: UIImageView!
+  
+  @IBOutlet weak var loadingImage2: UIImageView!
+  
+  @IBOutlet weak var loadingImage3: UIImageView!
   
   func checkUser() -> Bool {
     let login = "admin"
@@ -44,6 +52,8 @@ class LoginFormController: UIViewController {
     super.viewDidLoad()
     let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
     view.addGestureRecognizer(tapGesture)
+    //animateLogo()
+    //loginInterface.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
     
   }
   
@@ -51,3 +61,39 @@ class LoginFormController: UIViewController {
   }
 }
 
+extension LoginFormController {
+  func animateLogo() {
+    //loginInterface.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
+    self.view.bringSubviewToFront(animationView)
+    UIView.animate(withDuration: 1,
+                   delay: 0,
+                   options: [],
+                   animations: {[ weak self] in
+                    self?.loadingImage3.alpha = 0.0
+                   },
+                   completion: {_ in
+                    UIView.animate(withDuration: 1,
+                                   delay: 0,
+                                   options: [],
+                                   animations: {[ weak self] in
+                                    self?.loadingImage2.alpha = 0.0
+                                   },
+                                   completion: {_ in
+                                    UIView.animate(withDuration: 1,
+                                                   delay: 0,
+                                                   options: [],
+                                                   animations: {[ weak self] in
+                                                    self?.loadingImage1.alpha = 0.0
+                                                   },
+                                                   completion: {_ in
+                                                    UIView.transition(from: self.animationView,
+                                                                      to: self.loginInterface,
+                                                                      duration: 0,
+                                                                      options: [],
+                                                                      completion: nil)
+                                                   })
+                                   })
+                   })
+   // loginInterface.transform = CGAffineTransform(translationX: +self.view.frame.width, y: 0)
+  }
+}
