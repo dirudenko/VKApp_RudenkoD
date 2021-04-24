@@ -11,7 +11,7 @@ import UIKit
 
 class PhotosCollectionViewController: UICollectionViewController {
   
-  let cellReuseIdentifier = "PhotosCollectionViewCell"
+  private let cellReuseIdentifier = "PhotosCollectionViewCell"
   var index: Int?
   
   override func viewDidLoad() {
@@ -41,13 +41,15 @@ class PhotosCollectionViewController: UICollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of items
-    return DataStorage.shared.usersArray[index!].photoArray.count
+    guard let userIndex = index else { return 0 }
+    return DataStorage.shared.usersArray[userIndex].photoArray.count
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     //var image = [UIImage]()
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! PhotosCollectionViewCell
-    let image = DataStorage.shared.usersArray[index!].photoArray[indexPath.row]
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
+    guard let userIndex = index else { return UICollectionViewCell()}
+    let image = DataStorage.shared.usersArray[userIndex].photoArray[indexPath.row]
     cell.configure(image: image)
     return cell
   }

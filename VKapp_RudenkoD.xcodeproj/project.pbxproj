@@ -12,6 +12,7 @@
 		691F6EB026233D8E00CA7957 /* DetailedFriendCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691F6EAF26233D8E00CA7957 /* DetailedFriendCollectionViewController.swift */; };
 		691F6EB426233DD900CA7957 /* DetailedFriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691F6EB226233DD900CA7957 /* DetailedFriendCollectionViewCell.swift */; };
 		691F6EB526233DD900CA7957 /* DetailedFriendCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 691F6EB326233DD900CA7957 /* DetailedFriendCollectionViewCell.xib */; };
+		694FD2192634C7E8009CA6DD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694FD2182634C7E8009CA6DD /* Extensions.swift */; };
 		695F08CB2618D394001DC492 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F08CA2618D394001DC492 /* AppDelegate.swift */; };
 		695F08CD2618D394001DC492 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F08CC2618D394001DC492 /* SceneDelegate.swift */; };
 		695F08D22618D394001DC492 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695F08D02618D394001DC492 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		691F6EAF26233D8E00CA7957 /* DetailedFriendCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedFriendCollectionViewController.swift; sourceTree = "<group>"; };
 		691F6EB226233DD900CA7957 /* DetailedFriendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedFriendCollectionViewCell.swift; sourceTree = "<group>"; };
 		691F6EB326233DD900CA7957 /* DetailedFriendCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailedFriendCollectionViewCell.xib; sourceTree = "<group>"; };
+		694FD2182634C7E8009CA6DD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		695F08C72618D394001DC492 /* VKapp_RudenkoD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKapp_RudenkoD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695F08CA2618D394001DC492 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		695F08CC2618D394001DC492 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				69BF44212622FE6000D03109 /* DataStorage.swift */,
 				69BF44132622F70300D03109 /* User.swift */,
 				699DF71126317FF7004F6C13 /* Post.swift */,
+				694FD2182634C7E8009CA6DD /* Extensions.swift */,
 				69BF44162622F71200D03109 /* Group.swift */,
 			);
 			path = Model;
@@ -262,6 +265,7 @@
 				69BF44222622FE6000D03109 /* DataStorage.swift in Sources */,
 				699DF704263160C3004F6C13 /* NewsTableViewController.swift in Sources */,
 				697CCA13262EE6FF00E1F048 /* FriendsViewController.swift in Sources */,
+				694FD2192634C7E8009CA6DD /* Extensions.swift in Sources */,
 				691F6EB426233DD900CA7957 /* DetailedFriendCollectionViewCell.swift in Sources */,
 				6996570626246925008650B8 /* AllGroupsTableViewController.swift in Sources */,
 				695F08CB2618D394001DC492 /* AppDelegate.swift in Sources */,
@@ -422,7 +426,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "home.L1-RudenkoD";
+				PRODUCT_BUNDLE_IDENTIFIER = home.VKapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -441,7 +445,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "home.L1-RudenkoD";
+				PRODUCT_BUNDLE_IDENTIFIER = home.VKapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

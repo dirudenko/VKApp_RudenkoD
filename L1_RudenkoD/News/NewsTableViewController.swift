@@ -9,8 +9,8 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
   
-  let nibIdentifier = "NewsTableViewCell"
-  var news = [Post]()
+  private let nibIdentifier = "NewsTableViewCell"
+  private var news = [Post]()
   private var friendIndex: Int?
   
   override func viewDidLoad() {

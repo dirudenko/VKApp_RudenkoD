@@ -10,8 +10,8 @@ import UIKit
 class DetailedFriendCollectionViewController: UICollectionViewController {
   
   @IBOutlet weak var photoAlbumButton: UIBarButtonItem!
-  let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
-  var row: Int?
+  private let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
+  private var row: Int?
 
   var chosenFriend: User?
   var index: Int?
@@ -21,6 +21,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
     super.viewDidLoad()
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
     self.collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
+    
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     
@@ -49,9 +50,9 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
     return 1
   }
   
-  @IBAction func photoAlbumButton(_ sender: Any) {
-    performSegue(withIdentifier: "allPhotos", sender: self)
-  }
+//  @IBAction func photoAlbumButton(_ sender: Any) {
+//    performSegue(withIdentifier: "allPhotos", sender: self)
+//  }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of items
@@ -69,7 +70,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
     cell.avatarLabel.shadow(anyImage: image, anyView: cell.viewForShadow)
     cell.configure(name: name, image: image, age: age, work: work!)
     cell.buttonPressed = { [weak self] in
-      self?.performSegue(withIdentifier: "allPhotos", sender: (Any).self)
+      self?.performSegue(withIdentifier: "allPhotos", sender: UIButton())
     }
     return cell
   }
@@ -77,7 +78,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "allPhotos" {
       let controller = segue.destination as! PhotosCollectionViewController
-      controller.index.self = index
+      controller.index = index
     }
   }
   

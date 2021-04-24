@@ -36,33 +36,13 @@ class FriendTableViewCell: UITableViewCell {
   }
   
   @objc func animateAvatar(_ gestureRecognizer: UIGestureRecognizer) {
-    avatarImage.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-    UIView.animate(withDuration: 0.5,
-                   delay: 0,
-                   options: .curveEaseOut,
-                   animations: { [weak self] in
-                    self?.avatarImage.transform = .identity
-                   },
-                   completion: nil)
-  }
-  
-  func gradient() {
-    let gradientLayer: CAGradientLayer = {
-        let gradientLayer = CAGradientLayer()
-      gradientLayer.colors = [UIColor.lightGray.cgColor,UIColor.white.cgColor]
-      gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-      gradientLayer.endPoint = CGPoint(x: 0.7, y: 0.5)
-        gradientLayer.frame = CGRect.zero
-       return gradientLayer
-    }()
-    cellLabel.layer.addSublayer(gradientLayer)
-    gradientLayer.frame = cellLabel.bounds
-    avatarImage.layer.zPosition = 1
-    userName.layer.zPosition = 1
+    avatarImage.avatarAnimation()
   }
   
   func configure(name: String?, image: UIImage?) {
     gradient()
+    avatarImage.layer.zPosition = 1
+    userName.layer.zPosition = 1
     if let image = image {
     avatarImage.image = image
       avatarImage.maskCircle(anyImage: image)

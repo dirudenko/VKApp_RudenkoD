@@ -9,7 +9,7 @@ import UIKit
 
 class LoginFormController: UIViewController {
   
-  let fromLoginToTabbbarSegue = "fromLoginToTabbbarSegue"
+  private let fromLoginToTabbbarSegue = "fromLoginToTabbbarSegue"
   
   @IBOutlet weak var loginInput: UITextField!
   @IBOutlet weak var passwordInput: UITextField!
@@ -52,9 +52,7 @@ class LoginFormController: UIViewController {
     super.viewDidLoad()
     let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
     view.addGestureRecognizer(tapGesture)
-    //animateLogo()
-    //loginInterface.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
-    
+   // animateLogo()    
   }
   
   @IBAction func loginButton(_ sender: UIButton) {
@@ -63,37 +61,36 @@ class LoginFormController: UIViewController {
 
 extension LoginFormController {
   func animateLogo() {
-    //loginInterface.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
     self.view.bringSubviewToFront(animationView)
-    UIView.animate(withDuration: 1,
+    UIView.animate(withDuration: 0.6,
                    delay: 0,
-                   options: [],
+                   options: [.curveEaseIn],
                    animations: {[ weak self] in
                     self?.loadingImage3.alpha = 0.0
                    },
                    completion: {_ in
-                    UIView.animate(withDuration: 1,
+                    UIView.animate(withDuration: 0.6,
                                    delay: 0,
-                                   options: [],
+                                   options: [.curveEaseIn],
                                    animations: {[ weak self] in
                                     self?.loadingImage2.alpha = 0.0
                                    },
                                    completion: {_ in
-                                    UIView.animate(withDuration: 1,
+                                    UIView.animate(withDuration: 0.6,
                                                    delay: 0,
-                                                   options: [],
+                                                   options: [.curveEaseIn],
                                                    animations: {[ weak self] in
                                                     self?.loadingImage1.alpha = 0.0
                                                    },
                                                    completion: {_ in
                                                     UIView.transition(from: self.animationView,
                                                                       to: self.loginInterface,
-                                                                      duration: 0,
-                                                                      options: [],
+                                                                      duration: 1,
+                                                                      options: [.transitionFlipFromBottom],
                                                                       completion: nil)
                                                    })
                                    })
                    })
-   // loginInterface.transform = CGAffineTransform(translationX: +self.view.frame.width, y: 0)
+  
   }
 }

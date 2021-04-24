@@ -194,14 +194,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" id="8ZC-DD-OJy" customClass="CharPeekerControl" customModule="VKapp_RudenkoD" customModuleProvider="target">
-                                <rect key="frame" x="335" y="387" width="59" height="117"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <connections>
-                                    <action selector="test:" destination="YyK-vH-l6h" eventType="touchUpOutside" id="FgR-HS-NLO"/>
-                                </connections>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eMd-jl-kub"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -214,13 +206,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Друзья" id="Gr5-qY-3yE"/>
                     <connections>
-                        <outlet property="charPeekerControl" destination="8ZC-DD-OJy" id="sdc-j8-qR6"/>
                         <outlet property="friendsTableView" destination="KXK-Db-fTE" id="FtC-b9-DGL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TWv-AT-KFS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3695.652173913044" y="-913.39285714285711"/>
+            <point key="canvasLocation" x="3499" y="-267"/>
         </scene>
         <!--Фото-->
         <scene sceneID="Ijz-F7-cms">
@@ -251,7 +242,7 @@
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vjY-j7-HRJ">
                                 <rect key="frame" x="7" y="2010" width="400" height="2000"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="d0l-BJ-Zl5">
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d0l-BJ-Zl5">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="2000"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionViewCellContentView>
@@ -477,7 +468,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fwc-rP-7O4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4277" y="419"/>
+            <point key="canvasLocation" x="4332" y="419"/>
         </scene>
         <!--Группы-->
         <scene sceneID="4I8-SM-br0">
@@ -498,7 +489,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="1Hz-9E-fBz"/>
+        <segue reference="hCb-wW-OFm"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="check" width="128" height="128"/>

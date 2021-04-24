@@ -16,7 +16,7 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var workLabel: UILabel!
   @IBOutlet weak var likeLabel: UILabel!
   @IBOutlet weak var likeButton: UIButton!
-  var isLiked = true
+  private var isLiked = true
   var buttonPressed : (() -> ()) = {}
   
   func clearCell() {
@@ -33,25 +33,22 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     clearCell()
+    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
+    self.avatarLabel.addGestureRecognizer(tapRecognizer)
+    self.avatarLabel.isUserInteractionEnabled = true
     // Initialization code
   }
   
   @IBAction func pressLikeButton(_ sender: Any) {
-    if isLiked {
-      likeLabel.text = "1"
-      likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-      likeButton.tintColor = UIColor.systemRed
-    }
-    else {
-      likeLabel.text = "0"
-      likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-      likeButton.tintColor = UIColor.systemBlue
-    }
-    isLiked = !isLiked
+    pressLike(isLiked: &isLiked, likeCounter: likeLabel, likeButton: likeButton)
   }
   
   @IBAction func allPhotoButton(_ sender: Any) {
     buttonPressed()
+  }
+  
+  @objc func animateAvatar(_ gestureRecognizer: UIGestureRecognizer) {
+    avatarLabel.avatarAnimation()
   }
   
   func configure(name: String?, image: UIImage?, age: String?, work: String?) {
@@ -76,24 +73,5 @@ extension DetailedFriendCollectionViewCell: UICollectionViewDelegateFlowLayout {
   }
 }
 
-extension UIImageView {
-  public func maskCircle(anyImage: UIImage) {
-    self.image = anyImage
-    self.contentMode = UIView.ContentMode.scaleAspectFill
-    //self.layer.borderColor = UIColor.systemBlue.cgColor
-    //self.layer.borderWidth = 1
-    self.layer.cornerRadius = self.frame.height / 2
-  }
-  public func shadow(anyImage: UIImage, anyView: UIView) {
-    self.image = anyImage
-    anyView.backgroundColor = nil
-    anyView.layer.cornerRadius = anyView.frame.size.width / 2
-    anyView.layer.shadowColor = UIColor.black.cgColor
-    anyView.layer.shadowOffset = CGSize.zero
-    anyView.layer.shadowRadius = 10
-    anyView.layer.shadowOpacity = 0.9
-    self.layer.cornerRadius = self.frame.size.width / 2
-  }
-}
 
 

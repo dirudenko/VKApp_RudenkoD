@@ -24,18 +24,13 @@ class FriendsViewController: UIViewController {
   
   @IBOutlet weak var friendsTableView: UITableView!
   
-  @IBOutlet weak var charPeekerControl: CharPeekerControl!
-  
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     friendsTableView.dataSource = self
     friendsTableView.delegate = self
-    charPeekerControl.delegate = self
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
     friendsTableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
-    //button.setTitle(String(charIndex[0]), for: .normal)
-    self.view.sendSubviewToBack(charPeekerControl)
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
@@ -43,7 +38,6 @@ class FriendsViewController: UIViewController {
     for (key, value) in DataStorage.shared.groupedPeople {
       sections.append(Section(char: String(key), user: value))
     }
-    print(type(of: sections) )
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -119,7 +113,6 @@ extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
 extension FriendsViewController: NameDelegate {
   func didPressButton(button: UIButton) {
     let char = button.titleLabel!.text
-    var names = [String]()
     var row = 0
     var userSection: Int?
     for section in sections {

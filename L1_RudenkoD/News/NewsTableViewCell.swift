@@ -30,7 +30,7 @@ class NewsTableViewCell: UITableViewCell {
   @IBOutlet weak var constraintHeight1: NSLayoutConstraint!
   @IBOutlet weak var viewForShadow: UIView!
   @IBOutlet weak var viewCounter: UILabel!
-  var isLiked = true
+  private var isLiked = true
   weak var delegate: NewsButtonsDelegate?
   
   func clearCell() {
@@ -77,28 +77,12 @@ class NewsTableViewCell: UITableViewCell {
   
   
   @IBAction func pressLikeButton(_ sender: Any) {
-    if isLiked {
-      likeCounter.text = "\(Int(likeCounter.text!)! + 1)"
-      likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-      likeButton.tintColor = UIColor.systemRed
-    }
-    else {
-      likeCounter.text = "\(Int(likeCounter.text!)! - 1)"
-      likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-      likeButton.tintColor = UIColor.systemBlue
-    }
-    isLiked = !isLiked
-  }
+    
+    pressLike(isLiked: &isLiked, likeCounter: likeCounter, likeButton: likeButton)
+ }
   
   @objc func animateAvatar(_ gestureRecognizer: UIGestureRecognizer) {
-    userImage.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-    UIView.animate(withDuration: 0.5,
-                   delay: 0,
-                   options: .curveEaseOut,
-                   animations: { [weak self] in
-                    self?.userImage.transform = .identity
-                   },
-                   completion: nil)
+    userImage.avatarAnimation()
   }
   
   func configure (image: UIImage?, name: String?, posted: String?, newNews: String?, imageNews1: UIImage?, shared: String?, view: String?, comments: String?) {

@@ -37,15 +37,9 @@ class GroupTableViewCell: UITableViewCell {
     }
   
   @objc func animateAvatar(_ gestureRecognizer: UIGestureRecognizer) {
-    groupAvatar.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-    UIView.animate(withDuration: 0.5,
-                   delay: 0,
-                   options: .curveEaseOut,
-                   animations: { [weak self] in
-                    self?.groupAvatar.transform = .identity
-                   },
-                   completion: nil)
+    groupAvatar.avatarAnimation()
   }
+  
   override func prepareForReuse() {
     clearCell()
   }
