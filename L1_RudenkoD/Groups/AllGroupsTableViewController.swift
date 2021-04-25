@@ -18,9 +18,10 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
   private var data = [String]()
   private var isSearch = false
   
+  @IBOutlet weak var staticCell: UITableViewCell!
   override func viewDidLoad() {
     super.viewDidLoad()
-    //tableView.reloadData()
+    searchBar.alpha = 0
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
     self.tableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
     searchBar.delegate = self
@@ -31,7 +32,7 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
       data.append(item.name)
     }
   
-    //searchBar.showsCancelButton = true
+    searchBar.showsCancelButton = true
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     //self.navigationItem.rightBarButtonItem = self.editButtonItem

@@ -23,8 +23,8 @@ class FriendTableViewCell: UITableViewCell {
     super.awakeFromNib()
     clearCell()
     let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
-    self.avatarImage.addGestureRecognizer(tapRecognizer)
-    self.avatarImage.isUserInteractionEnabled = true
+    avatarImage.addGestureRecognizer(tapRecognizer)
+    avatarImage.isUserInteractionEnabled = true
   }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -14,12 +14,9 @@ class LoginFormController: UIViewController {
   @IBOutlet weak var loginInput: UITextField!
   @IBOutlet weak var passwordInput: UITextField!
   @IBOutlet weak var loginInterface: UIScrollView!
-  
   @IBOutlet weak var animationView: UIView!
   @IBOutlet weak var loadingImage1: UIImageView!
-  
   @IBOutlet weak var loadingImage2: UIImageView!
-  
   @IBOutlet weak var loadingImage3: UIImageView!
   
   func checkUser() -> Bool {
@@ -52,7 +49,7 @@ class LoginFormController: UIViewController {
     super.viewDidLoad()
     let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
     view.addGestureRecognizer(tapGesture)
-   // animateLogo()    
+    //animateLogo()
   }
   
   @IBAction func loginButton(_ sender: UIButton) {
