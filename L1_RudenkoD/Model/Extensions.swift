@@ -46,6 +46,53 @@ extension UIView {
     }
   }
   
+  func findButtonAnimation( searchBar: UISearchBar, isAnimated: Bool) {
+    if !isAnimated {
+      UIView.animate(withDuration: 0.7,
+                     delay: 0,
+                     usingSpringWithDamping: 0.5,
+                     initialSpringVelocity: 0,
+                     options: [.curveEaseOut],
+                     animations: { [weak self] in
+                      self?.frame.origin.x -= (searchBar.frame.width / 2.15)
+                      self?.tintColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+                     },
+                     completion: {_ in
+                      UIView.animate(withDuration: 0.5,
+                                     animations: {[weak searchBar, self] in
+                                      searchBar?.alpha = 1
+                                      self.alpha = 0
+                                     })
+                     })
+    }
+    else {
+      UIView.animate(withDuration: 0.5,
+                     delay: 0,
+                     animations: {[weak self] in
+                      UIView.animate(withDuration: 0.5,
+                                     animations: {[weak searchBar, self] in
+                                      searchBar?.alpha = 0
+                                      self?.alpha = 1
+                                     },
+                                     
+                                     completion: {_ in
+                                      UIView.animate(withDuration: 0.5,
+                                                     delay: 0,
+                                                     usingSpringWithDamping: 0.5,
+                                                     initialSpringVelocity: 0,
+                                                     options: [.curveEaseOut],
+                                                     animations: { [weak self] in
+                                                      self?.frame.origin.x += (searchBar.frame.width / 2.15)
+                                                      self?.tintColor = UIColor.systemBlue
+                                                     })
+                                      
+                                      
+                                     })
+                     })
+      
+    }
+  }
+  
   func photoAppereance(photoView: UIImageView, isClickedPhoto: inout Bool) {
     if isClickedPhoto {
       UIView.animate(withDuration: 1,

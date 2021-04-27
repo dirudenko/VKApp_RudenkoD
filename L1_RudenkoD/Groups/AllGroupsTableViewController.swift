@@ -17,8 +17,12 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
   private var filteredAvatars = [UIImage]()
   private var data = [String]()
   private var isSearch = false
+  var isAnimated = false
   
-  @IBOutlet weak var staticCell: UITableViewCell!
+  @IBOutlet weak var glassButton: UIButton!
+  
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     searchBar.alpha = 0
@@ -31,13 +35,19 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
       filteredDescription.append(item.description ?? "")
       data.append(item.name)
     }
-  
+    tableView.reloadData()
     searchBar.showsCancelButton = true
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     //self.navigationItem.rightBarButtonItem = self.editButtonItem
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    tableView.reloadData()
+  }
   // MARK: - Table view data source
+  
   
   override func numberOfSections(in tableView: UITableView) -> Int {
     // #warning Incomplete implementation, return the number of sections
@@ -46,9 +56,20 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
-    return  filteredNames.count
+    if isSearch == false {
+      return DataStorage.shared.allGroup.count
+    } else {
+      return  filteredNames.count
+    }
   }
   
+  @IBAction func pressGlassButton(_ sender: Any) {
+    glassButton.findButtonAnimation( searchBar: searchBar, isAnimated: isAnimated)
+    isAnimated = !isAnimated
+    isSearch = !isSearch
+    //glassButton.alpha = 0
+    //searchBar.alpha = 1
+  }
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as! GroupTableViewCell
     if isSearch == false {
@@ -73,6 +94,16 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     return cell
   }
   
+  @objc func dismissKeyboard() {
+      //Causes the view (or one of its embedded text fields) to resign the first responder status.
+      view.endEditing(true)
+    isAnimated = true
+    isSearch = true
+    glassButton.findButtonAnimation( searchBar: searchBar, isAnimated: isAnimated)
+    isAnimated = !isAnimated
+    isSearch = !isSearch
+    tableView.reloadData()
+  }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
@@ -105,17 +136,39 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
   }
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    if searchText.isEmpty { isSearch = false}
-    filteredNames = searchText.isEmpty  ? data : data.filter { (item: String) -> Bool in
-      isSearch = true
-      return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+    //let tapGesture = UITapGestureRecognizer(target: view, action:#selector(UIView.endEditing))
+    //view.addGestureRecognizer(tapGesture)
+    //searchBar.showsCancelButton = true
+//    let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+//    view.addGestureRecognizer(tap)
+    if searchText.isEmpty {
+      //isAnimated = true
+      //isSearch = true
+      glassButton.findButtonAnimation( searchBar: searchBar, isAnimated: isAnimated)
+      isAnimated = !isAnimated
+      isSearch = false
+      tableView.reloadData()
+      
+      //UIView.endEditing(view)
+    } else {
+      filteredNames = searchText.isEmpty  ? data : data.filter { (item: String) -> Bool in
+        isSearch = true
+        return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+      }
+      //isSearch = !isSearch
+      tableView.reloadData()
     }
-    tableView.reloadData()
   }
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-    isSearch = false
+    //isSearch = true
+    //isAnimated = true
+    glassButton.findButtonAnimation( searchBar: searchBar, isAnimated: isAnimated)
+    searchBar.text = ""
+    isAnimated = !isAnimated
+    isSearch = !isSearch
     tableView.reloadData()
+
   }
   
   func searchGroup() -> Int {

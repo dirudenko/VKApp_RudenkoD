@@ -11,9 +11,9 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   
   @IBOutlet weak var photoAlbumButton: UIBarButtonItem!
   private let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
-  private var row: Int?
+  //private var row: Int?
 
-  var chosenFriend: User?
+  //var chosenFriend: User?
   var index: Int?
 
   

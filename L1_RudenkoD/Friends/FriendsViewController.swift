@@ -8,7 +8,7 @@
 import UIKit
 
 class FriendsViewController: UIViewController {
-  var chosenFriend: User?
+  //var chosenFriend: User?
   private var friendRow: Int?
   private var friendSection: Int?
   private var charIndex: Int?
@@ -43,29 +43,35 @@ class FriendsViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "FriendInfo" {
       let controller = segue.destination as! DetailedFriendCollectionViewController
-      chosenFriend = sections[friendSection!].user[friendRow!]
-      var i = 0
-      for item in DataStorage.shared.usersArray {
-        if item.name == chosenFriend?.name {
-          index = i
-        }
-        i += 1
-      }
-      controller.index = index
+      let chosenFriend = sections[friendSection!].user[friendRow!]
+      controller.index = DataStorage.shared.usersArray.firstIndex(where: { $0.name == chosenFriend.name })
     }
+//  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    if segue.identifier == "FriendInfo" {
+//      let controller = segue.destination as! DetailedFriendCollectionViewController
+//      chosenFriend = sections[friendSection!].user[friendRow!]
+//      var i = 0
+//      for item in DataStorage.shared.usersArray {
+//        if item.name == chosenFriend?.name {
+//          index = i
+//        }
+//        i += 1
+//      }
+//      controller.index = index
+//    }
   }
 }
+  
 // MARK: - Table view data source
 
 extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
-      let section = sections[indexPath.section]
-      let username = section.user[indexPath.row]
+    let section = sections[indexPath.section]
+    let username = section.user[indexPath.row]
     cell.configure(name: username.name, image: username.avatar)
-   
-      return cell
+    return cell
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,11 +91,9 @@ extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
-    
    view.tintColor = UIColor.lightGray
       let header = view as! UITableViewHeaderFooterView
       header.textLabel?.textColor = UIColor.systemBlue
-   
   }
   
 //  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -113,18 +117,11 @@ extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
 extension FriendsViewController: NameDelegate {
   func didPressButton(button: UIButton) {
     let char = button.titleLabel!.text
-    var row = 0
-    var userSection: Int?
-    for section in sections {
-      if section.char == char {
-        userSection = row
-      }
-      row += 1
-    }
-        let indexPath = IndexPath(row: 0, section: userSection!)
-        friendsTableView.scrollToRow(at: indexPath, at: .top, animated: true)
-      }
-    }
+    let userSection = sections.firstIndex(where: { $0.char == char })
+    let indexPath = IndexPath(row: 0, section: userSection!)
+    friendsTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+  }
+}
  
 
 
