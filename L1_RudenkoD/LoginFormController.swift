@@ -47,8 +47,7 @@ class LoginFormController: UIViewController {
     super.viewDidLoad()
     let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
     view.addGestureRecognizer(tapGesture)
-    self.view.bringSubviewToFront(animationView)
-    animateLogo()
+    //animateLogo()
   }
   
   @IBAction func loginButton(_ sender: UIButton) {
@@ -56,10 +55,11 @@ class LoginFormController: UIViewController {
 }
 
 extension LoginFormController {
+  
   func animateLogo() {
+    self.view.bringSubviewToFront(animationView)
     
     CATransaction.setCompletionBlock{ [weak self] in
-      print("Animation completed")
       UIView.transition(from: self!.animationView,
                         to: self!.loginInterface,
                         duration: 1,
@@ -72,18 +72,12 @@ extension LoginFormController {
     shapeLayer.strokeColor = UIColor.systemBlue.cgColor
     shapeLayer.fillColor = UIColor.white.cgColor
     shapeLayer.lineWidth = 3.0
-    
-    // shapeLayer.transform = CATransform3DMakeScale(2, 2, 1)
-    //shapeLayer.position = CGPoint(x: 5 , y: -15 )
-    //shapeLayer.position = CGPoint(x: width / 2 , y: height / 2 )
-    
     viewForCloud.layer.addSublayer(shapeLayer)
     let circleLayer = CAShapeLayer()
-    circleLayer.backgroundColor = UIColor.systemGray.cgColor
+    circleLayer.backgroundColor = UIColor.black.cgColor
     circleLayer.bounds = CGRect(x: 0, y: 0, width: 10, height: 10)
-    //circleLayer.position = CGPoint(x: 5, y: 0)
     circleLayer.cornerRadius = 5
-    
+
     let followPathAnimation = CAKeyframeAnimation(keyPath: "position")
     followPathAnimation.path = createBezierPath().cgPath
     followPathAnimation.calculationMode = CAAnimationCalculationMode.cubicPaced

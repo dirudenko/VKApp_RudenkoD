@@ -9,6 +9,13 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fillUsers()
+        fillGroups()
+        fillPosts()
+    }
+  
   func fillUsers() {
     let user1 = User(name: "Tim Cook", age: 60, avatar: UIImage(named: "Tim Cook")!, photoArray: [UIImage(named: "Tim Cook 1")!, UIImage(named: "Tim Cook 2")!, UIImage(named: "Tim Cook 3")!, UIImage(named: "Tim Cook 4")!], job: "Apple")
     let user2 = User(name: "Bill Gates", age: 65, avatar: UIImage(named: "Bill Gates")!, photoArray: [UIImage(named: "Bill Gates 1")!, UIImage(named: "Bill Gates 2")!, UIImage(named: "Bill Gates 3")!, UIImage(named: "Bill Gates 4")!, UIImage(named: "Bill Gates 5")!], job: "ex-Microsoft")
@@ -47,10 +54,4 @@ class TabBarController: UITabBarController {
     DataStorage.shared.postedNews.append(contentsOf: posts)
   }
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fillUsers()
-        fillGroups()
-        fillPosts()
-    }
 }

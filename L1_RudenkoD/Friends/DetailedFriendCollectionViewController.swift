@@ -78,7 +78,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "allPhotos" {
       let controller = segue.destination as! AnimatedPhotosViewController
-      controller.index = index
+      controller.indexUser = index!
     }
   }
   

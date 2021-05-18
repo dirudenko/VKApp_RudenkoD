@@ -6,7 +6,7 @@
 //
 
 import UIKit
-protocol NameDelegate: class {
+protocol NameDelegate: AnyObject {
   func didPressButton(button: UIButton)
 }
 

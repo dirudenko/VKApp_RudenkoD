@@ -23,14 +23,29 @@ class AnimatedPhotosViewController: UIViewController {
   private var currentIndex = 0
   private var isLiked = true
   private var images = [UIImage]()
-  var index: Int?
+  var indexUser: Int?
+  var indexPhoto: Int?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    images = DataStorage.shared.usersArray[index!].photoArray
+    viewLoadSetup()
+  }
+  
+  
+  private func viewLoadSetup() {
+    guard let indexUser = indexUser else { return }
+    images = DataStorage.shared.usersArray[indexUser].photoArray
     setImages(images: images)
     setup()
-    // Do any additional setup after loading the view.
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "fullImage" {
+      let controller = segue.destination as! FullImageViewController
+     // print(indexUser , indexPhoto)
+      controller.indexPhoto = self.indexPhoto
+      controller.indexUser  = self.indexUser
+    }
   }
   
   func setImages(images: [UIImage]) {
@@ -41,12 +56,19 @@ class AnimatedPhotosViewController: UIViewController {
     pageControl.numberOfPages = images.count
   }
   
+ 
+  
   func setup() {
+    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(fullImageView(_:)))
+    self.primaryImageView.addGestureRecognizer(tapRecognizer)
+    self.primaryImageView.isUserInteractionEnabled = true
     let recognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
     viewForAnimation.addGestureRecognizer(recognizer)
+    
     likeCounter.text = "0"
     primaryImageView.frame = viewForAnimation.bounds
     secondaryImageView.frame = viewForAnimation.bounds
+    primaryImageView.contentMode = .scaleAspectFill
     secondaryImageView.transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
     
     pageControl.backgroundColor = UIColor.clear
@@ -54,11 +76,12 @@ class AnimatedPhotosViewController: UIViewController {
     pageControl.numberOfPages = images.count
     pageControl.currentPage = 0
     pageControl.pageIndicatorTintColor = UIColor.lightGray
-    pageControl.currentPageIndicatorTintColor = UIColor.black
+    pageControl.currentPageIndicatorTintColor = UIColor.systemBlue
     viewForAnimation.bringSubviewToFront(pageControl)
   }
-  
-  
+}
+  extension AnimatedPhotosViewController {
+    
   @IBAction func pressPageControl(_ sender: UIPageControl) {
     currentIndex = sender.currentPage
     self.primaryImageView.transform = .identity
@@ -71,7 +94,11 @@ class AnimatedPhotosViewController: UIViewController {
     self.pressLike(isLiked: &isLiked, likeCounter: likeCounter, likeButton: likeButton)
   }
   
-  
+    @objc func fullImageView(_ gestureRecognizer: UIGestureRecognizer) {
+      self.primaryImageView.avatarAnimation()
+      performSegue(withIdentifier: "fullImage", sender: (Any).self)
+    }
+    
   @objc func onPan(_ recognizer: UIPanGestureRecognizer) {
     if let animator = interactiveAnimator,
        animator.isRunning {
@@ -127,6 +154,8 @@ class AnimatedPhotosViewController: UIViewController {
         interactiveAnimator.addAnimations { [weak self] in
           self?.primaryImageView.transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
           self?.secondaryImageView.transform = .identity
+          // self?.secondaryImageView.alpha = 1
+          
         }
         interactiveAnimator.addCompletion({ [weak self] _ in
           self?.onChangeCompletion(isLeft: false)
@@ -168,7 +197,7 @@ class AnimatedPhotosViewController: UIViewController {
           if weakSelf.isRightSwipe {
             self?.secondaryImageView.transform = CGAffineTransform(translationX: -UIScreen.main.bounds.width, y: 0)
           }
-          self?.secondaryImageView.image = nil
+          self?.secondaryImageView.alpha = 0
         }
         interactiveAnimator.addCompletion({ [weak self] _ in
           self?.primaryImageView.transform = .identity
@@ -190,10 +219,13 @@ class AnimatedPhotosViewController: UIViewController {
     if isLeft {
       self.secondaryImageView.image = images[currentIndex + 1]
       self.secondaryImageView.transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
+      self.secondaryImageView.alpha = 1
+      
     }
     else {
       self.secondaryImageView.transform = CGAffineTransform(translationX: -UIScreen.main.bounds.width, y: 0)
       self.secondaryImageView.image = images[currentIndex - 1]
+      self.secondaryImageView.alpha = 1
     }
   }
   
@@ -210,69 +242,8 @@ class AnimatedPhotosViewController: UIViewController {
     self.primaryImageView.image = self.images[self.currentIndex]
     viewForAnimation.bringSubviewToFront(self.primaryImageView)
     self.pageControl.currentPage = self.currentIndex
+    self.indexPhoto = self.currentIndex
   }
-  
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destination.
-   // Pass the selected object to the new view controller.
-   }
-   */
-  
 }
 
-extension UIViewController {
-  func pressLike(isLiked: inout Bool, likeCounter: UILabel, likeButton: UIButton) {
-    likeCounterAnimation(likeCounter: likeCounter, isLiked: isLiked)
-    likeButtonAnimation(isLiked: isLiked, likeButton: likeButton)
-    isLiked = !isLiked
-  }
-  
-  private func likeButtonAnimation(isLiked: Bool ,likeButton: UIButton) {
-    likeButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-    UIView.animate(withDuration: 0.5,
-                   delay: 0,
-                   options: .curveEaseOut,
-                   animations: { [weak likeButton] in
-                    likeButton?.transform = .identity
-                   },
-                   completion: nil)
-    if isLiked {
-      likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-      likeButton.tintColor = UIColor.systemRed
-    }
-    else {
-      likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-      likeButton.tintColor = UIColor.systemBlue
-    }
-  }
-  
-  private func likeCounterAnimation(likeCounter: UILabel, isLiked: Bool) {
-    if isLiked {
-      UIView.transition(with: likeCounter,
-                        duration: 0.5,
-                        options: .transitionCurlDown,
-                        animations: {   [weak likeCounter] in
-                          guard let likeCounter = likeCounter else { return }
-                          
-                          likeCounter.text = "\(Int(likeCounter.text!)! + 1)"
-                          
-                        },
-                        completion: nil)
-    }
-    else {
-      UIView.transition(with: likeCounter,
-                        duration: 0.5,
-                        options: .transitionCurlUp,
-                        animations: {   [weak likeCounter] in
-                          guard let likeCounter = likeCounter else { return }
-                          likeCounter.text = "\(Int(likeCounter.text!)! - 1)"
-                        },
-                        completion: nil)
-    }
-  }
-}
+

@@ -286,6 +286,7 @@
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SYB-je-OPB">
                                         <rect key="frame" x="0.0" y="155.5" width="414" height="414"/>
+                                        <color key="backgroundColor" systemColor="labelColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="SYB-je-OPB" secondAttribute="height" multiplier="1:1" id="a3w-lW-yFU"/>
                                         </constraints>
@@ -296,8 +297,8 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azd-HR-pme">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qge-9Z-Bd7">
                                                 <rect key="frame" x="50" y="0.0" width="20" height="20"/>
@@ -313,7 +314,9 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstItem="SYB-je-OPB" firstAttribute="centerX" secondItem="J1F-A6-aoq" secondAttribute="centerX" id="2d0-an-bGO"/>
                                     <constraint firstItem="sep-od-22J" firstAttribute="centerX" secondItem="zMy-sY-TSD" secondAttribute="centerX" id="598-eI-rOg"/>
@@ -347,11 +350,42 @@
                         <outlet property="primaryImageView" destination="zMy-sY-TSD" id="8aW-zb-0HD"/>
                         <outlet property="secondaryImageView" destination="SYB-je-OPB" id="4dD-4C-27v"/>
                         <outlet property="viewForAnimation" destination="J1F-A6-aoq" id="zLX-cb-JJj"/>
+                        <segue destination="cWL-LM-fCe" kind="show" identifier="fullImage" customClass="FullImageCustomSegue" customModule="VKapp_RudenkoD" customModuleProvider="target" animates="NO" id="S7u-Yn-kjY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kT4-f4-ir3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5046" y="-927"/>
+            <point key="canvasLocation" x="5050.7246376811599" y="-914.0625"/>
+        </scene>
+        <!--Full Image View Controller-->
+        <scene sceneID="nam-0z-Nej">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="cWL-LM-fCe" customClass="FullImageViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1a8-ie-akB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i0v-xx-ltw">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CIY-dj-30H"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="i0v-xx-ltw" firstAttribute="leading" secondItem="CIY-dj-30H" secondAttribute="leading" id="8Xh-X4-WXv"/>
+                            <constraint firstItem="CIY-dj-30H" firstAttribute="trailing" secondItem="i0v-xx-ltw" secondAttribute="trailing" id="QYN-KP-O9Q"/>
+                            <constraint firstItem="CIY-dj-30H" firstAttribute="bottom" secondItem="i0v-xx-ltw" secondAttribute="bottom" id="d2Q-2W-fnn"/>
+                            <constraint firstItem="i0v-xx-ltw" firstAttribute="top" secondItem="CIY-dj-30H" secondAttribute="top" id="j3h-iF-Lae"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Bve-dH-E46"/>
+                    <connections>
+                        <outlet property="fullImage" destination="i0v-xx-ltw" id="ADo-TA-JSu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JU7-CN-ctf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5751" y="-914"/>
         </scene>
         <!--Photos Collection View Controller-->
         <scene sceneID="2jW-gC-qum">
@@ -396,7 +430,7 @@
         <!--Друзья-->
         <scene sceneID="uwb-Lm-4O5">
             <objects>
-                <navigationController id="4Rx-Sr-vYi" sceneMemberID="viewController">
+                <navigationController id="4Rx-Sr-vYi" customClass="CustomNavigationController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Друзья" image="person.fill" catalog="system" selectedImage="person.fill" id="Zm2-UC-a6m"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="keQ-qd-sYH">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -501,7 +535,7 @@
         <!--Новости-->
         <scene sceneID="3Dl-4E-uvm">
             <objects>
-                <navigationController id="OMR-xC-DMI" sceneMemberID="viewController">
+                <navigationController id="OMR-xC-DMI" customClass="CustomNavigationController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Новости" image="newspaper.fill" catalog="system" selectedImage="newspaper.fill" id="Z57-mu-zfN"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="s91-3e-9ce">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -593,7 +627,7 @@
         <!--Группы-->
         <scene sceneID="4I8-SM-br0">
             <objects>
-                <navigationController id="yG1-7x-NuZ" sceneMemberID="viewController">
+                <navigationController id="yG1-7x-NuZ" customClass="CustomNavigationController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Группы" image="rosette" catalog="system" id="B0K-mD-rxO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="t0x-Xz-E0J">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -623,6 +657,9 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
