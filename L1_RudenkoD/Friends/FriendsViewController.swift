@@ -8,7 +8,6 @@
 import UIKit
 
 class FriendsViewController: UIViewController {
-  //var chosenFriend: User?
   private var friendRow: Int?
   private var friendSection: Int?
   private var charIndex: Int?
@@ -16,15 +15,15 @@ class FriendsViewController: UIViewController {
   var index: Int?
   
   private struct Section {
-      let char : String
-      let user : [User]
+    let char : String
+    var user : [User]
   }
   
   private var sections = [Section]()
   
   @IBOutlet weak var friendsTableView: UITableView!
   
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     friendsTableView.dataSource = self
@@ -46,22 +45,9 @@ class FriendsViewController: UIViewController {
       let chosenFriend = sections[friendSection!].user[friendRow!]
       controller.index = DataStorage.shared.usersArray.firstIndex(where: { $0.name == chosenFriend.name })
     }
-//  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//    if segue.identifier == "FriendInfo" {
-//      let controller = segue.destination as! DetailedFriendCollectionViewController
-//      chosenFriend = sections[friendSection!].user[friendRow!]
-//      var i = 0
-//      for item in DataStorage.shared.usersArray {
-//        if item.name == chosenFriend?.name {
-//          index = i
-//        }
-//        i += 1
-//      }
-//      controller.index = index
-//    }
   }
 }
-  
+
 // MARK: - Table view data source
 
 extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -70,59 +56,55 @@ extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
     let section = sections[indexPath.section]
     let username = section.user[indexPath.row]
+    cell.avatarImage.shadow(anyImage: username.avatar!, anyView: cell.viewForShadow, color: UIColor.systemBlue.cgColor)
     cell.configure(name: username.name, image: username.avatar)
     return cell
   }
-
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return sections[section].user.count
+    return sections[section].user.count
   }
-
+  
   func numberOfSections(in tableView: UITableView) -> Int {
-      return sections.count
+    return sections.count
   }
-
+  
   func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-      return sections.map{$0.char}
+    return sections.map{$0.char}
   }
-
+  
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-      return sections[section].char
+    return sections[section].char
   }
   
   func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
-   view.tintColor = UIColor.lightGray
-      let header = view as! UITableViewHeaderFooterView
-      header.textLabel?.textColor = UIColor.systemBlue
+    view.tintColor = UIColor.systemGray2
+    let header = view as! UITableViewHeaderFooterView
+    header.textLabel?.textColor = UIColor.systemBlue
   }
   
-//  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//    if editingStyle == .delete {
-//      sections.remove(at: indexPath.row)
-//      tableView.beginUpdates()
-//      tableView.deleteRows(at: [indexPath], with: .fade)
-//      tableView.deleteSections([1], with: .fade)
-//      tableView.endUpdates()
-//    }
-//    tableView.reloadData()
-//  }
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      let indexSet = IndexSet(arrayLiteral: indexPath.section)
+      sections[indexPath.section].user.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+      if sections[indexPath.section].user.count == 0 {
+        sections.remove(at: indexPath.section)
+        tableView.beginUpdates()
+        tableView.deleteSections(indexSet, with: .automatic)
+        tableView.endUpdates()
+      }
+    }
+    tableView.reloadData()
+  }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     friendRow = indexPath.row
     friendSection = indexPath.section
-      performSegue(withIdentifier: "FriendInfo", sender: (Any).self)
+    performSegue(withIdentifier: "FriendInfo", sender: (Any).self)
   }
 }
 
-extension FriendsViewController: NameDelegate {
-  func didPressButton(button: UIButton) {
-    let char = button.titleLabel!.text
-    let userSection = sections.firstIndex(where: { $0.char == char })
-    let indexPath = IndexPath(row: 0, section: userSection!)
-    friendsTableView.scrollToRow(at: indexPath, at: .top, animated: true)
-  }
-}
- 
 
 
 
@@ -131,20 +113,4 @@ extension FriendsViewController: NameDelegate {
 
 
 
-/*
- // Override to support conditional rearranging of the table view.
- override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
- // Return false if you do not want the item to be re-orderable.
- return true
- }
- */
 
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */

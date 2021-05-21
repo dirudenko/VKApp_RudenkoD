@@ -67,8 +67,6 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     glassButton.findButtonAnimation( searchBar: searchBar, isAnimated: isAnimated)
     isAnimated = !isAnimated
     isSearch = !isSearch
-    //glassButton.alpha = 0
-    //searchBar.alpha = 1
   }
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as! GroupTableViewCell
@@ -136,26 +134,16 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
   }
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    //let tapGesture = UITapGestureRecognizer(target: view, action:#selector(UIView.endEditing))
-    //view.addGestureRecognizer(tapGesture)
-    //searchBar.showsCancelButton = true
-//    let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-//    view.addGestureRecognizer(tap)
     if searchText.isEmpty {
-      //isAnimated = true
-      //isSearch = true
       glassButton.findButtonAnimation( searchBar: searchBar, isAnimated: isAnimated)
       isAnimated = !isAnimated
       isSearch = false
       tableView.reloadData()
-      
-      //UIView.endEditing(view)
     } else {
       filteredNames = searchText.isEmpty  ? data : data.filter { (item: String) -> Bool in
         isSearch = true
         return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
       }
-      //isSearch = !isSearch
       tableView.reloadData()
     }
   }
@@ -179,52 +167,7 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
     let tmp = groupsname.filter () { filteredNames.contains($0) }
     return groupsname.firstIndex(of: tmp[0])!
   }
-  
-  /*
-   // Override to support conditional editing of the table view.
-   override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-   // Return false if you do not want the specified item to be editable.
-   return true
-   }
-   */
-  // Override to support editing the table view.
-  //     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-  //     if editingStyle == .insert {
-  //      DataStorage.shared.allGroup[indexPath.row].status = true
-  //
-  //     // Delete the row from the data source
-  //     //tableView.deleteRows(at: [indexPath], with: .fade)
-  //     }
-  //     }
-  
-  
-  
 }
 
-
-/*
- // Override to support rearranging the table view.
- override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
- 
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
- // Return false if you do not want the item to be re-orderable.
- return true
- }
- */
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
 
 

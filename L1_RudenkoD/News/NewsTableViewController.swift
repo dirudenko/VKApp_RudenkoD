@@ -53,7 +53,7 @@ class NewsTableViewController: UITableViewController {
     let shared = String(news[indexPath.row].numberOfShares)
     let views = String("\(news[indexPath.row].numberOfViews)K")
     let comments = String(news[indexPath.row].numberOfComments)
-    cell.userImage.shadow(anyImage: image!, anyView: cell.viewForShadow)
+    cell.userImage.shadow(anyImage: image!, anyView: cell.viewForShadow, color: UIColor.black.cgColor)
     cell.configure(image: image, name: name, posted: posted, newNews: newNews, imageNews1: imageNews1, shared: shared, view: views, comments: comments)
     cell.likeCounter.text = String(numberOfLikes)
     cell.delegate = self
@@ -139,14 +139,7 @@ extension NewsTableViewController: NewsButtonsDelegate {
     for item in DataStorage.shared.usersArray {
       users.append(item.name)
     }
-    var i = 0
-    for item in users {
-      if item == name {
-        friendIndex = i
-      } else {
-        i += 1
-      }
-    }
+    friendIndex = users.firstIndex(where: { $0 == name })
     performSegue(withIdentifier: "friendFromNews", sender: self)
   }
   

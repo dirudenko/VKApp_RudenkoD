@@ -13,24 +13,33 @@ class AnimatedPhotosViewController: UIViewController {
   @IBOutlet weak var secondaryImageView: UIImageView!
   @IBOutlet weak var pageControl: UIPageControl!
   @IBOutlet weak var viewForAnimation: UIView!
-  @IBOutlet weak var likeCounter: UILabel!
-  @IBOutlet weak var likeButton: UIButton!
   
   private var interactiveAnimator: UIViewPropertyAnimator!
   private var isLeftSwipe = false
   private var isRightSwipe = false
   private var chooseFlag = false
-  private var currentIndex = 0
+  private var currentIndex = Int()
   private var isLiked = true
   private var images = [UIImage]()
+  private var viewTranslation = CGPoint(x: 0, y: 0)
   var indexUser: Int?
   var indexPhoto: Int?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     viewLoadSetup()
+    
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.setNavigationBarHidden(false, animated: animated)
+  }
   
   private func viewLoadSetup() {
     guard let indexUser = indexUser else { return }
@@ -38,34 +47,25 @@ class AnimatedPhotosViewController: UIViewController {
     setImages(images: images)
     setup()
   }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "fullImage" {
-      let controller = segue.destination as! FullImageViewController
-     // print(indexUser , indexPhoto)
-      controller.indexPhoto = self.indexPhoto
-      controller.indexUser  = self.indexUser
-    }
-  }
-  
+    
   func setImages(images: [UIImage]) {
     self.images = images
     if self.images.count > 0 {
-      primaryImageView.image = images.first
+      primaryImageView.image = images[indexPhoto ?? 0]
     }
     pageControl.numberOfPages = images.count
   }
   
- 
-  
   func setup() {
-    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(fullImageView(_:)))
-    self.primaryImageView.addGestureRecognizer(tapRecognizer)
+    //let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(fullImageView(_:)))
+    //self.primaryImageView.addGestureRecognizer(tapRecognizer)
     self.primaryImageView.isUserInteractionEnabled = true
+    //view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismiss)))
+    let swipe = UIPanGestureRecognizer(target: self, action: #selector(handleDismiss))
     let recognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
-    viewForAnimation.addGestureRecognizer(recognizer)
+    primaryImageView.addGestureRecognizer(recognizer)
+    viewForAnimation.addGestureRecognizer(swipe)
     
-    likeCounter.text = "0"
     primaryImageView.frame = viewForAnimation.bounds
     secondaryImageView.frame = viewForAnimation.bounds
     primaryImageView.contentMode = .scaleAspectFill
@@ -74,14 +74,14 @@ class AnimatedPhotosViewController: UIViewController {
     pageControl.backgroundColor = UIColor.clear
     pageControl.frame = CGRect(x: 1, y: 1, width: 150, height: 50)
     pageControl.numberOfPages = images.count
-    pageControl.currentPage = 0
+    pageControl.currentPage = indexPhoto ?? 0
     pageControl.pageIndicatorTintColor = UIColor.lightGray
     pageControl.currentPageIndicatorTintColor = UIColor.systemBlue
     viewForAnimation.bringSubviewToFront(pageControl)
   }
 }
-  extension AnimatedPhotosViewController {
-    
+extension AnimatedPhotosViewController {
+  
   @IBAction func pressPageControl(_ sender: UIPageControl) {
     currentIndex = sender.currentPage
     self.primaryImageView.transform = .identity
@@ -89,22 +89,12 @@ class AnimatedPhotosViewController: UIViewController {
     self.secondaryImageView.transform = .identity
   }
   
-  @IBAction func pressButtonLike(_ sender: Any) {
-    
-    self.pressLike(isLiked: &isLiked, likeCounter: likeCounter, likeButton: likeButton)
-  }
-  
-    @objc func fullImageView(_ gestureRecognizer: UIGestureRecognizer) {
-      self.primaryImageView.avatarAnimation()
-      performSegue(withIdentifier: "fullImage", sender: (Any).self)
-    }
-    
   @objc func onPan(_ recognizer: UIPanGestureRecognizer) {
     if let animator = interactiveAnimator,
        animator.isRunning {
       return
     }
-    
+    currentIndex = indexPhoto ?? 0
     switch recognizer.state {
     case .began:
       self.primaryImageView.transform = .identity
@@ -244,6 +234,38 @@ class AnimatedPhotosViewController: UIViewController {
     self.pageControl.currentPage = self.currentIndex
     self.indexPhoto = self.currentIndex
   }
+  
+  @objc func handleDismiss(sender: UIPanGestureRecognizer) {
+    switch sender.state {
+    case .changed:
+      viewTranslation = sender.translation(in: view)
+      UIView.animate(withDuration: 0.5,
+                     delay: 0,
+                     usingSpringWithDamping: 0.7,
+                     initialSpringVelocity: 1,
+                     options: .curveEaseOut,
+                     animations: {[weak self] in
+                      self?.view.transform = CGAffineTransform(translationX: 0, y: (self?.viewTranslation.y)!)
+                     })
+    case .ended:
+      if viewTranslation.y < 200 {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 1,
+                       options: .curveEaseOut,
+                       animations: {[weak self] in
+                        self?.view.transform = .identity
+                       })
+      } else {
+        //self.navigationController?.popViewController(animated: false)
+        dismiss(animated: false)
+      }
+    default:
+      break
+    }
+  }
+  
 }
 
 

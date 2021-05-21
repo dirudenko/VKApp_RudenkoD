@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DataStorage: NSObject {
+final class DataStorage: NSObject {
   static let shared = DataStorage()
   private override init() {
     super.init()
@@ -15,8 +15,8 @@ class DataStorage: NSObject {
   
   var usersArray = [User]()
   //var myFriendsArray = [User]()
-  var sortedChars = [String]()
-  var charIndex = Int()
+  //var sortedChars = [String]()
+  //var charIndex = Int()
   var allGroup = [Group]()
   var myGroup = [Group]()
   var groupedPeople = [(char:Character, User:[User])]()

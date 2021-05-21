@@ -35,19 +35,19 @@ class LoginFormController: UIViewController {
     })
   }
   
-  //  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-  //    let checkResult = checkUser()
-  //    if !checkResult {
-  //      showLoginError()
-  //    }
-  //    return checkResult
-  //  }
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+      let checkResult = checkUser()
+      if !checkResult {
+        showLoginError()
+      }
+      return checkResult
+    }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
     view.addGestureRecognizer(tapGesture)
-    //animateLogo()
+    animateLogo()
   }
   
   @IBAction func loginButton(_ sender: UIButton) {

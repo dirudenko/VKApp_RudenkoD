@@ -12,7 +12,6 @@ protocol NameDelegate: AnyObject {
 
 
 @IBDesignable class CharPeekerControl: UIControl {
-  
   var selectedChar: String? = nil
   private var buttons: [UIButton] = []
   private var stackView: UIStackView!
@@ -51,11 +50,6 @@ protocol NameDelegate: AnyObject {
     self.setupView()
   }
   
-  //  private func updateSelectedDay() {
-  //  for (index, button) in self.buttons.enumerated() {
-  //  guard let day = Day(rawValue: index) else { continue }
-  //  button.isSelected = day == self.selectedDay }
-  //  }
   
   func findChars() -> [String] {
     var unsortedChars = Set<String>()
@@ -64,7 +58,7 @@ protocol NameDelegate: AnyObject {
       unsortedChars.insert(String(char!))
     }
     let sortedChars = Array(unsortedChars.sorted())
-    DataStorage.shared.sortedChars = sortedChars
+    //DataStorage.shared.sortedChars = sortedChars
     return Array(sortedChars)
   }
   
@@ -72,16 +66,7 @@ protocol NameDelegate: AnyObject {
     guard let index = self.buttons.firstIndex(of: sender)
     else { return }
     let button = self.buttons[index]
-    DataStorage.shared.charIndex = Int(index)
+   // DataStorage.shared.charIndex = Int(index)
     delegate?.didPressButton(button: button)
   }
-  
-  /*
-   // Only override draw() if you perform custom drawing.
-   // An empty implementation adversely affects performance during animation.
-   override func draw(_ rect: CGRect) {
-   // Drawing code
-   }
-   */
-  
 }

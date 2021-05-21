@@ -11,9 +11,6 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   
   @IBOutlet weak var photoAlbumButton: UIBarButtonItem!
   private let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
-  //private var row: Int?
-
-  //var chosenFriend: User?
   var index: Int?
 
   
@@ -21,29 +18,8 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
     super.viewDidLoad()
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
     self.collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
-    
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-    
-    // Register cell classes
-    
-    
-    // Do any additional setup after loading the view.
   }
-  
 
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using [segue destinationViewController].
-   // Pass the selected object to the new view controller.
-   }
-   */
-  
-  // MARK: UICollectionViewDataSource
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
     // #warning Incomplete implementation, return the number of sections
@@ -67,7 +43,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
     let age = String(DataStorage.shared.usersArray[userIndex].age)
     let image = DataStorage.shared.usersArray[userIndex].avatar ?? UIImage()
     let work = DataStorage.shared.usersArray[userIndex].job
-    cell.avatarLabel.shadow(anyImage: image, anyView: cell.viewForShadow)
+    cell.avatarLabel.shadow(anyImage: image, anyView: cell.viewForShadow, color: UIColor.black.cgColor)
     cell.configure(name: name, image: image, age: age, work: work!)
     cell.buttonPressed = { [weak self] in
       self?.performSegue(withIdentifier: "allPhotos", sender: UIButton())
@@ -77,8 +53,8 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "allPhotos" {
-      let controller = segue.destination as! AnimatedPhotosViewController
-      controller.indexUser = index!
+      let controller = segue.destination as! PhotosCollectionViewController
+      controller.indexUser = index
     }
   }
   
@@ -115,9 +91,9 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   
 
 
-extension DetailedFriendCollectionViewController: UICollectionViewDelegateFlowLayout {
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: 400.0, height: 900.0)
-  }
-}
+//extension DetailedFriendCollectionViewController: UICollectionViewDelegateFlowLayout {
+//  
+//  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//    return CGSize(width: 400.0, height: 900.0)
+//  }
+//}

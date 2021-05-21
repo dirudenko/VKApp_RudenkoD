@@ -95,6 +95,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6958798B2658295900A14C88 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				69C11F27264311EA002A3E92 /* CustomAnimators.swift */,
+				69C11F292643153E002A3E92 /* CustomNavigationController.swift */,
+				69C11F2B2644032C002A3E92 /* NavigationClosingAnimation.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		695F08BE2618D394001DC492 = {
 			isa = PBXGroup;
 			children = (
@@ -114,22 +124,16 @@
 		695F08C92618D394001DC492 /* VKapp_RudenkoD */ = {
 			isa = PBXGroup;
 			children = (
-				695F08CA2618D394001DC492 /* AppDelegate.swift */,
 				695F08D32618D395001DC492 /* Assets.xcassets */,
 				69A9BFF6262EDBBA00980DDF /* CharPeekerControl.swift */,
-				69C11F27264311EA002A3E92 /* CustomAnimators.swift */,
-				69C11F292643153E002A3E92 /* CustomNavigationController.swift */,
+				6958798B2658295900A14C88 /* Animations */,
 				699657082625F8CB008650B8 /* Friends */,
 				6996570A2625F8E6008650B8 /* Groups */,
-				695F08D82618D395001DC492 /* Info.plist */,
-				695F08D52618D395001DC492 /* LaunchScreen.storyboard */,
-				69D332272618DF76009D4411 /* LoginFormController.swift */,
-				695F08D02618D394001DC492 /* Main.storyboard */,
 				69BF44122622F6E300D03109 /* Model */,
-				69C11F2B2644032C002A3E92 /* NavigationClosingAnimation.swift */,
 				699DF70B2631611B004F6C13 /* News */,
-				695F08CC2618D394001DC492 /* SceneDelegate.swift */,
 				69BF44252622FF7900D03109 /* TabBarController.swift */,
+				69D332272618DF76009D4411 /* LoginFormController.swift */,
+				69DB50872658248C00648F72 /* Resources */,
 			);
 			name = VKapp_RudenkoD;
 			path = L1_RudenkoD;
@@ -193,6 +197,18 @@
 				69BF44162622F71200D03109 /* Group.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		69DB50872658248C00648F72 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				695F08D82618D395001DC492 /* Info.plist */,
+				695F08CC2618D394001DC492 /* SceneDelegate.swift */,
+				695F08D52618D395001DC492 /* LaunchScreen.storyboard */,
+				695F08CA2618D394001DC492 /* AppDelegate.swift */,
+				695F08D02618D394001DC492 /* Main.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,7 +461,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N3G8R7BNR2;
-				INFOPLIST_FILE = L1_RudenkoD/Info.plist;
+				INFOPLIST_FILE = L1_RudenkoD/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -464,7 +481,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N3G8R7BNR2;
-				INFOPLIST_FILE = L1_RudenkoD/Info.plist;
+				INFOPLIST_FILE = L1_RudenkoD/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

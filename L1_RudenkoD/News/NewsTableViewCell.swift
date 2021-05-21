@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol NewsButtonsDelegate: class {
+protocol NewsButtonsDelegate: AnyObject {
   func share()
   func namePressed(button: UIButton)
 }

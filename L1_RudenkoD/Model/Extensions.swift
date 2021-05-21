@@ -167,19 +167,15 @@ extension UIView {
   }
   
   func gradient() {
-    let gradientLayer: CAGradientLayer = {
+      clipsToBounds = true
       let gradientLayer = CAGradientLayer()
       gradientLayer.colors = [UIColor.lightGray.cgColor,UIColor.white.cgColor]
+      gradientLayer.frame = self.bounds
       gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
       gradientLayer.endPoint = CGPoint(x: 0.7, y: 0.5)
-      gradientLayer.frame = CGRect.zero
-      return gradientLayer
-    }()
-    self.layer.addSublayer(gradientLayer)
-    self.frame = self.bounds
+      self.layer.insertSublayer(gradientLayer, at: 0)
+   
   }
-  
- 
   
   private func likeCounterAnimation(likeCounter: UILabel, isLiked: Bool) {
     if isLiked {
@@ -215,11 +211,12 @@ extension UIImageView {
     //self.layer.borderWidth = 1
     self.layer.cornerRadius = self.frame.height / 2
   }
-  func shadow(anyImage: UIImage, anyView: UIView) {
+  
+  func shadow(anyImage: UIImage, anyView: UIView, color: CGColor) {
     self.image = anyImage
     anyView.backgroundColor = nil
     anyView.layer.cornerRadius = anyView.frame.size.width / 2
-    anyView.layer.shadowColor = UIColor.black.cgColor
+    anyView.layer.shadowColor = color
     anyView.layer.shadowOffset = CGSize.zero
     anyView.layer.shadowRadius = 10
     anyView.layer.shadowOpacity = 0.9

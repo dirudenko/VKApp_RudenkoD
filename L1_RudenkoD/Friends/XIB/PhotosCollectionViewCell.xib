@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PhotosCollectionViewCell" customModule="VKapp_RudenkoD" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="264" height="237"/>
+            <rect key="frame" x="0.0" y="0.0" width="161" height="186"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="264" height="237"/>
+                <rect key="frame" x="0.0" y="0.0" width="161" height="186"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wbo-FO-E3j">
@@ -63,14 +63,14 @@
                 <constraint firstItem="stP-TV-Mt2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="12" id="nLR-x6-Hy3"/>
                 <constraint firstItem="Wbo-FO-E3j" firstAttribute="top" secondItem="stP-TV-Mt2" secondAttribute="bottom" constant="12" id="ryh-3w-jMY"/>
             </constraints>
-            <size key="customSize" width="264" height="237"/>
+            <size key="customSize" width="161" height="186"/>
             <connections>
                 <outlet property="likeButton" destination="X6p-ro-8d3" id="MTn-TL-a4d"/>
                 <outlet property="likeLabel" destination="hER-Aj-evY" id="yVI-D4-07b"/>
                 <outlet property="photoView" destination="vFr-NH-6dv" id="4wm-rE-oL9"/>
                 <outlet property="viewForPhoto" destination="stP-TV-Mt2" id="YPX-C4-frW"/>
             </connections>
-            <point key="canvasLocation" x="88.405797101449281" y="131.58482142857142"/>
+            <point key="canvasLocation" x="16.666666666666668" y="114.50892857142857"/>
         </collectionViewCell>
     </objects>
     <resources>
