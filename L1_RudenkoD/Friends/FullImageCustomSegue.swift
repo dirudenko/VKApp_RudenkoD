@@ -7,13 +7,14 @@
 
 import UIKit
 
+
 class FullImageCustomSegue: UIStoryboardSegue {
   
   
   override func perform() {
     let src = self.source as! PhotosCollectionViewController
     let index = src.indexPhoto!
-    let image = src.photoArray[index]
+   // let image = src.photoArray[index]
     let dst = self.destination as! AnimatedPhotosViewController
     
    // dst.primaryImageView = src.photoArray[indexPhoto]

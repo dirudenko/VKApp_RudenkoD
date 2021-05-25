@@ -10,7 +10,7 @@ import UIKit
 class FriendsViewController: UIViewController {
   private var friendRow: Int?
   private var friendSection: Int?
-  private var charIndex: Int?
+ // private var charIndex: Int?
   private let nibIdentifier = "FriendTableViewCell"
   var index: Int?
   
