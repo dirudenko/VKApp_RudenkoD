@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,6 +43,7 @@
 		69C11F2E26442FB3002A3E92 /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C11F2D26442FB3002A3E92 /* FullImageViewController.swift */; };
 		69C11F302644373D002A3E92 /* FullImageCustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C11F2F2644373D002A3E92 /* FullImageCustomSegue.swift */; };
 		69D332282618DF76009D4411 /* LoginFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D332272618DF76009D4411 /* LoginFormController.swift */; };
+		69E97FB2265EA5940083DEAB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E97FB1265EA5940083DEAB /* AuthViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		69C11F2D26442FB3002A3E92 /* FullImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		69C11F2F2644373D002A3E92 /* FullImageCustomSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageCustomSegue.swift; sourceTree = "<group>"; };
 		69D332272618DF76009D4411 /* LoginFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormController.swift; sourceTree = "<group>"; };
+		69E97FB1265EA5940083DEAB /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		B2583E241E5765781BF49B8B /* Pods-VKapp_RudenkoD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKapp_RudenkoD.debug.xcconfig"; path = "Target Support Files/Pods-VKapp_RudenkoD/Pods-VKapp_RudenkoD.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,7 +108,6 @@
 				B2583E241E5765781BF49B8B /* Pods-VKapp_RudenkoD.debug.xcconfig */,
 				31C019C1BCDE06690692DA1E /* Pods-VKapp_RudenkoD.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -150,6 +151,7 @@
 				69BF44252622FF7900D03109 /* TabBarController.swift */,
 				69D332272618DF76009D4411 /* LoginFormController.swift */,
 				69DB50872658248C00648F72 /* Resources */,
+				69E97FB1265EA5940083DEAB /* AuthViewController.swift */,
 			);
 			name = VKapp_RudenkoD;
 			path = L1_RudenkoD;
@@ -379,6 +381,7 @@
 				69BF44172622F71200D03109 /* Group.swift in Sources */,
 				69C11F2E26442FB3002A3E92 /* FullImageViewController.swift in Sources */,
 				69A9BFF1262DED8A00980DDF /* PhotosCollectionViewCell.swift in Sources */,
+				69E97FB2265EA5940083DEAB /* AuthViewController.swift in Sources */,
 				699657022624595D008650B8 /* GroupTableViewCell.swift in Sources */,
 				695F08CD2618D394001DC492 /* SceneDelegate.swift in Sources */,
 				69C11F28264311EA002A3E92 /* CustomAnimators.swift in Sources */,
