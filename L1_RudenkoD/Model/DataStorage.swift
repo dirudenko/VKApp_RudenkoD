@@ -13,12 +13,13 @@ final class DataStorage: NSObject {
     super.init()
   }
   
-  var usersArray = [User]()
+  var usersArray = [oldUser]()
+  //var newUsersArray = [Item]()
   //var myFriendsArray = [User]()
   //var sortedChars = [String]()
   //var charIndex = Int()
-  var allGroup = [Group]()
-  var myGroup = [Group]()
-  var groupedPeople = [(char:Character, User:[User])]()
+  var allGroup = [oldGroup]()
+  var myGroup = [oldGroup]()
+  var groupedPeople = [(char:Character, User:[Users])]()
   var postedNews = [Post]()
 }

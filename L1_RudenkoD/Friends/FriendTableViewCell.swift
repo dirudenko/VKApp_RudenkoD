@@ -29,10 +29,6 @@ class FriendTableViewCell: UITableViewCell {
     gradient()
   }
 
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//    }
-  
   override func prepareForReuse() {
     clearCell()
   }
@@ -42,9 +38,6 @@ class FriendTableViewCell: UITableViewCell {
   }
   
   func configure(name: String?, image: UIImage?) {
-    //gradient()
-    //avatarImage.layer.zPosition = 1
-    //userName.layer.zPosition = 1
     if let image = image {
     avatarImage.image = image
     }

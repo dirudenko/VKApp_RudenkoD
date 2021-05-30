@@ -359,36 +359,6 @@
             </objects>
             <point key="canvasLocation" x="5751" y="-267"/>
         </scene>
-        <!--Full Image View Controller-->
-        <scene sceneID="nam-0z-Nej">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="cWL-LM-fCe" customClass="FullImageViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1a8-ie-akB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i0v-xx-ltw">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="CIY-dj-30H"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="i0v-xx-ltw" firstAttribute="leading" secondItem="CIY-dj-30H" secondAttribute="leading" id="8Xh-X4-WXv"/>
-                            <constraint firstItem="CIY-dj-30H" firstAttribute="trailing" secondItem="i0v-xx-ltw" secondAttribute="trailing" id="QYN-KP-O9Q"/>
-                            <constraint firstItem="CIY-dj-30H" firstAttribute="bottom" secondItem="i0v-xx-ltw" secondAttribute="bottom" id="d2Q-2W-fnn"/>
-                            <constraint firstItem="i0v-xx-ltw" firstAttribute="top" secondItem="CIY-dj-30H" secondAttribute="top" id="j3h-iF-Lae"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Bve-dH-E46"/>
-                    <connections>
-                        <outlet property="fullImage" destination="i0v-xx-ltw" id="ADo-TA-JSu"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JU7-CN-ctf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6510" y="-267"/>
-        </scene>
         <!--Photos Collection View Controller-->
         <scene sceneID="2jW-gC-qum">
             <objects>
@@ -444,7 +414,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="gc6-wV-VeK">
             <objects>
-                <tabBarController id="183-cK-JhL" customClass="TabBarController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="183-cK-JhL" customClass="TabBarController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="fyo-9e-cef"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VSB-I5-HD7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -452,7 +422,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="OMR-xC-DMI" kind="relationship" relationship="viewControllers" id="RLI-OV-a8i"/>
                         <segue destination="4Rx-Sr-vYi" kind="relationship" relationship="viewControllers" id="PWY-4r-ixz"/>
                         <segue destination="yG1-7x-NuZ" kind="relationship" relationship="viewControllers" id="AYW-8x-3nV"/>
                     </connections>

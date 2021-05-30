@@ -6,48 +6,57 @@
 //
 
 import UIKit
+import Alamofire
 
 class PhotosCollectionViewController: UICollectionViewController {
   
   private let cellReuseIdentifier = "PhotosCollectionViewCell"
-  var indexUser: Int?
-  var photoArray: [UIImage] = []
+  var friendId: Int?
+  //var albumArray = [Item]()
+  private var urlArray = [String]()
   var indexPhoto: Int?
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    getPhoto() {  [weak self] photos in
+      let albumArray = photos
+      albumArray.forEach {
+        $0.sizes.forEach {
+          if $0.type.rawValue == "m"  {
+            self?.urlArray.append($0.url)
+          }
+        }
+      }
+    }
+    
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
     self.collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
-    if let index = indexUser {
-    photoArray = DataStorage.shared.usersArray[index].photoArray
-    }
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "fullImage" {
       let controller = segue.destination as! AnimatedPhotosViewController
-     // print(indexUser! , indexPhoto!)
       controller.indexPhoto = self.indexPhoto
-      controller.indexUser  = self.indexUser
+      controller.friendId  = self.friendId
     }
   }
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    // #warning Incomplete implementation, return the number of sections
     return 1
   }
   
-  
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of items
-    //guard let userIndex = index else { return 0 }
-    return photoArray.count
+    return urlArray.count
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     //var image = [UIImage]()
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-    let image = photoArray[indexPath.row]
+    var image = UIImage()
+    let string = urlArray[indexPath.row]
+      if let urlImage = getImage(from: string) {
+        image = urlImage
+    }
     cell.configure(image: image)
     return cell
   }
@@ -77,6 +86,28 @@ extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
     let sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
       return sectionInset
   }
-  
 }
 
+extension PhotosCollectionViewController {
+  func getPhoto(completion: @escaping ([Item]) -> Void) {
+    let baseUrl = "https://api.vk.com/method/"
+    let token = Session.shared.token
+    let parameters: Parameters = [
+      "count": 199,
+      "owner_id": friendId!,
+      "no_service_albums": 1,
+      "access_token": token,
+      "v": "5.77"]
+    let path = "photos.getAll"
+    let url = baseUrl + path
+    AF.request(url, parameters: parameters).responseData {
+      response in
+      guard let data = response.value else { return }
+      let photos = try! JSONDecoder().decode(Photos.self, from: data).response.items
+      completion(photos)
+      DispatchQueue.main.async { [weak self] in
+        self?.collectionView.reloadData()
+      }
+    }
+  }
+}

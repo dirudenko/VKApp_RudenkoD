@@ -36,7 +36,6 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
     let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
     self.avatarLabel.addGestureRecognizer(tapRecognizer)
     self.avatarLabel.isUserInteractionEnabled = true
-    // Initialization code
   }
   
   @IBAction func pressLikeButton(_ sender: Any) {

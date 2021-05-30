@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct Post {
-  var createdBy: User
+  var createdBy: oldUser
   var caption: String
   var numberOfLikes: Int
   var numberOfComments: Int

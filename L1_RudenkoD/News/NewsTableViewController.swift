@@ -80,7 +80,7 @@ class NewsTableViewController: UITableViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "friendFromNews" {
       let controller = segue.destination as! DetailedFriendCollectionViewController
-      controller.index.self = friendIndex
+      controller.friendId.self = friendIndex
     }
     
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class AnimatedPhotosViewController: UIViewController {
   
@@ -22,12 +23,24 @@ class AnimatedPhotosViewController: UIViewController {
   private var isLiked = true
   private var images = [UIImage]()
   private var viewTranslation = CGPoint(x: 0, y: 0)
-  var indexUser: Int?
+  var friendId: Int?
   var indexPhoto: Int?
+  private var urlArray = [String]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    viewLoadSetup()
+    getPhoto() {  [weak self] photos in
+      let albumArray = photos
+      albumArray.forEach {
+        $0.sizes.forEach {
+          if $0.type.rawValue == "x"  {
+            self?.urlArray.append($0.url)
+          }
+          
+        }
+      }
+    }
+   // viewLoadSetup()
     
   }
   
@@ -42,10 +55,18 @@ class AnimatedPhotosViewController: UIViewController {
   }
   
   private func viewLoadSetup() {
-    guard let indexUser = indexUser else { return }
-    images = DataStorage.shared.usersArray[indexUser].photoArray
-    setImages(images: images)
-    setup()
+    //guard let indexUser = friendId else { return }
+    
+//    var image = [UIImage]()
+//    let string = urlArray
+//    string.forEach{
+//      if let urlImage = getImage(from: $0) {
+//        image.append(urlImage)
+//      }
+//    }
+    
+    //images = image
+    
   }
     
   func setImages(images: [UIImage]) {
@@ -57,10 +78,7 @@ class AnimatedPhotosViewController: UIViewController {
   }
   
   func setup() {
-    //let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(fullImageView(_:)))
-    //self.primaryImageView.addGestureRecognizer(tapRecognizer)
     self.primaryImageView.isUserInteractionEnabled = true
-    //view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismiss)))
     let swipe = UIPanGestureRecognizer(target: self, action: #selector(handleDismiss))
     let recognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
     primaryImageView.addGestureRecognizer(recognizer)
@@ -268,4 +286,36 @@ extension AnimatedPhotosViewController {
   
 }
 
+extension AnimatedPhotosViewController {
+  func getPhoto(completion: @escaping ([Item]) -> Void) {
+    let baseUrl = "https://api.vk.com/method/"
+    let token = Session.shared.token
+    let parameters: Parameters = [
+      "count": 199,
+      "owner_id": friendId!,
+      "no_service_albums": 1,
+      "access_token": token,
+      "v": "5.77"]
+    let path = "photos.getAll"
+    let url = baseUrl + path
+    AF.request(url, parameters: parameters).responseData {
+      response in
+      guard let data = response.value else { return }
+    //  print(data.prettyJSON!)
+      let photos = try! JSONDecoder().decode(Photos.self, from: data).response.items
+      completion(photos)
+      DispatchQueue.main.async { [weak self] in
+        var image = [UIImage]()
+        let string = self?.urlArray
+        string!.forEach{
+          if let urlImage = self?.getImage(from: $0) {
+            image.append(urlImage)
+          }
+        }
+        self?.setImages(images: self!.images)
+        self?.setup()
+      }
+    }
+  }
+}
 

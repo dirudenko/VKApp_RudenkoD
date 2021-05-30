@@ -6,44 +6,49 @@
 //
 
 import UIKit
+import Alamofire
 
 class FriendsViewController: UIViewController {
   private var friendRow: Int?
   private var friendSection: Int?
- // private var charIndex: Int?
   private let nibIdentifier = "FriendTableViewCell"
-  var index: Int?
+  private var users = [Users]()
   
   private struct Section {
     let char : String
-    var user : [User]
+    var user : [Users]
   }
   
   private var sections = [Section]()
-  
   @IBOutlet weak var friendsTableView: UITableView!
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    getInfo(method: "friends.get") { [weak self] users in
+      self?.users = users
+      let usersDictionary = Dictionary(grouping: self!.users,
+                                       by: { $0.name.first! })
+        .sorted(by: { $0.key < $1.key })
+        .map({ (char:$0.key, User:$0.value)})
+      for (key, value) in usersDictionary {
+        self?.sections.append(Section(char: String(key), user: value))
+      }
+    }
+    
     friendsTableView.dataSource = self
     friendsTableView.delegate = self
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
     friendsTableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
-    
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-    self.navigationItem.rightBarButtonItem = self.editButtonItem
-    for (key, value) in DataStorage.shared.groupedPeople {
-      sections.append(Section(char: String(key), user: value))
-    }
+    //self.navigationItem.rightBarButtonItem = self.editButtonItem
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "FriendInfo" {
       let controller = segue.destination as! DetailedFriendCollectionViewController
-      let chosenFriend = sections[friendSection!].user[friendRow!]
-      controller.index = DataStorage.shared.usersArray.firstIndex(where: { $0.name == chosenFriend.name })
+      guard let friendSection = friendSection,
+            let friendRow = friendRow else {return}
+      controller.friendId = sections[friendSection].user[friendRow].id
     }
   }
 }
@@ -51,13 +56,17 @@ class FriendsViewController: UIViewController {
 // MARK: - Table view data source
 
 extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
-  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
     let section = sections[indexPath.section]
     let username = section.user[indexPath.row]
-    cell.avatarImage.shadow(anyImage: username.avatar!, anyView: cell.viewForShadow, color: UIColor.systemBlue.cgColor)
-    cell.configure(name: username.name, image: username.avatar)
+    var avatar =  UIImage()
+    let string = username.photo50
+    if let image = getImage(from: string) {
+      avatar = image
+    }
+    cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.systemBlue.cgColor)
+    cell.configure(name: username.name, image: avatar)
     return cell
   }
   
@@ -106,7 +115,27 @@ extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 
-
+extension FriendsViewController {
+  func getInfo(method: String, completion: @escaping ([Users]) -> Void){
+    let baseUrl = "https://api.vk.com/method/"
+    let token = Session.shared.token
+    let parameters: Parameters = [
+      "fields": "nickname,photo_50",
+      "access_token": token,
+      "v": "5.131"]
+    let path = method
+    let url = baseUrl + path
+    AF.request(url, method: .get, parameters: parameters).responseData {
+      response in
+      guard let data = response.value else { return }
+      let users = try! JSONDecoder().decode(FriendsResponse.self, from: data).response.items
+      completion(users)
+      DispatchQueue.main.async { [weak self] in
+        self?.friendsTableView.reloadData()
+      }
+    }
+  }
+}
 
 
 

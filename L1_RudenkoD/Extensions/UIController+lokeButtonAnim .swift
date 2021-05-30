@@ -8,7 +8,25 @@
 import Foundation
 import UIKit
 
+
 extension UIViewController {
+  func getImage(from string: String) -> UIImage? {
+    guard let url = URL(string: string)
+    else {
+      print("Unable to create URL")
+      return nil
+    }
+    var image: UIImage? = nil
+    do {
+      let data = try Data(contentsOf: url, options: [])
+      image = UIImage(data: data)
+    }
+    catch {
+      print(error.localizedDescription)
+    }
+    return image
+  }
+  
   func pressLike(isLiked: inout Bool, likeCounter: UILabel, likeButton: UIButton) {
     likeCounterAnimation(likeCounter: likeCounter, isLiked: isLiked)
     likeButtonAnimation(isLiked: isLiked, likeButton: likeButton)
