@@ -65,7 +65,11 @@ extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
     if let image = getImage(from: string) {
       avatar = image
     }
-    cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.systemBlue.cgColor)
+    if username.online == 1 {
+      cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.green.cgColor)
+    } else {
+      cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.systemBlue.cgColor)
+    }
     cell.configure(name: username.name, image: avatar)
     return cell
   }
@@ -120,7 +124,7 @@ extension FriendsViewController {
     let baseUrl = "https://api.vk.com/method/"
     let token = Session.shared.token
     let parameters: Parameters = [
-      "fields": "nickname,photo_50",
+      "fields": "nickname,photo_50,online",
       "access_token": token,
       "v": "5.131"]
     let path = method

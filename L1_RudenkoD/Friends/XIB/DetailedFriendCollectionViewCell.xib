@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +26,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nameLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y0-EY-sO1">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="nameLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y0-EY-sO1">
                         <rect key="frame" x="120" y="360" width="83.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -38,8 +38,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Работа:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XC2-fc-qWe">
-                        <rect key="frame" x="20" y="481" width="60" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Онлайн" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XC2-fc-qWe">
+                        <rect key="frame" x="20" y="481" width="60.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -101,6 +101,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="evC-hL-RdN" firstAttribute="top" secondItem="6y0-EY-sO1" secondAttribute="bottom" constant="40" id="1V6-BB-9R1"/>
+                    <constraint firstItem="daw-DC-6eS" firstAttribute="bottom" secondItem="XC2-fc-qWe" secondAttribute="bottom" id="5RK-HJ-ZPK"/>
                     <constraint firstItem="T5d-oT-OAJ" firstAttribute="leading" secondItem="XC2-fc-qWe" secondAttribute="leading" id="6P9-eN-hrp"/>
                     <constraint firstItem="daw-DC-6eS" firstAttribute="top" secondItem="evC-hL-RdN" secondAttribute="bottom" constant="40" id="BOR-qf-OIh"/>
                     <constraint firstItem="6y0-EY-sO1" firstAttribute="leading" secondItem="dx6-Vy-Coe" secondAttribute="leading" constant="120" id="HZy-vh-YvN"/>
@@ -122,13 +123,13 @@
             </collectionViewCellContentView>
             <size key="customSize" width="480" height="674"/>
             <connections>
+                <outlet property="aboutLabel" destination="daw-DC-6eS" id="8Nv-wK-54T"/>
                 <outlet property="ageLabel" destination="evC-hL-RdN" id="D9L-qg-SXJ"/>
                 <outlet property="avatarLabel" destination="MDL-Fl-gQA" id="OO6-Ke-hXf"/>
                 <outlet property="likeButton" destination="w6o-Ec-zmU" id="KZQ-WE-G4K"/>
                 <outlet property="likeLabel" destination="74a-6a-Wko" id="pPr-Z4-eEn"/>
                 <outlet property="nameLabel" destination="6y0-EY-sO1" id="gFF-p5-5lv"/>
                 <outlet property="viewForShadow" destination="fNx-Nc-or1" id="lP1-F3-iit"/>
-                <outlet property="workLabel" destination="daw-DC-6eS" id="8Nv-wK-54T"/>
             </connections>
             <point key="canvasLocation" x="665.21739130434787" y="378.34821428571428"/>
         </collectionViewCell>

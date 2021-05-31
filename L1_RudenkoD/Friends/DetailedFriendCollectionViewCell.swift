@@ -13,7 +13,7 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var avatarLabel: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var ageLabel: UILabel!
-  @IBOutlet weak var workLabel: UILabel!
+  @IBOutlet weak var aboutLabel: UILabel!
   @IBOutlet weak var likeLabel: UILabel!
   @IBOutlet weak var likeButton: UIButton!
   private var isLiked = true
@@ -23,7 +23,7 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
     avatarLabel.image = nil
     nameLabel.text = nil
     ageLabel.text = nil
-    workLabel.text = nil
+    aboutLabel.text = nil
   }
   
   override func prepareForReuse() {
@@ -61,7 +61,7 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
       ageLabel.text = age
     }
     if let work = work {
-      workLabel.text = work
+      aboutLabel.text = work
     }
   }
 }
