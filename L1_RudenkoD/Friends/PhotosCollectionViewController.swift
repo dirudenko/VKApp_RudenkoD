@@ -65,8 +65,6 @@ class PhotosCollectionViewController: UICollectionViewController {
     indexPhoto = indexPath.row
     performSegue(withIdentifier: "fullImage", sender: (Any).self)
   }
-  
-  
 }
 
 extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {  
@@ -104,8 +102,8 @@ extension PhotosCollectionViewController {
       response in
       guard let data = response.value else { return }
       let photos = try! JSONDecoder().decode(Photos.self, from: data).response.items
-      completion(photos)
       DispatchQueue.main.async { [weak self] in
+        completion(photos)
         self?.collectionView.reloadData()
       }
     }

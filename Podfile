@@ -8,5 +8,6 @@ target 'VKapp_RudenkoD' do
   # Pods for VKapp_RudenkoD
 pod 'Alamofire'
 pod 'RealmSwift'
+pod 'SwiftKeychainWrapper'
 
 end

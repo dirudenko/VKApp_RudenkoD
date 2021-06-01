@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class DetailedFriendCollectionViewController: UICollectionViewController {
   
@@ -14,15 +13,23 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   private let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
   var friendId: Int?
   private var user = User()
+  private let getUserRequest = ApiRequests()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getUser() {  [weak self] user in
-      self?.user = user
-      print(user.time)
-    }
+    
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
     self.collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    getUserRequest.getUserInfo(friendId: friendId!) {  [weak self] user in
+      self?.user = user
+      self?.title = String(user.id)
+      self?.collectionView.reloadData()
+    }
+    
   }
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -64,26 +71,3 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   }
 }
 
-extension DetailedFriendCollectionViewController {
-  func getUser(completion: @escaping (User) -> Void) {
-    let baseUrl = "https://api.vk.com/method/"
-    let token = Session.shared.token
-    let parameters: Parameters = [
-      "user_ids": friendId!,
-      "fields": "nickname,photo_200_orig,online,last_seen",
-      "access_token": token,
-      "v": "5.131"]
-    let path = "users.get"
-    let url = baseUrl + path
-    AF.request(url, method: .get, parameters: parameters).responseData {
-      response in
-      guard let data = response.value else { return }
-  //    print(data.prettyJSON)
-      let user = try! JSONDecoder().decode(User.self, from: data)
-      completion(user)
-      DispatchQueue.main.async { [weak self] in
-        self?.collectionView.reloadData()
-      }
-    }
-  }
-}

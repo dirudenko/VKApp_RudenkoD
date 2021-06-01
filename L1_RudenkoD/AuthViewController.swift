@@ -51,7 +51,6 @@ extension AuthViewController {
       decisionHandler(.allow)
       return
     }
-    
     let params = fragment
       .components(separatedBy: "&")
       .map { $0.components(separatedBy: "=") }
@@ -73,25 +72,6 @@ extension AuthViewController {
     }
     decisionHandler(.cancel)
   }
-  
-  
-  // Получение групп по поисковому запросу
-  func getGroup(groupName: String) {
-    let baseUrl = "https://api.vk.com/method/"
-    let token = Session.shared.token
-    let parameters: Parameters = [
-      "q": groupName,
-      "count": 10,
-      "access_token": token,
-      "v": "5.54"]
-    let path = "groups.search"
-    let url = baseUrl + path
-    AF.request(url, parameters: parameters).responseJSON {
-      response in
-      print(response.value)
-    }
-  }
-  
 }
 
 

@@ -6,13 +6,13 @@
 //
 
 import UIKit
-import Alamofire
 
 class FriendsViewController: UIViewController {
-  private var friendRow: Int?
-  private var friendSection: Int?
+  
+  private var chosenFriend = (section: 0, row: 0)
   private let nibIdentifier = "FriendTableViewCell"
   private var users = [Users]()
+  private let getFriendsRequest = ApiRequests()
   
   private struct Section {
     let char : String
@@ -25,17 +25,6 @@ class FriendsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getInfo(method: "friends.get") { [weak self] users in
-      self?.users = users
-      let usersDictionary = Dictionary(grouping: self!.users,
-                                       by: { $0.name.first! })
-        .sorted(by: { $0.key < $1.key })
-        .map({ (char:$0.key, User:$0.value)})
-      for (key, value) in usersDictionary {
-        self?.sections.append(Section(char: String(key), user: value))
-      }
-    }
-    
     friendsTableView.dataSource = self
     friendsTableView.delegate = self
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
@@ -43,12 +32,25 @@ class FriendsViewController: UIViewController {
     //self.navigationItem.rightBarButtonItem = self.editButtonItem
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    getFriendsRequest.getFriendList(userId: nil) { [weak self] users in
+      self?.users = users
+      let usersDictionary = Dictionary(grouping: self!.users,
+                                       by: { $0.name.first! })
+        .sorted(by: { $0.key < $1.key })
+        .map({ (char:$0.key, User:$0.value)})
+      for (key, value) in usersDictionary {
+        self?.sections.append(Section(char: String(key), user: value))
+        self?.friendsTableView.reloadData()
+      }
+    }
+  }
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "FriendInfo" {
       let controller = segue.destination as! DetailedFriendCollectionViewController
-      guard let friendSection = friendSection,
-            let friendRow = friendRow else {return}
-      controller.friendId = sections[friendSection].user[friendRow].id
+      controller.friendId = sections[chosenFriend.section].user[chosenFriend.row].id
     }
   }
 }
@@ -112,34 +114,12 @@ extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    friendRow = indexPath.row
-    friendSection = indexPath.section
+    chosenFriend.row = indexPath.row
+    chosenFriend.section = indexPath.section
     performSegue(withIdentifier: "FriendInfo", sender: (Any).self)
   }
 }
 
-
-extension FriendsViewController {
-  func getInfo(method: String, completion: @escaping ([Users]) -> Void){
-    let baseUrl = "https://api.vk.com/method/"
-    let token = Session.shared.token
-    let parameters: Parameters = [
-      "fields": "nickname,photo_50,online",
-      "access_token": token,
-      "v": "5.131"]
-    let path = method
-    let url = baseUrl + path
-    AF.request(url, method: .get, parameters: parameters).responseData {
-      response in
-      guard let data = response.value else { return }
-      let users = try! JSONDecoder().decode(FriendsResponse.self, from: data).response.items
-      completion(users)
-      DispatchQueue.main.async { [weak self] in
-        self?.friendsTableView.reloadData()
-      }
-    }
-  }
-}
 
 
 

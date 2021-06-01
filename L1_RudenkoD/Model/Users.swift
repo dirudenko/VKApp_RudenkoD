@@ -39,8 +39,6 @@ class User: Decodable {
 
   enum TopCodingKeys: String, CodingKey {
     case response
-    
-
   }
 
   enum CodingKeys: String, CodingKey {
@@ -51,7 +49,6 @@ class User: Decodable {
     case about
     case  lastSeen = "last_seen"
     case online
-    
   }
   
   enum LowCodingKeys: String, CodingKey {
