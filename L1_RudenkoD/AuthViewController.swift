@@ -7,9 +7,6 @@
 
 import UIKit
 import WebKit
-import Alamofire
-
-
 
 class AuthViewController: UIViewController, WKNavigationDelegate {
   

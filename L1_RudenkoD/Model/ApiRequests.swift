@@ -25,6 +25,7 @@ class ApiRequests {
     } else {
       parameters = [
         "user_id": userId!,
+        //"count": 5,
         "order": "hints",
         "fields": "photo_50,online",
         "access_token": token,

@@ -11,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="7WB-db-Mch" customClass="DetailedFriendCollectionViewCell" customModule="VKapp_RudenkoD" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="674"/>
+            <rect key="frame" x="0.0" y="0.0" width="502" height="875"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dx6-Vy-Coe">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="674"/>
+                <rect key="frame" x="0.0" y="0.0" width="502" height="875"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="nameLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y0-EY-sO1">
@@ -23,8 +23,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ageLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evC-hL-RdN">
-                        <rect key="frame" x="140" y="59.5" width="320" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="aboutLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evC-hL-RdN">
+                        <rect key="frame" x="140" y="59.5" width="342" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -65,35 +65,69 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EJj-46-HuV">
+                        <rect key="frame" x="20" y="230" width="462" height="200"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="200" id="SBv-6N-JbW"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kIn-br-BBG">
+                            <size key="itemSize" width="120" height="150"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <connections>
+                            <outlet property="dataSource" destination="-1" id="eHi-tV-IQa"/>
+                            <outlet property="delegate" destination="-1" id="Fo5-s6-qhk"/>
+                        </connections>
+                    </collectionView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.horizontal.3" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="RTn-Tj-dJ1">
+                        <rect key="frame" x="0.0" y="210" width="502" height="10.5"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.horizontal.3" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GHM-je-Jo8">
+                        <rect key="frame" x="0.0" y="440" width="502" height="10.5"/>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="GHM-je-Jo8" firstAttribute="top" secondItem="EJj-46-HuV" secondAttribute="bottom" constant="5" id="12O-ES-yJZ"/>
+                    <constraint firstAttribute="trailing" secondItem="EJj-46-HuV" secondAttribute="trailing" constant="20" id="5WL-5i-g1z"/>
                     <constraint firstAttribute="trailing" secondItem="evC-hL-RdN" secondAttribute="trailing" constant="20" id="7IU-eN-yeb"/>
                     <constraint firstItem="6y0-EY-sO1" firstAttribute="top" secondItem="dx6-Vy-Coe" secondAttribute="top" constant="20" id="7ll-50-nfE"/>
                     <constraint firstItem="daw-DC-6eS" firstAttribute="centerY" secondItem="XC2-fc-qWe" secondAttribute="centerY" id="CXZ-9R-W0E"/>
                     <constraint firstItem="evC-hL-RdN" firstAttribute="leading" secondItem="MDL-Fl-gQA" secondAttribute="trailing" constant="20" id="GwZ-6w-Sns"/>
+                    <constraint firstItem="EJj-46-HuV" firstAttribute="leading" secondItem="dx6-Vy-Coe" secondAttribute="leading" constant="20" id="HXk-Yt-Vlo"/>
+                    <constraint firstItem="EJj-46-HuV" firstAttribute="top" secondItem="T5d-oT-OAJ" secondAttribute="bottom" constant="40" id="TbS-5b-xza"/>
                     <constraint firstItem="6y0-EY-sO1" firstAttribute="leading" secondItem="fNx-Nc-or1" secondAttribute="trailing" constant="20" id="Tv8-Wi-zLe"/>
                     <constraint firstItem="daw-DC-6eS" firstAttribute="leading" secondItem="XC2-fc-qWe" secondAttribute="trailing" constant="20" id="X5f-Gl-tFy"/>
+                    <constraint firstItem="EJj-46-HuV" firstAttribute="top" secondItem="RTn-Tj-dJ1" secondAttribute="bottom" constant="5" id="YtV-5R-bjN"/>
+                    <constraint firstAttribute="trailing" secondItem="GHM-je-Jo8" secondAttribute="trailing" id="aJl-kN-A4m"/>
                     <constraint firstItem="fNx-Nc-or1" firstAttribute="leading" secondItem="dx6-Vy-Coe" secondAttribute="leading" constant="20" id="dBF-JH-JWZ"/>
                     <constraint firstItem="evC-hL-RdN" firstAttribute="top" secondItem="6y0-EY-sO1" secondAttribute="bottom" constant="20" id="h3s-w3-K4F"/>
                     <constraint firstItem="XC2-fc-qWe" firstAttribute="top" secondItem="evC-hL-RdN" secondAttribute="bottom" constant="20" id="hED-Su-beW"/>
+                    <constraint firstItem="GHM-je-Jo8" firstAttribute="leading" secondItem="dx6-Vy-Coe" secondAttribute="leading" id="hhq-P5-Kv9"/>
+                    <constraint firstItem="RTn-Tj-dJ1" firstAttribute="leading" secondItem="dx6-Vy-Coe" secondAttribute="leading" id="jle-P1-WCp"/>
                     <constraint firstItem="MDL-Fl-gQA" firstAttribute="top" secondItem="dx6-Vy-Coe" secondAttribute="top" constant="20" id="kFP-bc-MZ5"/>
                     <constraint firstItem="XC2-fc-qWe" firstAttribute="leading" secondItem="fNx-Nc-or1" secondAttribute="trailing" constant="20" id="lCz-zI-GuQ"/>
+                    <constraint firstAttribute="trailing" secondItem="RTn-Tj-dJ1" secondAttribute="trailing" id="qZV-Q7-GTJ"/>
                     <constraint firstItem="T5d-oT-OAJ" firstAttribute="leading" secondItem="dx6-Vy-Coe" secondAttribute="leading" constant="20" symbolic="YES" id="qjo-rL-HHO"/>
                     <constraint firstItem="T5d-oT-OAJ" firstAttribute="top" secondItem="MDL-Fl-gQA" secondAttribute="bottom" constant="40" id="uYj-I2-X19"/>
                 </constraints>
             </collectionViewCellContentView>
-            <size key="customSize" width="480" height="674"/>
+            <size key="customSize" width="502" height="875"/>
             <connections>
-                <outlet property="aboutLabel" destination="daw-DC-6eS" id="8Nv-wK-54T"/>
-                <outlet property="ageLabel" destination="evC-hL-RdN" id="D9L-qg-SXJ"/>
+                <outlet property="aboutLabel" destination="evC-hL-RdN" id="D9L-qg-SXJ"/>
                 <outlet property="avatarLabel" destination="MDL-Fl-gQA" id="OO6-Ke-hXf"/>
+                <outlet property="collectionView" destination="EJj-46-HuV" id="rRz-Wz-UNt"/>
+                <outlet property="lastOnlineLabel" destination="daw-DC-6eS" id="8Nv-wK-54T"/>
                 <outlet property="nameLabel" destination="6y0-EY-sO1" id="gFF-p5-5lv"/>
                 <outlet property="viewForShadow" destination="fNx-Nc-or1" id="lP1-F3-iit"/>
             </connections>
-            <point key="canvasLocation" x="665.21739130434787" y="378.34821428571428"/>
+            <point key="canvasLocation" x="681.15942028985512" y="445.64732142857139"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -49,8 +49,9 @@ class FriendsViewController: UIViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "FriendInfo" {
-      let controller = segue.destination as! DetailedFriendCollectionViewController
-      controller.friendId = sections[chosenFriend.section].user[chosenFriend.row].id
+     // let controller = segue.destination as! DetailedFriendCollectionViewController
+      //controller.friendId = sections[chosenFriend.section].user[chosenFriend.row].id
+      Session.shared.userId = sections[chosenFriend.section].user[chosenFriend.row].id
     }
   }
 }
