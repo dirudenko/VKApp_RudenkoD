@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-
+import RealmSwift
 
 class ApiRequests {
   
@@ -25,7 +25,6 @@ class ApiRequests {
     } else {
       parameters = [
         "user_id": userId!,
-        //"count": 5,
         "order": "hints",
         "fields": "photo_50,online",
         "access_token": token,
@@ -38,15 +37,16 @@ class ApiRequests {
       guard let data = response.value else { return }
       let users = try! JSONDecoder().decode(FriendsResponse.self, from: data).response.items
       DispatchQueue.main.async {
+        self.saveUsersData(users)
         completion(users)
       }
     }
   }
   
-  func getUserInfo(friendId: Int, completion: @escaping (User) -> Void) {
+  func getUserInfo(id: Int, completion: @escaping (User) -> Void) {
     let baseUrl = "https://api.vk.com/method/"
     let parameters: Parameters = [
-      "user_ids": friendId,
+      "user_ids": id,
       "fields": "nickname,photo_200_orig,online,last_seen",
       "access_token": token,
       "v": "5.131"]
@@ -57,6 +57,7 @@ class ApiRequests {
       guard let data = response.value else { return }
       let user = try! JSONDecoder().decode(User.self, from: data)
       DispatchQueue.main.async {
+        self.saveCurrentUserData(user)
         completion(user)
       }
     }
@@ -76,22 +77,61 @@ class ApiRequests {
       //  print(data.prettyJSON!)
       let groups = try! JSONDecoder().decode(GroupsResponse.self, from: data).response.items
       DispatchQueue.main.async {
+        self.saveGroupData(groups)
         completion(groups)
       }
     }
   }
   
-  func findGroup(groupName: String) {
+  func getPhoto(id: Int,completion: @escaping ([Item]) -> Void) {
+    let baseUrl = "https://api.vk.com/method/"
+    let token = Session.shared.token
     let parameters: Parameters = [
-      "q": groupName,
-      "count": 10,
+      "owner_id": id,
+      "no_service_albums": 1,
       "access_token": token,
-      "v": "5.54"]
-    let path = "groups.search"
+      "v": "5.77"]
+    let path = "photos.getAll"
     let url = baseUrl + path
-    AF.request(url, parameters: parameters).responseJSON {
+    AF.request(url, parameters: parameters).responseData {
       response in
-      print(response.value)
+      guard let data = response.value else { return }
+      let photos = try! JSONDecoder().decode(Photos.self, from: data).response.items
+      DispatchQueue.main.async {
+        self.savePhotosData(photos)
+        completion(photos)
+      }
+    }
+  }
+}
+
+extension ApiRequests {
+  
+  func saveUsersData(_ users: [Users]) {
+    let realm = try! Realm()
+    try? realm.write {
+      realm.add(users)
+    }
+  }
+  
+  func saveCurrentUserData(_ user: User) {
+    let realm = try! Realm()
+    try? realm.write {
+      realm.add(user)
+    }
+  }
+  
+  func saveGroupData(_ group: [Groups]) {
+    let realm = try! Realm()
+    try? realm.write {
+      realm.add(group)
+    }
+  }
+  
+  func savePhotosData(_ photos: [Item]) {
+    let realm = try! Realm()
+    try? realm.write {
+      realm.add(photos)
     }
   }
   

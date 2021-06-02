@@ -45,7 +45,7 @@ class UserGroupTableViewController: UITableViewController {
     if let image = getImage(from: string) {
       avatar = image
     }
-    let descr = groups[indexPath.row].description
+    let descr = groups[indexPath.row].descr
     cell.configure(name: name, image: avatar, descr: descr)
     return cell
   }

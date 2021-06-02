@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 struct oldGroup {
   var name: String
@@ -22,11 +23,11 @@ extension oldGroup: Equatable {
   }
 }
 
-class Groups: Decodable {
-  var id = 0
-  var photo50 = ""
-  var name = ""
-  var description = ""
+class Groups: Object, Decodable {
+  @objc dynamic var id = 0
+  @objc dynamic var photo50 = ""
+  @objc dynamic var name = ""
+  @objc dynamic var descr = ""
 
   enum TopCodingKeys: String, CodingKey {
     case response
@@ -37,7 +38,7 @@ class Groups: Decodable {
     case id
     case name
     case photo50 = "photo_50"
-    case description = "status"
+    case descr = "status"
 
   }
    convenience required init(from decoder: Decoder) throws {
@@ -46,7 +47,7 @@ class Groups: Decodable {
     self.id = try usersValues.decode(Int.self, forKey: .id)
     self.photo50 = try usersValues.decode(String.self, forKey: .photo50)
     self.name = try usersValues.decode(String.self, forKey: .name)
-    self.description = try usersValues.decode(String.self, forKey: .description)
+    self.descr = try usersValues.decode(String.self, forKey: .descr)
   }
 }
 

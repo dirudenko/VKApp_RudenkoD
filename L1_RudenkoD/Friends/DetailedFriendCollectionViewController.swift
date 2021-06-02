@@ -15,7 +15,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   private var user = User()
   private let getUserRequest = ApiRequests()
   private var userFriends = [Users]()
-  
+  var id = Int()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,8 +27,8 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    let id = Session.shared.userId
-    getUserRequest.getUserInfo(friendId: id) {  [weak self] user in
+    id = Session.shared.userId
+    getUserRequest.getUserInfo(id: id) {  [weak self] user in
       self?.user = user
       self?.title = String(user.id)
       self?.collectionView.reloadData()
@@ -53,7 +53,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "allPhotos" {
       let controller = segue.destination as! PhotosCollectionViewController
-     // controller.friendId = id
+      controller.friendId = id
     }
   }
 }

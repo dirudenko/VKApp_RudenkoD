@@ -15,18 +15,21 @@ class PhotosCollectionViewController: UICollectionViewController {
   //var albumArray = [Item]()
   private var urlArray = [String]()
   var indexPhoto: Int?
+  private let getUserRequest = ApiRequests()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getPhoto() {  [weak self] photos in
+    guard let id = friendId else { return }
+    getUserRequest.getPhoto(id: id) {  [weak self] photos in
       let albumArray = photos
       albumArray.forEach {
         $0.sizes.forEach {
-          if $0.type.rawValue == "m"  {
+          if $0.type == "m"  {
             self?.urlArray.append($0.url)
           }
         }
       }
+      self?.collectionView.reloadData()
     }
     
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
@@ -87,25 +90,5 @@ extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotosCollectionViewController {
-  func getPhoto(completion: @escaping ([Item]) -> Void) {
-    let baseUrl = "https://api.vk.com/method/"
-    let token = Session.shared.token
-    let parameters: Parameters = [
-      "count": 199,
-      "owner_id": friendId!,
-      "no_service_albums": 1,
-      "access_token": token,
-      "v": "5.77"]
-    let path = "photos.getAll"
-    let url = baseUrl + path
-    AF.request(url, parameters: parameters).responseData {
-      response in
-      guard let data = response.value else { return }
-      let photos = try! JSONDecoder().decode(Photos.self, from: data).response.items
-      DispatchQueue.main.async { [weak self] in
-        completion(photos)
-        self?.collectionView.reloadData()
-      }
-    }
-  }
+ 
 }

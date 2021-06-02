@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import RealmSwift
 
 struct oldUser {
   var name: String
@@ -17,16 +17,16 @@ struct oldUser {
   var job: String?
 }
 
-class User: Decodable {
-  var id = 0
-  var platform = 0
-  var time = 0.0
-  var lastName = ""
-  var photo200 = ""
-  var firstName = ""
-  var online = 0
-  var about: String?
-  var name: String {
+class User: Object, Decodable {
+  @objc dynamic var id = 0
+  @objc dynamic var platform = 0
+  @objc dynamic var time = 0.0
+  @objc dynamic var lastName = ""
+  @objc dynamic var photo200 = ""
+  @objc dynamic var firstName = ""
+  @objc dynamic var online = 0
+  @objc dynamic var about: String?
+  @objc dynamic var name: String {
   firstName + " " + lastName
 }
   var lastOnline: String {
@@ -48,7 +48,7 @@ class User: Decodable {
     case photo200 = "photo_200_orig"
     case firstName = "first_name"
     case about
-    case  lastSeen = "last_seen"
+    case lastSeen = "last_seen"
     case online
   }
   
@@ -75,13 +75,13 @@ class User: Decodable {
   }
 }
 
-class Users: Decodable {
-  var id = 0
-  var lastName = ""
-  var photo50 = ""
-  var firstName = ""
-  var online = 0
-  var name: String {
+class Users: Object, Decodable {
+  @objc dynamic var id = 0
+  @objc dynamic var lastName = ""
+  @objc dynamic var photo50 = ""
+  @objc dynamic var firstName = ""
+  @objc dynamic var online = 0
+  @objc dynamic var name: String {
   firstName + " " + lastName
 }
   

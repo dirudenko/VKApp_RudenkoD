@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 // MARK: - Photos
 class Photos: Codable {
@@ -28,12 +29,12 @@ class Response: Codable {
 }
 
 // MARK: - Item
-class Item: Codable {
-    let albumID, id, date: Int
-    let text: String
-    let sizes: [Size]
-    let hasTags: Bool
-    let ownerID: Int
+class Item: Object, Codable {
+  var sizes: [Size]
+  @objc dynamic var albumID, id, date: Int
+  @objc dynamic var text: String
+  @objc dynamic var hasTags: Bool
+  @objc dynamic var ownerID: Int
 
     enum CodingKeys: String, CodingKey {
         case albumID = "album_id"
@@ -42,41 +43,30 @@ class Item: Codable {
         case ownerID = "owner_id"
     }
 
-    init(albumID: Int, id: Int, date: Int, text: String, sizes: [Size], hasTags: Bool, ownerID: Int) {
-        self.albumID = albumID
-        self.id = id
-        self.date = date
-        self.text = text
-        self.sizes = sizes
-        self.hasTags = hasTags
-        self.ownerID = ownerID
-    }
+//    init(albumID: Int, id: Int, date: Int, text: String, sizes: [Size], hasTags: Bool, ownerID: Int) {
+//        self.albumID = albumID
+//        self.id = id
+//        self.date = date
+//        self.text = text
+//        self.sizes = sizes
+//        self.hasTags = hasTags
+//        self.ownerID = ownerID
+//    }
 }
 
 // MARK: - Size
-class Size: Codable {
-    let width, height: Int
-    let url: String
-    let type: TypeEnum
+class Size: Object, Codable {
+  @objc dynamic var width, height: Int
+  @objc dynamic var url: String
+  @objc dynamic var type: String
 
-    init(width: Int, height: Int, url: String, type: TypeEnum) {
-        self.width = width
-        self.height = height
-        self.url = url
-        self.type = type
-    }
+//    init(width: Int, height: Int, url: String, type: String) {
+//        self.width = width
+//        self.height = height
+//        self.url = url
+//        self.type = type
+//    }
 }
 
-enum TypeEnum: String, Codable {
-    case m = "m"
-    case o = "o"
-    case p = "p"
-    case q = "q"
-    case r = "r"
-    case s = "s"
-    case w = "w"
-    case x = "x"
-    case y = "y"
-    case z = "z"
-}
+
 

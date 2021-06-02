@@ -33,7 +33,7 @@ class AnimatedPhotosViewController: UIViewController {
       let albumArray = photos
       albumArray.forEach {
         $0.sizes.forEach {
-          if $0.type.rawValue == "x"  {
+          if $0.type == "x"  {
             self?.urlArray.append($0.url)
           }
           
