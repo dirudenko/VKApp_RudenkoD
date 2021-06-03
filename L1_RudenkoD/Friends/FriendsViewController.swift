@@ -51,7 +51,8 @@ class FriendsViewController: UIViewController {
     if segue.identifier == "FriendInfo" {
      // let controller = segue.destination as! DetailedFriendCollectionViewController
       //controller.friendId = sections[chosenFriend.section].user[chosenFriend.row].id
-      Session.shared.userId = sections[chosenFriend.section].user[chosenFriend.row].id
+      let id = sections[chosenFriend.section].user[chosenFriend.row].id
+      Session.shared.userId.append(id)
     }
   }
 }

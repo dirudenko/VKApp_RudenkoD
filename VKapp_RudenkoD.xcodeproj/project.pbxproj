@@ -45,27 +45,12 @@
 		69C11F2C2644032C002A3E92 /* NavigationClosingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C11F2B2644032C002A3E92 /* NavigationClosingAnimation.swift */; };
 		69C11F302644373D002A3E92 /* FullImageCustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C11F2F2644373D002A3E92 /* FullImageCustomSegue.swift */; };
 		69C3AD9C26625958009AF474 /* Pods_VKapp_RudenkoD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3894B421EC6F7436AF1786F9 /* Pods_VKapp_RudenkoD.framework */; };
-		69C3AD9D26625958009AF474 /* Pods_VKapp_RudenkoD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3894B421EC6F7436AF1786F9 /* Pods_VKapp_RudenkoD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		69D332282618DF76009D4411 /* LoginFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D332272618DF76009D4411 /* LoginFormController.swift */; };
 		69E97FB2265EA5940083DEAB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E97FB1265EA5940083DEAB /* AuthViewController.swift */; };
 		69E97FB5266221910083DEAB /* Data+PrettyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E97FB4266221910083DEAB /* Data+PrettyJSON.swift */; };
 		69E97FB8266221EA0083DEAB /* UIController+lokeButtonAnim .swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E97FB7266221EA0083DEAB /* UIController+lokeButtonAnim .swift */; };
 		69E97FBA266222280083DEAB /* UIImageView+ShadowCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E97FB9266222280083DEAB /* UIImageView+ShadowCircleImage.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		69C3AD9E26625958009AF474 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				69C3AD9D26625958009AF474 /* Pods_VKapp_RudenkoD.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		31C019C1BCDE06690692DA1E /* Pods-VKapp_RudenkoD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKapp_RudenkoD.release.xcconfig"; path = "Target Support Files/Pods-VKapp_RudenkoD/Pods-VKapp_RudenkoD.release.xcconfig"; sourceTree = "<group>"; };
@@ -301,7 +286,6 @@
 				695F08C42618D394001DC492 /* Frameworks */,
 				695F08C52618D394001DC492 /* Resources */,
 				234B904006B896DF189A34B7 /* [CP] Embed Pods Frameworks */,
-				69C3AD9E26625958009AF474 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

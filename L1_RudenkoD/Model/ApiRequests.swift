@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import RealmSwift
 
-class ApiRequests {
+class ApiRequests: UIViewController {
   
   let baseUrl = "https://api.vk.com/method/"
   let token = Session.shared.token
@@ -35,10 +35,14 @@ class ApiRequests {
     AF.request(url, method: .get, parameters: parameters).responseData {
       response in
       guard let data = response.value else { return }
-      let users = try! JSONDecoder().decode(FriendsResponse.self, from: data).response.items
+      do {
+      let users = try JSONDecoder().decode(FriendsResponse.self, from: data).response.items
       DispatchQueue.main.async {
         self.saveUsersData(users)
         completion(users)
+      }
+      } catch {
+        return
       }
     }
   }
@@ -96,10 +100,14 @@ class ApiRequests {
     AF.request(url, parameters: parameters).responseData {
       response in
       guard let data = response.value else { return }
-      let photos = try! JSONDecoder().decode(Photos.self, from: data).response.items
+      do {
+      let photos = try JSONDecoder().decode(Photos.self, from: data).response.items
       DispatchQueue.main.async {
         self.savePhotosData(photos)
         completion(photos)
+      }
+      } catch {
+        return
       }
     }
   }
@@ -134,5 +142,4 @@ extension ApiRequests {
       realm.add(photos)
     }
   }
-  
 }

@@ -14,5 +14,6 @@ final class Session: NSObject {
   }
   
   var token = String()
-  var userId = Int()
+  var userId = [Int]()
+  var numberOfFriends = Int()
 }

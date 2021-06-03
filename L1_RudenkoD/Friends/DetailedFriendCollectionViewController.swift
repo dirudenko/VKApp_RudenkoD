@@ -10,7 +10,7 @@ import UIKit
 class DetailedFriendCollectionViewController: UICollectionViewController {
   
   @IBOutlet weak var photoAlbumButton: UIBarButtonItem!
-  private let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
+  let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
   
   private var user = User()
   private let getUserRequest = ApiRequests()
@@ -19,7 +19,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
     self.collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
     
@@ -27,13 +27,12 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    id = Session.shared.userId
+    id = Session.shared.userId.last!
     getUserRequest.getUserInfo(id: id) {  [weak self] user in
       self?.user = user
       self?.title = String(user.id)
       self?.collectionView.reloadData()
     }
-    
   }
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -60,13 +59,6 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
 
 extension DetailedFriendCollectionViewController {
   func prepareCell(cell: DetailedFriendCollectionViewCell) -> DetailedFriendCollectionViewCell {
-    
-//    var id = Session.shared.userId {
-//      didSet {
-//        performSegue(withIdentifier: "FriendInfo", sender: (Any).self)
-//      }
-//    }
-    
     let name = user.name
     var online = "сейчас"
     var avatar =  UIImage()
@@ -81,27 +73,30 @@ extension DetailedFriendCollectionViewController {
       cell.avatarLabel.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.green.cgColor)
     }
     cell.configure(name: name, image: avatar, about: nil, online: online)
+    //cell.friendsCount.text = String(user)
     cell.buttonPressed = { [weak self] in
       self?.performSegue(withIdentifier: "allPhotos", sender: UIButton())
     }
-    
-    //cell.delegate = self
-    
+    cell.cellDelegate = self
     return cell
   }
 }
 
-extension DetailedFriendCollectionViewController: DetailedFriendDelegate {
-  func namePressed(id: Int) {
-    Session.self.shared.userId = id
-    //self.navigationController?.pushViewController(DetailedFriendCollectionViewController(), animated: true)
-    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    let collectionViewController = storyBoard.instantiateViewController(withIdentifier: "DetailedFriendCollectionViewController") as! DetailedFriendCollectionViewController
-    collectionViewController.modalPresentationStyle = .fullScreen
-    self.present(collectionViewController, animated: true, completion: nil)
-    //self.present(DetailedFriendCollectionViewController, animated: true, completion: nil)
-    //print("gogo")
+extension DetailedFriendCollectionViewController: DetailedViewDelegate {
+  func goVC(id: Int) {
+    Session.shared.userId.append(id)
+    let vc = self.storyboard?.instantiateViewController(withIdentifier: "DetailedFriendCollectionViewController") as! DetailedFriendCollectionViewController
+
+    self.navigationController?.pushViewController(vc, animated: true)
+//    self.present(vc, animated: true, completion: {
+//      if Session.shared.userId.count > 1 {
+//        Session.shared.userId.removeLast()
+//      }
+//    })
+    
   }
 }
+
+
 
 

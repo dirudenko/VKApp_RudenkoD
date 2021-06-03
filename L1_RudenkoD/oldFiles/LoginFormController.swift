@@ -25,20 +25,20 @@ class LoginFormController: UIViewController {
     return true
   }
   
-  func showLoginError() {
-    let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-    let alert = UIAlertController(title: "Ошибка", message: "Неверное имя пользователя или пароль", preferredStyle: UIAlertController.Style.alert)
-    alert.addAction(action)
-    present(alert, animated: true, completion: {
-      self.loginInput.text = ""
-      self.passwordInput.text = ""
-    })
-  }
+//  func showLoginError() {
+//    let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//    let alert = UIAlertController(title: "Ошибка", message: "Неверное имя пользователя или пароль", preferredStyle: UIAlertController.Style.alert)
+//    alert.addAction(action)
+//    present(alert, animated: true, completion: {
+//      self.loginInput.text = ""
+//      self.passwordInput.text = ""
+//    })
+//  }
   
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
       let checkResult = checkUser()
       if !checkResult {
-        showLoginError()
+      //  showLoginError()
       }
       return checkResult
     }

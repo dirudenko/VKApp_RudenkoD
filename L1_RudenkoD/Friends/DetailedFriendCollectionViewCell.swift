@@ -7,7 +7,9 @@
 
 import UIKit
 
-
+protocol DetailedViewDelegate: AnyObject {
+  func goVC(id: Int)
+}
 
 class DetailedFriendCollectionViewCell: UICollectionViewCell {
   
@@ -17,10 +19,11 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var aboutLabel: UILabel!
   @IBOutlet weak var lastOnlineLabel: UILabel!
   @IBOutlet weak var collectionView: UICollectionView!
-  //var friendId: Int?
-  weak var delegate: DetailedFriendDelegate?
+  @IBOutlet weak var friendsCount: UILabel!
   
-  var id = Session.shared.userId
+  weak var delegate: DetailedFriendDelegate?
+  weak var cellDelegate: DetailedViewDelegate?
+  var id = Session.shared.userId.last
     
   
   var buttonPressed : (() -> ()) = {}
@@ -33,6 +36,7 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
     nameLabel.text = nil
     aboutLabel.text = nil
     lastOnlineLabel.text = nil
+    friendsCount.text = nil
   }
   
   override func prepareForReuse() {
@@ -44,6 +48,7 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
     
     getUserRequest.getFriendList(userId: id) {  [weak self] users in
       self?.userFriends = users
+      self?.friendsCount.text = String(self?.userFriends.count ?? 0)
       self?.collectionView.reloadData()
     }
     self.collectionView.dataSource = self
@@ -105,7 +110,8 @@ extension DetailedFriendCollectionViewCell: UICollectionViewDelegate, UICollecti
 
 extension DetailedFriendCollectionViewCell: DetailedFriendDelegate {
   func namePressed(id: Int) {
-    //DetailedFriendCollectionViewController().namePressed(id: id)
+    cellDelegate?.goVC(id: id)
+    
   }
 }
 

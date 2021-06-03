@@ -12,7 +12,7 @@ class AnimatedPhotosViewController: UIViewController {
   
   @IBOutlet weak var primaryImageView: UIImageView!
   @IBOutlet weak var secondaryImageView: UIImageView!
-  @IBOutlet weak var pageControl: UIPageControl!
+ // @IBOutlet weak var pageControl: UIPageControl!
   @IBOutlet weak var viewForAnimation: UIView!
   
   private var interactiveAnimator: UIViewPropertyAnimator!
@@ -23,35 +23,48 @@ class AnimatedPhotosViewController: UIViewController {
   private var isLiked = true
   private var images = [UIImage]()
   private var viewTranslation = CGPoint(x: 0, y: 0)
-  var friendId: Int?
+  var friendId = Session.shared.userId.last
   var indexPhoto: Int?
   private var urlArray = [String]()
+  private let getUserRequest = ApiRequests()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getPhoto() {  [weak self] photos in
-      let albumArray = photos
-      albumArray.forEach {
-        $0.sizes.forEach {
-          if $0.type == "x"  {
-            self?.urlArray.append($0.url)
-          }
-          
-        }
-      }
-    }
+    
+    
    // viewLoadSetup()
     
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    navigationController?.setNavigationBarHidden(true, animated: animated)
+    //navigationController?.setNavigationBarHidden(true, animated: animated)
+    
+    getUserRequest.getPhoto(id: friendId!) {  [weak self] photos in
+      let albumArray = photos
+      albumArray.forEach {
+        $0.sizes.forEach {
+          if $0.type == "m"  {
+            self?.urlArray.append($0.url)
+          }
+        }
+      }
+        self?.urlArray.forEach {
+       // var avatar =  UIImage()
+          let string = $0
+          if let image = self?.getImage(from: string) {
+          self?.images.append(image)
+        }
+        }
+        self?.setImages(images: self!.images)
+        self?.setup()
+      }
+    
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    navigationController?.setNavigationBarHidden(false, animated: animated)
+   // navigationController?.setNavigationBarHidden(false, animated: animated)
   }
   
   private func viewLoadSetup() {
@@ -74,7 +87,7 @@ class AnimatedPhotosViewController: UIViewController {
     if self.images.count > 0 {
       primaryImageView.image = images[indexPhoto ?? 0]
     }
-    pageControl.numberOfPages = images.count
+   // pageControl.numberOfPages = images.count
   }
   
   func setup() {
@@ -89,23 +102,23 @@ class AnimatedPhotosViewController: UIViewController {
     primaryImageView.contentMode = .scaleAspectFill
     secondaryImageView.transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
     
-    pageControl.backgroundColor = UIColor.clear
-    pageControl.frame = CGRect(x: 1, y: 1, width: 150, height: 50)
-    pageControl.numberOfPages = images.count
-    pageControl.currentPage = indexPhoto ?? 0
-    pageControl.pageIndicatorTintColor = UIColor.lightGray
-    pageControl.currentPageIndicatorTintColor = UIColor.systemBlue
-    viewForAnimation.bringSubviewToFront(pageControl)
+//    pageControl.backgroundColor = UIColor.clear
+//    pageControl.frame = CGRect(x: 1, y: 1, width: 150, height: 50)
+//    pageControl.numberOfPages = images.count
+//    pageControl.currentPage = indexPhoto ?? 0
+//    pageControl.pageIndicatorTintColor = UIColor.lightGray
+//    pageControl.currentPageIndicatorTintColor = UIColor.systemBlue
+  //  viewForAnimation.bringSubviewToFront(pageControl)
   }
 }
 extension AnimatedPhotosViewController {
   
-  @IBAction func pressPageControl(_ sender: UIPageControl) {
-    currentIndex = sender.currentPage
-    self.primaryImageView.transform = .identity
-    self.primaryImageView.image = images[currentIndex]
-    self.secondaryImageView.transform = .identity
-  }
+//  @IBAction func pressPageControl(_ sender: UIPageControl) {
+//    currentIndex = sender.currentPage
+//    self.primaryImageView.transform = .identity
+//    self.primaryImageView.image = images[currentIndex]
+//    self.secondaryImageView.transform = .identity
+//  }
   
   @objc func onPan(_ recognizer: UIPanGestureRecognizer) {
     if let animator = interactiveAnimator,
@@ -249,7 +262,7 @@ extension AnimatedPhotosViewController {
     }
     self.primaryImageView.image = self.images[self.currentIndex]
     viewForAnimation.bringSubviewToFront(self.primaryImageView)
-    self.pageControl.currentPage = self.currentIndex
+   // self.pageControl.currentPage = self.currentIndex
     self.indexPhoto = self.currentIndex
   }
   

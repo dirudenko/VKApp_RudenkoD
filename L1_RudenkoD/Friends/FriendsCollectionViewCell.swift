@@ -35,5 +35,6 @@ class FriendsCollectionViewCell: UICollectionViewCell {
    // self.id = Session.shared.userId
    // print(self.id)
     delegate?.namePressed(id: self.id)
+    
   }
 }
