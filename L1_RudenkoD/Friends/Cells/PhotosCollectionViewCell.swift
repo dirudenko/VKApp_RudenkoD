@@ -14,14 +14,13 @@ class PhotosCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var likeButton: UIButton!
   @IBOutlet weak var likeLabel: UILabel!
   private var isLiked = true
-  private var isClickedPhoto = false
-  
-  func clearCell() {
-    photoView.image = nil
-  }
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    clearCell()
+  }
+  
+  override func prepareForReuse() {
     clearCell()
   }
   
@@ -33,6 +32,10 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     if let image = image {
       photoView.image = image
     }
+  }
+  
+  func clearCell() {
+    photoView.image = nil
   }
 }
 

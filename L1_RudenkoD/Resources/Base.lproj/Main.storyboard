@@ -42,7 +42,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZrJ-Jh-ZxK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="974" y="-598"/>
+            <point key="canvasLocation" x="1487" y="-607"/>
         </scene>
         <!--Login Form Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -191,7 +191,7 @@
         <!--Друзья-->
         <scene sceneID="vga-EB-s4E">
             <objects>
-                <viewController id="YyK-vH-l6h" customClass="FriendsViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YyK-vH-l6h" customClass="FriendsListViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b4j-Up-veU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

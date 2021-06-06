@@ -9,5 +9,5 @@ target 'VKapp_RudenkoD' do
 pod 'Alamofire'
 pod 'RealmSwift'
 pod 'SwiftKeychainWrapper'
-
+pod 'SDWebImage'
 end

@@ -17,3 +17,6 @@ final class Session: NSObject {
   var userId = [Int]()
   var numberOfFriends = Int()
 }
+
+
+

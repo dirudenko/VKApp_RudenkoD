@@ -8,21 +8,17 @@
 import UIKit
 
 class DetailedFriendCollectionViewController: UICollectionViewController {
-  
-  @IBOutlet weak var photoAlbumButton: UIBarButtonItem!
-  let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
-  
+    
+  private let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
   private var user = User()
-  private let getUserRequest = ApiRequests()
+  private let getUserRequest = APIService()
   private var userFriends = [Users]()
-  var id = Int()
+  private var id = Int()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
     self.collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
-    
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -63,6 +59,7 @@ extension DetailedFriendCollectionViewController {
     var online = "сейчас"
     var avatar =  UIImage()
     let string = user.photo200
+    let about = user.about
     if let image = getImage(from: string) {
       avatar = image
     }
@@ -72,8 +69,7 @@ extension DetailedFriendCollectionViewController {
     } else {
       cell.avatarLabel.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.green.cgColor)
     }
-    cell.configure(name: name, image: avatar, about: nil, online: online)
-    //cell.friendsCount.text = String(user)
+    cell.configure(name: name, image: avatar, about: about, online: online)
     cell.buttonPressed = { [weak self] in
       self?.performSegue(withIdentifier: "allPhotos", sender: UIButton())
     }
@@ -86,14 +82,7 @@ extension DetailedFriendCollectionViewController: DetailedViewDelegate {
   func goVC(id: Int) {
     Session.shared.userId.append(id)
     let vc = self.storyboard?.instantiateViewController(withIdentifier: "DetailedFriendCollectionViewController") as! DetailedFriendCollectionViewController
-
     self.navigationController?.pushViewController(vc, animated: true)
-//    self.present(vc, animated: true, completion: {
-//      if Session.shared.userId.count > 1 {
-//        Session.shared.userId.removeLast()
-//      }
-//    })
-    
   }
 }
 

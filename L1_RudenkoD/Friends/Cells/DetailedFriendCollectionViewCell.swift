@@ -28,7 +28,7 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
   
   var buttonPressed : (() -> ()) = {}
   private let cellReuseIdentifier = "FriendsCollectionViewCell"
-  private let getUserRequest = ApiRequests()
+  private let getUserRequest = APIService()
   private var userFriends = [Users]()
   
   func clearCell() {
@@ -45,22 +45,19 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    
     getUserRequest.getFriendList(userId: id) {  [weak self] users in
       self?.userFriends = users
       self?.friendsCount.text = String(self?.userFriends.count ?? 0)
       self?.collectionView.reloadData()
     }
-    self.collectionView.dataSource = self
-    self.collectionView.delegate = self
+    collectionView.dataSource = self
+    collectionView.delegate = self
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
-    self.collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
-    //clearCell()
+    collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
     let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
-    self.avatarLabel.addGestureRecognizer(tapRecognizer)
-    self.avatarLabel.isUserInteractionEnabled = true
-    
-  
+    avatarLabel.addGestureRecognizer(tapRecognizer)
+    avatarLabel.isUserInteractionEnabled = true
+    clearCell()
   }
   
   @IBAction func allPhotoButton(_ sender: Any) {
@@ -94,15 +91,13 @@ extension DetailedFriendCollectionViewCell: UICollectionViewDelegate, UICollecti
   }
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath as IndexPath) as! FriendsCollectionViewCell
-    cell.firstName.text = userFriends[indexPath.row].firstName
-    cell.lastName.text = userFriends[indexPath.row].lastName
-    var avatar =  UIImage()
-    let string = userFriends[indexPath.row].photo50
-    if let image = getImage(from: string) {
-      avatar = image
-    }
+    let name = userFriends[indexPath.row].firstName
+    let lName = userFriends[indexPath.row].lastName
+    let string = URL(string: userFriends[indexPath.row].photo50)!
+    let avatar = asyncPhoto(cellImage: cell.avatarImage, url: string)
     cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.systemBlue.cgColor)
     cell.id = userFriends[indexPath.row].id
+    cell.configure(name: name, image: avatar, lName: lName)
     cell.delegate = self
     return cell
   }
@@ -111,7 +106,6 @@ extension DetailedFriendCollectionViewCell: UICollectionViewDelegate, UICollecti
 extension DetailedFriendCollectionViewCell: DetailedFriendDelegate {
   func namePressed(id: Int) {
     cellDelegate?.goVC(id: id)
-    
   }
 }
 

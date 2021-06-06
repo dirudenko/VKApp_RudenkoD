@@ -6,19 +6,23 @@
 //
 
 import UIKit
-import Alamofire
 
 class PhotosCollectionViewController: UICollectionViewController {
   
   private let cellReuseIdentifier = "PhotosCollectionViewCell"
   var friendId: Int?
-  //var albumArray = [Item]()
   private var urlArray = [String]()
-  var indexPhoto: Int?
-  private let getUserRequest = ApiRequests()
+  private var indexPhoto: Int?
+  private let getUserRequest = APIService()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
+    self.collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     guard let id = friendId else { return }
     getUserRequest.getPhoto(id: id) {  [weak self] photos in
       let albumArray = photos
@@ -31,9 +35,6 @@ class PhotosCollectionViewController: UICollectionViewController {
       }
       self?.collectionView.reloadData()
     }
-    
-    let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
-    self.collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -53,13 +54,9 @@ class PhotosCollectionViewController: UICollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    //var image = [UIImage]()
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-    var image = UIImage()
-    let string = urlArray[indexPath.row]
-      if let urlImage = getImage(from: string) {
-        image = urlImage
-    }
+    guard let string = URL(string: urlArray[indexPath.row]) else { return UICollectionViewCell() }
+    let image = asyncPhoto(cellImage: cell.photoView, url: string)
     cell.configure(image: image)
     return cell
   }
@@ -76,19 +73,6 @@ extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
       let cellSize = CGSize(width: 160, height: 186)
       return cellSize
   }
-
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
-  {
-      return 10
-  }
-
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
-  {
-    let sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-      return sectionInset
-  }
 }
 
-extension PhotosCollectionViewController {
- 
-}
+

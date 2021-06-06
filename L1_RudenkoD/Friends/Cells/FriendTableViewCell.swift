@@ -9,16 +9,10 @@ import UIKit
 
 class FriendTableViewCell: UITableViewCell {
   
-
   @IBOutlet weak var viewForShadow: UIView!
   @IBOutlet weak var avatarImage: UIImageView!
   @IBOutlet weak var userName: UILabel!
   @IBOutlet weak var cellLabel: UIView!
-  
-  func clearCell() {
-    avatarImage.image = nil
-    userName.text = nil
-  }
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -44,6 +38,11 @@ class FriendTableViewCell: UITableViewCell {
     if let name = name {
     userName.text = name
     }
+  }
+  
+  func clearCell() {
+    avatarImage.image = nil
+    userName.text = nil
   }
 }
 

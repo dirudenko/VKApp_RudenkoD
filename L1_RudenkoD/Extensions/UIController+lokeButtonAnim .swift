@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 
 extension UIViewController {
@@ -26,6 +27,22 @@ extension UIViewController {
     }
     return image
   }
+  
+  func asyncPhoto(cellImage: UIImageView, url: URL) -> UIImage {
+    var asyncImage = UIImage()
+    cellImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+    cellImage.sd_setImage(with: url, placeholderImage: UIImage(named: "App-Default"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cache, urls) in
+                if (error != nil) {
+                    // Failed to load image
+                  asyncImage = UIImage(named: "ico_placeholder")!
+                } else {
+                    // Successful in loading image
+                  asyncImage = image!
+                }
+            })
+    return asyncImage
+  }
+  
   
   func pressLike(isLiked: inout Bool, likeCounter: UILabel, likeButton: UIButton) {
     likeCounterAnimation(likeCounter: likeCounter, isLiked: isLiked)

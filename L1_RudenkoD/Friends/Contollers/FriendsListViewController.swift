@@ -7,33 +7,32 @@
 
 import UIKit
 
-class FriendsViewController: UIViewController {
-  
-  private var chosenFriend = (section: 0, row: 0)
-  private let nibIdentifier = "FriendTableViewCell"
-  private var users = [Users]()
-  private let getFriendsRequest = ApiRequests()
+class FriendsListViewController: UIViewController {
   
   private struct Section {
     let char : String
     var user : [Users]
   }
   
-  private var sections = [Section]()
   @IBOutlet weak var friendsTableView: UITableView!
-  
-  
+ 
+  private var chosenFriend = (section: 0, row: 0)
+  private let nibIdentifier = "FriendTableViewCell"
+  private var users = [Users]()
+  private let getFriendsRequest = APIService()
+  private var sections = [Section]()
+ 
   override func viewDidLoad() {
     super.viewDidLoad()
     friendsTableView.dataSource = self
     friendsTableView.delegate = self
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
     friendsTableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
-    //self.navigationItem.rightBarButtonItem = self.editButtonItem
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    guard users.isEmpty else { return }
     getFriendsRequest.getFriendList(userId: nil) { [weak self] users in
       self?.users = users
       let usersDictionary = Dictionary(grouping: self!.users,
@@ -49,8 +48,6 @@ class FriendsViewController: UIViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "FriendInfo" {
-     // let controller = segue.destination as! DetailedFriendCollectionViewController
-      //controller.friendId = sections[chosenFriend.section].user[chosenFriend.row].id
       let id = sections[chosenFriend.section].user[chosenFriend.row].id
       Session.shared.userId.append(id)
     }
@@ -59,16 +56,13 @@ class FriendsViewController: UIViewController {
 
 // MARK: - Table view data source
 
-extension FriendsViewController: UITableViewDataSource, UITableViewDelegate {
+extension FriendsListViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
     let section = sections[indexPath.section]
     let username = section.user[indexPath.row]
-    var avatar =  UIImage()
-    let string = username.photo50
-    if let image = getImage(from: string) {
-      avatar = image
-    }
+    let string = URL(string: username.photo50)!
+    let avatar = asyncPhoto(cellImage: cell.avatarImage, url: string)
     if username.online == 1 {
       cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.green.cgColor)
     } else {

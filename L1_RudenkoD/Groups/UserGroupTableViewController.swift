@@ -11,7 +11,7 @@ class UserGroupTableViewController: UITableViewController {
   
   let nibIdentifier = "GroupTableViewCell"
   private var groups = [Groups]()
-  private let getGroupsRequest = ApiRequests()
+  private let getGroupsRequest = APIService()
   
   override func viewDidLoad() {
     super.viewDidLoad()

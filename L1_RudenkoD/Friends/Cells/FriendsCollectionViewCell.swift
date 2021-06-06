@@ -23,18 +23,35 @@ class FriendsCollectionViewCell: UICollectionViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    
+    clearcell()
     let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(getFriend(_:)))
     self.stackView.addGestureRecognizer(tapRecognizer)
     self.stackView.isUserInteractionEnabled = true
-    
   }
   
+  override func prepareForReuse() {
+    clearcell()
+  }
   
   @objc func getFriend(_ gestureRecognizer: UIGestureRecognizer) {
-   // self.id = Session.shared.userId
-   // print(self.id)
     delegate?.namePressed(id: self.id)
-    
+  }
+  
+  func clearcell() {
+    avatarImage.image = nil
+    firstName.text = nil
+    lastName.text = nil
+  }
+  
+  func configure(name: String?, image: UIImage?, lName: String?) {
+    if let image = image {
+      avatarImage.image = image
+    }
+    if let name = name {
+      firstName.text = name
+    }
+    if let lName = lName {
+      lastName.text = lName
+    }
   }
 }

@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import RealmSwift
 
-class ApiRequests: UIViewController {
+class APIService: UIViewController {
   
   let baseUrl = "https://api.vk.com/method/"
   let token = Session.shared.token
@@ -34,7 +34,7 @@ class ApiRequests: UIViewController {
     let url = baseUrl + path
     AF.request(url, method: .get, parameters: parameters).responseData {
       response in
-      guard let data = response.value else { return }
+      guard let data = response.data else { return }
       do {
       let users = try JSONDecoder().decode(FriendsResponse.self, from: data).response.items
       DispatchQueue.main.async {
@@ -58,7 +58,7 @@ class ApiRequests: UIViewController {
     let url = baseUrl + path
     AF.request(url, method: .get, parameters: parameters).responseData {
       response in
-      guard let data = response.value else { return }
+      guard let data = response.data else { return }
       let user = try! JSONDecoder().decode(User.self, from: data)
       DispatchQueue.main.async {
         self.saveCurrentUserData(user)
@@ -77,7 +77,7 @@ class ApiRequests: UIViewController {
     let url = baseUrl + path
     AF.request(url, method: .get, parameters: parameters).responseData {
       response in
-      guard let data = response.value else { return }
+      guard let data = response.data else { return }
       //  print(data.prettyJSON!)
       let groups = try! JSONDecoder().decode(GroupsResponse.self, from: data).response.items
       DispatchQueue.main.async {
@@ -99,7 +99,7 @@ class ApiRequests: UIViewController {
     let url = baseUrl + path
     AF.request(url, parameters: parameters).responseData {
       response in
-      guard let data = response.value else { return }
+      guard let data = response.data else { return }
       do {
       let photos = try JSONDecoder().decode(Photos.self, from: data).response.items
       DispatchQueue.main.async {
@@ -113,7 +113,7 @@ class ApiRequests: UIViewController {
   }
 }
 
-extension ApiRequests {
+extension APIService {
   
   func saveUsersData(_ users: [Users]) {
     let realm = try! Realm()

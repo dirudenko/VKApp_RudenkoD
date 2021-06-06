@@ -7,6 +7,8 @@
 
 import UIKit
 import WebKit
+import SwiftKeychainWrapper
+
 
 class AuthViewController: UIViewController, WKNavigationDelegate {
   
@@ -18,6 +20,15 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    if let token = KeychainWrapper.standard.string(forKey: "vkToken") {
+      Session.shared.token = token
+      showMainTabBar()
+     // return
+    }
+    authorizateToVK()
+  }
+  
+  private func authorizateToVK() {
     var urlComponents = URLComponents()
     urlComponents.scheme = "https"
     urlComponents.host = "oauth.vk.com"
@@ -34,9 +45,18 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
     let request = URLRequest(url: urlComponents.url!)
     authWebView.load(request)
   }
-}
+  
+  
+  private func showMainTabBar() {
+    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let tabBarViewController = storyBoard.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
+    tabBarViewController.modalPresentationStyle = .fullScreen
+    self.present(tabBarViewController, animated: true, completion: nil)
+   // performSegue(withIdentifier: "goToTabBar", sender: nil)
+  }
+  
 
-extension AuthViewController {
+
   func webView(_ webView: WKWebView,
                decidePolicyFor navigationResponse:
                 WKNavigationResponse,
@@ -58,17 +78,15 @@ extension AuthViewController {
         dict[key] = value
         return dict
       }
-    let token = params["access_token"]
-    if let token = token, !token.isEmpty {
-      UserDefaults.standard.setValue(token, forKey: "vkToken")
+    if let token = params["access_token"] {
+      print("TOKEN = ", token as Any)
+      KeychainWrapper.standard.set(token, forKey: "vkToken")
       Session.shared.token = token
-      let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-      let tabBarViewController = storyBoard.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
-      tabBarViewController.modalPresentationStyle = .fullScreen
-      self.present(tabBarViewController, animated: true, completion: nil)
+      showMainTabBar()
     }
     decisionHandler(.cancel)
   }
 }
+
 
 
