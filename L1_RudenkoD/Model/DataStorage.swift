@@ -20,6 +20,6 @@ final class DataStorage: NSObject {
   //var charIndex = Int()
   var allGroup = [oldGroup]()
   var myGroup = [oldGroup]()
-  var groupedPeople = [(char:Character, User:[Users])]()
-  var postedNews = [Post]()
+  var groupedPeople = [(char:Character, User:[UsersModel])]()
+  //var postedNews = [Post]()
 }

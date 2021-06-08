@@ -29,7 +29,7 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
   var buttonPressed : (() -> ()) = {}
   private let cellReuseIdentifier = "FriendsCollectionViewCell"
   private let getUserRequest = APIService()
-  private var userFriends = [Users]()
+  private var userFriends = [UsersModel]()
   
   func clearCell() {
     avatarLabel.image = nil

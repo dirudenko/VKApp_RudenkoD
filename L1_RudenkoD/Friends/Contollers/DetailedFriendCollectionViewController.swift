@@ -12,7 +12,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
   private let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
   private var user = User()
   private let getUserRequest = APIService()
-  private var userFriends = [Users]()
+  private var userFriends = [UsersModel]()
   private var id = Int()
   
   override func viewDidLoad() {

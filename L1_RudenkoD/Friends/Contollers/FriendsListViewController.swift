@@ -11,14 +11,14 @@ class FriendsListViewController: UIViewController {
   
   private struct Section {
     let char : String
-    var user : [Users]
+    var user : [UsersModel]
   }
   
   @IBOutlet weak var friendsTableView: UITableView!
  
   private var chosenFriend = (section: 0, row: 0)
   private let nibIdentifier = "FriendTableViewCell"
-  private var users = [Users]()
+  private var users = [UsersModel]()
   private let getFriendsRequest = APIService()
   private var sections = [Section]()
  

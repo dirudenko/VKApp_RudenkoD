@@ -14,14 +14,14 @@ class APIService: UIViewController {
   let baseUrl = "https://api.vk.com/method/"
   let token = Session.shared.token
   
-  func getFriendList(userId: Int?, completion: @escaping ([Users]) -> Void) {
+  func getFriendList(userId: Int?, completion: @escaping ([UsersModel]) -> Void) {
     let parameters: Parameters
     if userId == nil {
-     parameters = [
-      "order": "hints",
-      "fields": "nickname,photo_50,online",
-      "access_token": token,
-      "v": "5.131"]
+      parameters = [
+        "order": "hints",
+        "fields": "nickname,photo_50,online",
+        "access_token": token,
+        "v": "5.131"]
     } else {
       parameters = [
         "user_id": userId!,
@@ -36,13 +36,13 @@ class APIService: UIViewController {
       response in
       guard let data = response.data else { return }
       do {
-      let users = try JSONDecoder().decode(FriendsResponse.self, from: data).response.items
-      DispatchQueue.main.async {
-        self.saveUsersData(users)
-        completion(users)
-      }
+        let users = try JSONDecoder().decode(FriendsResponse.self, from: data).response.items
+        DispatchQueue.main.async {
+          completion(users)
+          self.saveUsersData(users)
+        }
       } catch {
-        return
+        print(error)
       }
     }
   }
@@ -51,7 +51,7 @@ class APIService: UIViewController {
     let baseUrl = "https://api.vk.com/method/"
     let parameters: Parameters = [
       "user_ids": id,
-      "fields": "nickname,photo_200_orig,online,last_seen",
+      "fields": "nickname,photo_200_orig,online,last_seen,status",
       "access_token": token,
       "v": "5.131"]
     let path = "users.get"
@@ -59,10 +59,14 @@ class APIService: UIViewController {
     AF.request(url, method: .get, parameters: parameters).responseData {
       response in
       guard let data = response.data else { return }
-      let user = try! JSONDecoder().decode(User.self, from: data)
-      DispatchQueue.main.async {
-        self.saveCurrentUserData(user)
-        completion(user)
+      do {
+        let user = try JSONDecoder().decode(User.self, from: data)
+        DispatchQueue.main.async {
+          self.saveCurrentUserData(user)
+          completion(user)
+        }
+      } catch {
+        print(error)
       }
     }
   }
@@ -78,11 +82,14 @@ class APIService: UIViewController {
     AF.request(url, method: .get, parameters: parameters).responseData {
       response in
       guard let data = response.data else { return }
-      //  print(data.prettyJSON!)
-      let groups = try! JSONDecoder().decode(GroupsResponse.self, from: data).response.items
-      DispatchQueue.main.async {
-        self.saveGroupData(groups)
-        completion(groups)
+      do {
+        let groups = try JSONDecoder().decode(GroupsResponse.self, from: data).response.items
+        DispatchQueue.main.async {
+          completion(groups)
+          self.saveGroupData(groups)
+        }
+      } catch {
+        print(error)
       }
     }
   }
@@ -92,6 +99,7 @@ class APIService: UIViewController {
     let token = Session.shared.token
     let parameters: Parameters = [
       "owner_id": id,
+      "count": 199,
       "no_service_albums": 1,
       "access_token": token,
       "v": "5.77"]
@@ -101,13 +109,13 @@ class APIService: UIViewController {
       response in
       guard let data = response.data else { return }
       do {
-      let photos = try JSONDecoder().decode(Photos.self, from: data).response.items
-      DispatchQueue.main.async {
-        self.savePhotosData(photos)
-        completion(photos)
-      }
+        let photos = try JSONDecoder().decode(Photos.self, from: data).response.items
+        DispatchQueue.main.async {
+          self.savePhotosData(photos)
+          completion(photos)
+        }
       } catch {
-        return
+        print(error)
       }
     }
   }
@@ -115,31 +123,48 @@ class APIService: UIViewController {
 
 extension APIService {
   
-  func saveUsersData(_ users: [Users]) {
+  func saveUsersData(_ users: [UsersModel]) {
     let realm = try! Realm()
-    try? realm.write {
+    do {
+      realm.beginWrite()
       realm.add(users)
+      try realm.commitWrite()
+    } catch  {
+      print(error)
     }
+    print(realm.configuration.fileURL)
   }
   
   func saveCurrentUserData(_ user: User) {
     let realm = try! Realm()
-    try? realm.write {
+    do {
+      realm.beginWrite()
       realm.add(user)
+      try realm.commitWrite()
+    } catch  {
+      print(error)
     }
   }
   
   func saveGroupData(_ group: [Groups]) {
     let realm = try! Realm()
-    try? realm.write {
+    do {
+      realm.beginWrite()
       realm.add(group)
+      try realm.commitWrite()
+    } catch  {
+      print(error)
     }
   }
   
   func savePhotosData(_ photos: [Item]) {
     let realm = try! Realm()
-    try? realm.write {
+    do {
+      realm.beginWrite()
       realm.add(photos)
+      try realm.commitWrite()
+    } catch  {
+      print(error)
     }
   }
 }
