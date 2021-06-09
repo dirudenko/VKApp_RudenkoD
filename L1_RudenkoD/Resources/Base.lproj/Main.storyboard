@@ -211,7 +211,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionViewCellContentView>
                                 <connections>
-                                    <segue destination="1c1-rp-n31" kind="showDetail" identifier="fullImage" customClass="FullImageCustomSegue" customModule="VKapp_RudenkoD" customModuleProvider="target" id="R0q-2L-dLk"/>
+                                    <segue destination="1c1-rp-n31" kind="showDetail" identifier="fullImage" id="R0q-2L-dLk"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

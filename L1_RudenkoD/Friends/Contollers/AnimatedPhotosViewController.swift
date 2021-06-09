@@ -22,8 +22,7 @@ class AnimatedPhotosViewController: UIViewController {
   var friendId = Session.shared.userId.last
   var indexPhoto: Int?
   private var urlArray = [String]()
-  private let getUserRequest = APIService()
-  
+  private let databaseService = DatabaseServiceImpl()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -31,19 +30,21 @@ class AnimatedPhotosViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-    getUserRequest.getPhoto(id: friendId!) {  [weak self] photos in
-      let albumArray = photos
-      albumArray.forEach {
-        $0.sizes.forEach {
-          if $0.type == "x"  {
-            self?.urlArray.append($0.url)
-          }
+    guard let id = friendId else { return }
+    guard let albumArray = databaseService.read(object: PhotosModel()) else { return }
+ 
+    albumArray.filter {
+      $0.ownerID == id
+    }
+    .forEach {
+      let item = $0.sizeList
+      item.forEach{
+        if $0.type == "x"  {
+          urlArray.append($0.url)
         }
       }
-      self?.setup()
-      self?.primaryImageView.sd_setImage(with: URL(string: (self?.urlArray[self?.indexPhoto ?? 0])!))
     }
+    setup()
   }
   
   func setup() {
@@ -57,6 +58,7 @@ class AnimatedPhotosViewController: UIViewController {
     secondaryImageView.frame = viewForAnimation.bounds
     primaryImageView.contentMode = .scaleAspectFill
     secondaryImageView.transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
+    primaryImageView.sd_setImage(with: URL(string: (urlArray[indexPhoto ?? 0])))
   }
 }
 extension AnimatedPhotosViewController {

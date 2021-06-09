@@ -34,7 +34,7 @@ extension UIViewController {
     cellImage.sd_setImage(with: url, placeholderImage: UIImage(named: "App-Default"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cache, urls) in
                 if (error != nil) {
                     // Failed to load image
-                  asyncImage = UIImage(named: "ico_placeholder")!
+                  asyncImage = UIImage(named: "AppIcon")!
                 } else {
                     // Successful in loading image
                   asyncImage = image!

@@ -10,8 +10,9 @@ import UIKit
 class UserGroupTableViewController: UITableViewController {
   
   let nibIdentifier = "GroupTableViewCell"
-  private var groups = [Groups]()
+  private var groups = [GroupsModel]()
   private let getGroupsRequest = APIService()
+  private let databaseService = DatabaseServiceImpl()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,7 +23,12 @@ class UserGroupTableViewController: UITableViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     getGroupsRequest.getUserGroups() { [weak self] groups in
-      self?.groups = groups
+      
+      for item in groups {
+        self?.databaseService.save(object: item, update: true)
+      }
+      guard let item = self?.databaseService.read(object: GroupsModel()) else { return }
+      self?.groups.append(contentsOf: item)
       self?.tableView.reloadData()
     }
   }
@@ -40,11 +46,8 @@ class UserGroupTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as! GroupTableViewCell
     let name = groups[indexPath.row].name
-    var avatar =  UIImage()
-    let string = groups[indexPath.row].photo50
-    if let image = getImage(from: string) {
-      avatar = image
-    }
+    let string = URL(string: groups[indexPath.row].photo50)!
+    let avatar =  asyncPhoto(cellImage: cell.groupAvatar, url: string)
     let descr = groups[indexPath.row].descr
     cell.configure(name: name, image: avatar, descr: descr)
     return cell

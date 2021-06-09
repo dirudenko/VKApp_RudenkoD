@@ -10,10 +10,12 @@ import UIKit
 class DetailedFriendCollectionViewController: UICollectionViewController {
     
   private let cellReuseIdentifier = "DetailedFriendCollectionViewCell"
-  private var user = User()
-  private let getUserRequest = APIService()
-  private var userFriends = [UsersModel]()
+  private var user = UserModel()
   private var id = Int()
+
+  private let getUserRequest = APIService()
+  private let databaseService = DatabaseServiceImpl()
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,7 +27,9 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
     super.viewWillAppear(animated)
     id = Session.shared.userId.last!
     getUserRequest.getUserInfo(id: id) {  [weak self] user in
-      self?.user = user
+      self?.databaseService.save(object: user, update: false)
+      guard let item = self?.databaseService.read(object: UserModel()) else { return }
+      self?.user = item.first(where: {$0.id == self?.id}) ?? UserModel()
       self?.title = String(user.id)
       self?.collectionView.reloadData()
     }

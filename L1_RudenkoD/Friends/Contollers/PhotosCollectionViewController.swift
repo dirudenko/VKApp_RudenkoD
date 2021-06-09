@@ -14,6 +14,7 @@ class PhotosCollectionViewController: UICollectionViewController {
   private var urlArray = [String]()
   private var indexPhoto: Int?
   private let getUserRequest = APIService()
+  private let databaseService = DatabaseServiceImpl()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,9 +26,17 @@ class PhotosCollectionViewController: UICollectionViewController {
     super.viewWillAppear(animated)
     guard let id = friendId else { return }
     getUserRequest.getPhoto(id: id) {  [weak self] photos in
-      let albumArray = photos
-      albumArray.forEach {
-        $0.sizes.forEach {
+      for item in photos {
+        self?.databaseService.save(object: item, update: true)
+      }
+      guard let albumArray = self?.databaseService.read(object: PhotosModel()) else { return }
+   
+      albumArray.filter {
+        $0.ownerID == id
+      }
+      .forEach {
+        let item = $0.sizeList
+        item.forEach{
           if $0.type == "m"  {
             self?.urlArray.append($0.url)
           }

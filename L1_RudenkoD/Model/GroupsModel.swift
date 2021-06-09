@@ -22,7 +22,7 @@ extension oldGroup: Equatable {
   }
 }
 
-class Groups: Object, Decodable {
+class GroupsModel: Object, Decodable {
   @objc dynamic var id = 0
   @objc dynamic var photo50 = ""
   @objc dynamic var name = ""
@@ -48,6 +48,11 @@ class Groups: Object, Decodable {
     self.name = try usersValues.decode(String.self, forKey: .name)
     self.descr = try usersValues.decode(String.self, forKey: .descr)
   }
+  
+  override class func primaryKey() -> String? {
+          return "id"
+      }
+  
 }
 
 class GroupsResponse: Decodable {
@@ -55,7 +60,7 @@ class GroupsResponse: Decodable {
 }
 
 class GroupsItems: Decodable {
-  let items: [Groups]
+  let items: [GroupsModel]
 }
 
 

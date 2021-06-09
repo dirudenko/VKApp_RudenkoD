@@ -19,11 +19,15 @@ class FriendsListViewController: UIViewController {
   private var chosenFriend = (section: 0, row: 0)
   private let nibIdentifier = "FriendTableViewCell"
   private var users = [UsersModel]()
-  private let getFriendsRequest = APIService()
   private var sections = [Section]()
+
+  private let getFriendsRequest = APIService()
+  private let databaseService = DatabaseServiceImpl()
+
  
   override func viewDidLoad() {
     super.viewDidLoad()
+   // databaseService.deleteUsers()
     friendsTableView.dataSource = self
     friendsTableView.delegate = self
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
@@ -34,7 +38,12 @@ class FriendsListViewController: UIViewController {
     super.viewWillAppear(animated)
     guard users.isEmpty else { return }
     getFriendsRequest.getFriendList(userId: nil) { [weak self] users in
-      self?.users = users
+      for item in users {
+        self?.databaseService.save(object: item, update: true)
+      }
+      guard let item = self?.databaseService.read(object: UsersModel()) else { return }
+      self?.users.append(contentsOf: item)
+      
       let usersDictionary = Dictionary(grouping: self!.users,
                                        by: { $0.name.first! })
         .sorted(by: { $0.key < $1.key })
