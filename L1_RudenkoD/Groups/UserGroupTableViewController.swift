@@ -27,7 +27,7 @@ class UserGroupTableViewController: UITableViewController {
       for item in groups {
         self?.databaseService.save(object: item, update: true)
       }
-      guard let item = self?.databaseService.read(object: GroupsModel()) else { return }
+      guard let item = self?.databaseService.read(object: GroupsModel(), tableView: self?.tableView) else { return }
       self?.groups.append(contentsOf: item)
       self?.tableView.reloadData()
     }
@@ -55,8 +55,9 @@ class UserGroupTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      DataStorage.shared.myGroup.remove(at: indexPath.row)
-      tableView.deleteRows(at: [indexPath], with: .fade)
+      let group = groups[indexPath.row]
+      groups.remove(at: indexPath.row)
+      databaseService.delete(object: group)
     }
   }
 }

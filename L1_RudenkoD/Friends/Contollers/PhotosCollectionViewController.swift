@@ -29,7 +29,7 @@ class PhotosCollectionViewController: UICollectionViewController {
       for item in photos {
         self?.databaseService.save(object: item, update: true)
       }
-      guard let albumArray = self?.databaseService.read(object: PhotosModel()) else { return }
+      guard let albumArray = self?.databaseService.read(object: PhotosModel(), collectionView: self?.collectionView) else { return }
    
       albumArray.filter {
         $0.ownerID == id

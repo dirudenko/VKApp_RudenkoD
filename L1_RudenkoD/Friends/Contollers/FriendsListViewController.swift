@@ -9,17 +9,11 @@ import UIKit
 
 class FriendsListViewController: UIViewController {
   
-  private struct Section {
-    let char : String
-    var user : [UsersModel]
-  }
-  
   @IBOutlet weak var friendsTableView: UITableView!
  
-  private var chosenFriend = (section: 0, row: 0)
+  private var row = Int()
   private let nibIdentifier = "FriendTableViewCell"
   private var users = [UsersModel]()
-  private var sections = [Section]()
 
   private let getFriendsRequest = APIService()
   private let databaseService = DatabaseServiceImpl()
@@ -27,7 +21,7 @@ class FriendsListViewController: UIViewController {
  
   override func viewDidLoad() {
     super.viewDidLoad()
-   // databaseService.deleteUsers()
+    //databaseService.deleteAll()
     friendsTableView.dataSource = self
     friendsTableView.delegate = self
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
@@ -36,28 +30,24 @@ class FriendsListViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    setupScreen()
+  }
+  
+  func setupScreen() {
     guard users.isEmpty else { return }
     getFriendsRequest.getFriendList(userId: nil) { [weak self] users in
+      guard let self = self else { return }
       for item in users {
-        self?.databaseService.save(object: item, update: true)
+        self.databaseService.save(object: item, update: true)
       }
-      guard let item = self?.databaseService.read(object: UsersModel()) else { return }
-      self?.users.append(contentsOf: item)
-      
-      let usersDictionary = Dictionary(grouping: self!.users,
-                                       by: { $0.name.first! })
-        .sorted(by: { $0.key < $1.key })
-        .map({ (char:$0.key, User:$0.value)})
-      for (key, value) in usersDictionary {
-        self?.sections.append(Section(char: String(key), user: value))
-        self?.friendsTableView.reloadData()
-      }
+      guard let item = self.databaseService.read(object: UsersModel(), tableView: self.friendsTableView) else { return }
+      self.users.append(contentsOf: item)
     }
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "FriendInfo" {
-      let id = sections[chosenFriend.section].user[chosenFriend.row].id
+      let id = users[row].id
       Session.shared.userId.append(id)
     }
   }
@@ -68,8 +58,8 @@ class FriendsListViewController: UIViewController {
 extension FriendsListViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
-    let section = sections[indexPath.section]
-    let username = section.user[indexPath.row]
+   
+    let username = users[indexPath.row]
     let string = URL(string: username.photo50)!
     let avatar = asyncPhoto(cellImage: cell.avatarImage, url: string)
     if username.online == 1 {
@@ -82,19 +72,11 @@ extension FriendsListViewController: UITableViewDataSource, UITableViewDelegate 
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return sections[section].user.count
+    return users.count
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return sections.count
-  }
-  
-  func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-    return sections.map{$0.char}
-  }
-  
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return sections[section].char
+    return 1
   }
   
   func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
@@ -105,22 +87,14 @@ extension FriendsListViewController: UITableViewDataSource, UITableViewDelegate 
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      let indexSet = IndexSet(arrayLiteral: indexPath.section)
-      sections[indexPath.section].user.remove(at: indexPath.row)
-      tableView.deleteRows(at: [indexPath], with: .fade)
-      if sections[indexPath.section].user.count == 0 {
-        sections.remove(at: indexPath.section)
-        tableView.beginUpdates()
-        tableView.deleteSections(indexSet, with: .automatic)
-        tableView.endUpdates()
-      }
+      let user = users[indexPath.row]
+      users.remove(at: indexPath.row)
+      self.databaseService.delete(object: user)
     }
-    tableView.reloadData()
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    chosenFriend.row = indexPath.row
-    chosenFriend.section = indexPath.section
+    row = indexPath.row
     performSegue(withIdentifier: "FriendInfo", sender: (Any).self)
   }
 }

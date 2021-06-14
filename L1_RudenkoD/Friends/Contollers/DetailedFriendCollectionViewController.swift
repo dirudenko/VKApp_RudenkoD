@@ -28,7 +28,7 @@ class DetailedFriendCollectionViewController: UICollectionViewController {
     id = Session.shared.userId.last!
     getUserRequest.getUserInfo(id: id) {  [weak self] user in
       self?.databaseService.save(object: user, update: false)
-      guard let item = self?.databaseService.read(object: UserModel()) else { return }
+      guard let item = self?.databaseService.read(object: UserModel(), collectionView: self?.collectionView) else { return }
       self?.user = item.first(where: {$0.id == self?.id}) ?? UserModel()
       self?.title = String(user.id)
       self?.collectionView.reloadData()
