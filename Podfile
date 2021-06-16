@@ -10,4 +10,8 @@ pod 'Alamofire'
 pod 'RealmSwift'
 pod 'SwiftKeychainWrapper'
 pod 'SDWebImage'
+pod 'Firebase/Analytics'
+pod 'Firebase/Auth'
+pod 'Firebase/Firestore'
+pod 'Firebase/Database'
 end

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class FriendsListViewController: UIViewController {
   
@@ -17,6 +18,8 @@ class FriendsListViewController: UIViewController {
 
   private let getFriendsRequest = APIService()
   private let databaseService = DatabaseServiceImpl()
+  private let ref = Database.database().reference(withPath: "user")
+  private var usersFB = [FBUserModel]()
 
  
   override func viewDidLoad() {
@@ -26,6 +29,17 @@ class FriendsListViewController: UIViewController {
     friendsTableView.delegate = self
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
     friendsTableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
+    self.ref.child(Session.shared.selfId).child("friends").observe(.value, with: { snapshot in
+            var newUsersFB: [FBUserModel] = []
+      for child in snapshot.children {
+        if let snapshot = child as? DataSnapshot,
+           let user = FBUserModel(snapshot: snapshot) {
+          newUsersFB.append(user)
+                }
+            }
+            self.usersFB = newUsersFB
+            self.friendsTableView.reloadData()
+        })
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +56,11 @@ class FriendsListViewController: UIViewController {
       }
       guard let item = self.databaseService.read(object: UsersModel(), tableView: self.friendsTableView) else { return }
       self.users.append(contentsOf: item)
+      
+      for item in users {
+        let fbUsers = FBUserModel(lastName: item.lastName, photo50: item.photo50, firstName: item.firstName, online: item.online).toAnyObject()
+        self.ref.child(Session.shared.selfId).child("friends").child(String(item.id)).setValue(fbUsers)
+      }
     }
   }
   
@@ -59,7 +78,7 @@ extension FriendsListViewController: UITableViewDataSource, UITableViewDelegate 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
    
-    let username = users[indexPath.row]
+    let username =  usersFB[indexPath.row]
     let string = URL(string: username.photo50)!
     let avatar = asyncPhoto(cellImage: cell.avatarImage, url: string)
     if username.online == 1 {
@@ -72,7 +91,7 @@ extension FriendsListViewController: UITableViewDataSource, UITableViewDelegate 
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return users.count
+    return usersFB.count
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -87,9 +106,8 @@ extension FriendsListViewController: UITableViewDataSource, UITableViewDelegate 
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      let user = users[indexPath.row]
-      users.remove(at: indexPath.row)
-      self.databaseService.delete(object: user)
+      let user = usersFB[indexPath.row]
+      user.ref?.removeValue()
     }
   }
   
