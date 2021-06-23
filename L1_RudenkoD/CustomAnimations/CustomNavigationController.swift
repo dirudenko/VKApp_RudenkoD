@@ -29,7 +29,9 @@ class CustomNavigationController: UINavigationController, UINavigationController
     else if operation == .pop {
       
       if fromVC is DetailedFriendCollectionViewController {
+        if Session.shared.userId.count > 1 {
         Session.shared.userId.removeLast()
+        }
       }
         if navigationController.viewControllers.first != toVC {
           self.interactiveTransition.viewController = toVC

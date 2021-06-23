@@ -253,6 +253,7 @@
                     <connections>
                         <segue destination="4Rx-Sr-vYi" kind="relationship" relationship="viewControllers" id="PWY-4r-ixz"/>
                         <segue destination="yG1-7x-NuZ" kind="relationship" relationship="viewControllers" id="AYW-8x-3nV"/>
+                        <segue destination="Mox-bF-0D6" kind="relationship" relationship="viewControllers" id="bmp-06-bgY"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xI2-J5-klb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -294,6 +295,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y3N-Ay-fne" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3499" y="419"/>
+        </scene>
+        <!--News-->
+        <scene sceneID="CnM-MG-A1L">
+            <objects>
+                <tableViewController id="fqN-Gg-heQ" customClass="NewsTableViewController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="LjA-Pt-SIF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="096-BW-hR1">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="096-BW-hR1" id="tqr-v1-lZj">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fqN-Gg-heQ" id="bzq-Pp-dCs"/>
+                            <outlet property="delegate" destination="fqN-Gg-heQ" id="Nzw-vz-Yu2"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="News" id="YNP-w7-OSL"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="waL-oP-xVV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3500" y="1148"/>
+        </scene>
+        <!--News-->
+        <scene sceneID="qun-DD-TJO">
+            <objects>
+                <navigationController id="Mox-bF-0D6" customClass="CustomNavigationController" customModule="VKapp_RudenkoD" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="News" selectedImage="newspaper" catalog="system" id="c7N-mi-Xtn"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="63N-RG-pcW">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="fqN-Gg-heQ" kind="relationship" relationship="rootViewController" id="VTR-B0-UgD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iVy-bd-UbI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2606" y="1148"/>
         </scene>
         <!--Группы-->
         <scene sceneID="hjs-Ez-OaM">
@@ -390,6 +437,7 @@
     </scenes>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="newspaper" catalog="system" width="128" height="108"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="rosette" catalog="system" width="106" height="128"/>

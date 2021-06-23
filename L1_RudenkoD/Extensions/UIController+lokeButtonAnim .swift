@@ -31,12 +31,10 @@ extension UIViewController {
   func asyncPhoto(cellImage: UIImageView, url: URL) -> UIImage {
     var asyncImage = UIImage()
     cellImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-    cellImage.sd_setImage(with: url, placeholderImage: UIImage(named: "App-Default"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cache, urls) in
+    cellImage.sd_setImage(with: url, placeholderImage: UIImage(named: "logo"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cache, urls) in
                 if (error != nil) {
-                    // Failed to load image
-                  asyncImage = UIImage(named: "AppIcon")!
+                  asyncImage = UIImage(named: "logo")!
                 } else {
-                    // Successful in loading image
                   asyncImage = image!
                 }
             })
