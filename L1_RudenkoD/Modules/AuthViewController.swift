@@ -75,7 +75,7 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
       }
     if let selfId = params["user_id"] {
       Session.shared.selfId = selfId
-      print(Session.shared.selfId)
+     // print(Session.shared.selfId)
     }
     if let token = params["access_token"] {
      // print("TOKEN = ", token as Any)
