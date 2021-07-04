@@ -14,7 +14,7 @@ protocol UserProtocol: AnyObject {
 
 protocol UserPresenterProtocol: AnyObject {
   init(view: UserProtocol, networkService: NetworkServicesProtocol, databaseService: DatabaseServiceProtocol)
-  func getFriend(collectionView: UICollectionView)
+  func getFriend(collectionView: UICollectionView, id: Int)
   var friend: Results<UserModel>? {get set}
 }
 
@@ -22,7 +22,6 @@ class UserPresenter: UserPresenterProtocol {
   
   var friend: Results<UserModel>?
   let view: UserProtocol
-  let id  = Session.shared.userId.last!
   weak var networkService: NetworkServicesProtocol!
   weak var databaseService: DatabaseServiceProtocol!
   
@@ -32,10 +31,10 @@ class UserPresenter: UserPresenterProtocol {
     self.databaseService = databaseService
   }
   
-  func getFriend(collectionView: UICollectionView) {
+  func getFriend(collectionView: UICollectionView, id: Int) {
     networkService.getUserInfo(id: id) { [weak self] user in
       guard let self = self else { return }
-        self.databaseService.save(object: user, update: false)
+        self.databaseService.save(object: user, update: true)
       self.friend = self.databaseService.read(object: UserModel(), tableView: nil, collectionView: collectionView)
       self.view.success()
     }

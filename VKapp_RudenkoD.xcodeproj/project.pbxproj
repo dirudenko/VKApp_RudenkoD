@@ -24,6 +24,8 @@
 		692217352683129600429DB6 /* PhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692217342683129600429DB6 /* PhotosPresenter.swift */; };
 		692217372683188B00429DB6 /* NewsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692217362683188B00429DB6 /* NewsPresenter.swift */; };
 		6923C72826636F520077A312 /* PhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6923C72726636F520077A312 /* PhotosModel.swift */; };
+		693901742691BE64007C2DB5 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693901722691BE64007C2DB5 /* FriendViewController.swift */; };
+		693901752691BE64007C2DB5 /* FriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693901732691BE64007C2DB5 /* FriendViewController.xib */; };
 		6939F3FB26394C5A007EE218 /* AnimatedPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6939F3FA26394C5A007EE218 /* AnimatedPhotosViewController.swift */; };
 		694FD2192634C7E8009CA6DD /* UIView+AnomationsGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694FD2182634C7E8009CA6DD /* UIView+AnomationsGradient.swift */; };
 		695A0CD4266AC6C2003BA234 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695A0CD3266AC6C2003BA234 /* CollectionViewCell.swift */; };
@@ -82,6 +84,8 @@
 		692217342683129600429DB6 /* PhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPresenter.swift; sourceTree = "<group>"; };
 		692217362683188B00429DB6 /* NewsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPresenter.swift; sourceTree = "<group>"; };
 		6923C72726636F520077A312 /* PhotosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosModel.swift; sourceTree = "<group>"; };
+		693901722691BE64007C2DB5 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
+		693901732691BE64007C2DB5 /* FriendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendViewController.xib; sourceTree = "<group>"; };
 		6939F3FA26394C5A007EE218 /* AnimatedPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedPhotosViewController.swift; sourceTree = "<group>"; };
 		694FD2182634C7E8009CA6DD /* UIView+AnomationsGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AnomationsGradient.swift"; sourceTree = "<group>"; };
 		695A0CD3266AC6C2003BA234 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 				69BF44122622F6E300D03109 /* ServiceLayer */,
 				698D1A24266A984400F626A8 /* Modules */,
 				69DB50872658248C00648F72 /* Resources */,
+				693901722691BE64007C2DB5 /* FriendViewController.swift */,
+				693901732691BE64007C2DB5 /* FriendViewController.xib */,
 			);
 			name = VKapp_RudenkoD;
 			path = L1_RudenkoD;
@@ -508,6 +514,7 @@
 				695F08D42618D395001DC492 /* Assets.xcassets in Resources */,
 				69E5E0112679184500BCB5FF /* GoogleService-Info.plist in Resources */,
 				695F08D22618D394001DC492 /* Main.storyboard in Resources */,
+				693901752691BE64007C2DB5 /* FriendViewController.xib in Resources */,
 				691F6EAD26231F0B00CA7957 /* FriendTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -601,6 +608,7 @@
 				691F27992677C9CF008D27F2 /* NewsTableViewController.swift in Sources */,
 				699657022624595D008650B8 /* GroupTableViewCell.swift in Sources */,
 				69E5E00F26790AF100BCB5FF /* FBFriendsModel.swift in Sources */,
+				693901742691BE64007C2DB5 /* FriendViewController.swift in Sources */,
 				695F08CD2618D394001DC492 /* SceneDelegate.swift in Sources */,
 				69C11F28264311EA002A3E92 /* CustomAnimators.swift in Sources */,
 			);

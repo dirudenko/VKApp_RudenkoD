@@ -63,4 +63,9 @@ class UserModel: Object, Decodable {
     self.time = try metainfo.decode(Double.self, forKey: .time)
     self.platform = try metainfo.decode(Int.self, forKey: .platform)
   }
+  
+  override class func primaryKey() -> String? {
+          return "id"
+      }
+  
 }

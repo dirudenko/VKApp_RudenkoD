@@ -18,17 +18,7 @@ protocol DatabaseServiceProtocol: AnyObject {
 
 class DatabaseServiceImpl: DatabaseServiceProtocol {
   
-  let config = Realm.Configuration( schemaVersion: 7, migrationBlock: { migration, oldSchemaVersion in
-    print("oldSchemaVersion: \(oldSchemaVersion)")
-    if (oldSchemaVersion < 7) {
-      print("  performing migration")
-      var nextID = 0
-      migration.enumerateObjects(ofType: PhotosModel.className()) { oldItem, newItem in
-        newItem!["id"] = nextID
-        nextID += 1
-      }
-    }
-  })
+  let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
   
   lazy var mainRealm = try! Realm(configuration: config)
   var token: NotificationToken?
@@ -41,7 +31,7 @@ class DatabaseServiceImpl: DatabaseServiceProtocol {
         mainRealm.add(object)
       }
     }
-    //print(mainRealm.configuration.fileURL)
+   // print(mainRealm.configuration.fileURL)
   }
   
   func read<T: Object>(object: T, tableView: UITableView? = nil, collectionView: UICollectionView? = nil) -> Results<T>? {
