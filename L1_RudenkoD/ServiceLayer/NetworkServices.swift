@@ -126,8 +126,8 @@ class NetworkServices: NetworkServicesProtocol {
   
   func getNews(completion: @escaping (Response) -> Void) {
     let parameters: Parameters = [
-     // "filters": "post,photo,photo_tag,wall_photo",
-     // "count": 5,
+       "filters": "post",
+    //  "count": 5,
       "access_token": token,
       "v": version]
     let path = "newsfeed.get"
@@ -135,10 +135,9 @@ class NetworkServices: NetworkServicesProtocol {
     AF.request(url, method: .get, parameters: parameters).responseData {
       response in
       guard let data = response.data else { return }
-     // print(data.prettyJSON)
+    //  print(data.prettyJSON)
       do {
         let news = try JSONDecoder().decode(NewsFeed.self, from: data).response
-
         DispatchQueue.main.async {
           completion(news!)
         }

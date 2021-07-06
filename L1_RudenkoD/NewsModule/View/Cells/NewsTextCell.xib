@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="269" id="UPE-Hh-7pq" customClass="NewsTextCell" customModule="VKapp_RudenkoD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="269"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UPE-Hh-7pq" id="XLv-6w-aIN">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="269"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" text="News" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGV-aR-Q0K">
+                        <rect key="frame" x="12" y="2" width="390" height="265"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="IGV-aR-Q0K" firstAttribute="leading" secondItem="XLv-6w-aIN" secondAttribute="leading" constant="12" id="G6n-yH-Iow"/>
+                    <constraint firstAttribute="bottom" secondItem="IGV-aR-Q0K" secondAttribute="bottom" constant="2" id="bWV-3E-m0N"/>
+                    <constraint firstItem="IGV-aR-Q0K" firstAttribute="top" secondItem="XLv-6w-aIN" secondAttribute="top" constant="2" id="cGL-Zr-cLh"/>
+                    <constraint firstAttribute="trailing" secondItem="IGV-aR-Q0K" secondAttribute="trailing" constant="12" id="iHf-gi-Ov0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="newsText" destination="IGV-aR-Q0K" id="2n1-aw-Ipy"/>
+            </connections>
+            <point key="canvasLocation" x="191" y="-95"/>
+        </tableViewCell>
+    </objects>
+</document>

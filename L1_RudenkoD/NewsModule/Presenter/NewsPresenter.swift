@@ -20,7 +20,6 @@ protocol NewsPresenterProtocol: AnyObject {
 
 class NewsPresenter: NewsPresenterProtocol {
   
-  
   var news: Response?
   let view: NewsProtocol
   weak var networkService: NetworkServicesProtocol!
@@ -37,8 +36,7 @@ class NewsPresenter: NewsPresenterProtocol {
       self.news = news
       self.view.success()
     }
-    
-  
+   
   }
 }
 
