@@ -91,7 +91,7 @@ class NewsTableViewController: UITableViewController {
     case 2:
       let cell = tableView.dequeueReusableCell(withIdentifier: "NewsImageCell", for: indexPath) as! NewsImageCell
       guard let imageString = findURL(item: items[indexPath.section].attachments) else { return UITableViewCell() }
-      let imageNews = asyncPhoto(cellImage: UIImageView(), url: imageString)
+      let imageNews = asyncPhoto(cellImage: cell.newsImage, url: imageString)
       cell.configure(image: imageNews)
       return cell
     case 3:
