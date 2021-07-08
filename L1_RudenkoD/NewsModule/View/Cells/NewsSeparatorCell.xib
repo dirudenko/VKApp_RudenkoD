@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="284" id="HUH-NK-icQ" customClass="NewsSeparatorCell" customModule="VKapp_RudenkoD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="284"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HUH-NK-icQ" id="ffq-nK-vwC">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="284"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6w0-8i-rbI">
+                        <rect key="frame" x="20" y="11" width="374" height="2"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="NhD-P8-BQr"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="6w0-8i-rbI" secondAttribute="trailing" id="2az-Ng-Scg"/>
+                    <constraint firstItem="6w0-8i-rbI" firstAttribute="top" secondItem="ffq-nK-vwC" secondAttribute="topMargin" id="eZM-Gi-I6W"/>
+                    <constraint firstItem="6w0-8i-rbI" firstAttribute="leading" secondItem="ffq-nK-vwC" secondAttribute="leadingMargin" id="l5N-oV-Txy"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="6w0-8i-rbI" secondAttribute="bottom" id="lmm-ut-FJK"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="newsSeparator" destination="ffq-nK-vwC" id="lx0-w0-CVG"/>
+            </connections>
+            <point key="canvasLocation" x="-133" y="43"/>
+        </tableViewCell>
+    </objects>
+</document>

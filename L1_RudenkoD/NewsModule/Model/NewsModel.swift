@@ -433,7 +433,9 @@ class Profile: Codable {
     let photo50, photo100: String?
     let online: Int?
     let onlineInfo: OnlineInfo?
-
+    var name: String {
+      (firstName ?? "") + " " + (lastName ?? "")
+  }
     enum CodingKeys: String, CodingKey {
         case id
         case firstName = "first_name"

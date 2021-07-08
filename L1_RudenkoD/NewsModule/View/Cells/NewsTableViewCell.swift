@@ -7,9 +7,9 @@
 
 import UIKit
 
-protocol NewsButtonsDelegate: AnyObject {
-  func share()
-}
+//protocol NewsButtonsDelegate: AnyObject {
+//  func share()
+//}
 
 
 class NewsTableViewCell: UITableViewCell {
@@ -55,13 +55,9 @@ class NewsTableViewCell: UITableViewCell {
         clearCell()
     }
 
-
-  
-  
   @IBAction func pressShareButton(_ sender: Any) {
-    delegate?.share()
+    //delegate?.share()
   }
-  
   
   
   @IBAction func pressLikeButton(_ sender: Any) {
@@ -79,8 +75,8 @@ class NewsTableViewCell: UITableViewCell {
     if let imageNews = imageNews {
       imageForNews.image = imageNews
       if imageForNews.image != nil {
-      let ratio = imageNews.size.width / imageNews.size.height
-      let newHeight = imageForNews.frame.width / ratio
+      //let ratio = imageNews.size.width / imageNews.size.height
+      //let newHeight = imageForNews.frame.width / ratio
       constraintHeight1.constant = 300
       } else {
         constraintHeight1.constant = 0
