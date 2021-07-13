@@ -16,9 +16,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="197"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpo-g2-7uf">
-                        <rect key="frame" x="90" y="23" width="251" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpo-g2-7uf">
+                        <rect key="frame" x="90" y="23" width="43" height="30"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <state key="normal" title="Name">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -43,9 +42,8 @@
                             <constraint firstAttribute="height" constant="50" id="p28-ic-0KZ"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Posted" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4BK-yx-3wQ">
-                        <rect key="frame" x="99" y="61" width="33" height="12"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Posted" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4BK-yx-3wQ">
+                        <rect key="frame" x="90" y="58" width="33" height="12"/>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -54,7 +52,11 @@
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="YZi-6q-eFL" secondAttribute="bottom" constant="12" id="0wz-vw-9Ps"/>
                     <constraint firstItem="YZi-6q-eFL" firstAttribute="leading" secondItem="KKC-FR-hVg" secondAttribute="leadingMargin" id="6eb-sD-fpc"/>
+                    <constraint firstItem="4BK-yx-3wQ" firstAttribute="top" secondItem="wpo-g2-7uf" secondAttribute="bottom" constant="5" id="DkZ-sB-Af6"/>
                     <constraint firstItem="YZi-6q-eFL" firstAttribute="top" secondItem="KKC-FR-hVg" secondAttribute="topMargin" constant="12" id="HAg-U3-DJx"/>
+                    <constraint firstItem="wpo-g2-7uf" firstAttribute="leading" secondItem="WcN-3A-Qby" secondAttribute="trailing" constant="20" id="Vvo-lJ-JdN"/>
+                    <constraint firstItem="4BK-yx-3wQ" firstAttribute="leading" secondItem="wpo-g2-7uf" secondAttribute="leading" id="Wfi-0Y-mj5"/>
+                    <constraint firstItem="wpo-g2-7uf" firstAttribute="top" secondItem="WcN-3A-Qby" secondAttribute="top" id="ZoY-7y-mSi"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
