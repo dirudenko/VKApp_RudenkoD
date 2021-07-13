@@ -8,13 +8,12 @@
 import Foundation
 import Alamofire
 
-
 protocol NetworkServicesProtocol: AnyObject {
   func getFriendList(userId: Int?, completion: @escaping ([FriendsModel]) -> Void)
   func getUserInfo(id: Int, completion: @escaping (UserModel) -> Void)
   func getUserGroups(completion: @escaping ([GroupsModel]) -> Void)
   func getPhoto(id: Int,completion: @escaping ([PhotosModel]) -> Void)
-  func getNews(completion: @escaping (Response) -> Void)
+  func getNews(filters: PhotoFilters, completion: @escaping ([ResponseItem], [Group], [Profile]) -> Void)
 }
 
 class NetworkServices: NetworkServicesProtocol {
@@ -124,28 +123,39 @@ class NetworkServices: NetworkServicesProtocol {
     }
   }
   
-  func getNews(completion: @escaping (Response) -> Void) {
+  func getNews(filters: PhotoFilters, completion: @escaping ([ResponseItem], [Group], [Profile]) -> Void) {
+    
+    var items = [ResponseItem]()
+    var groups = [Group]()
+    var profiles = [Profile]()
+    let getNewsGroup = DispatchGroup()
+
     let parameters: Parameters = [
-       "filters": "post",
-    //  "count": 5,
+      "filters": filters,
+      //"count": 2,
       "access_token": token,
       "v": version]
     let path = "newsfeed.get"
     let url = baseUrl + path
+    DispatchQueue.global().async(group: getNewsGroup) {
     AF.request(url, method: .get, parameters: parameters).responseData {
       response in
       guard let data = response.data else { return }
-    //  print(data.prettyJSON)
-      do {
-        let news = try JSONDecoder().decode(NewsFeed.self, from: data).response
-        DispatchQueue.main.async {
-          completion(news!)
-        }
-      } catch {
-        print(error)
+      // print(data.prettyJSON)
+      
+        guard let rawItem = try? JSONDecoder().decode(NewsFeed.self, from: data).response?.items else { return }
+        items = rawItem
+      
+        guard let rawGroups = try? JSONDecoder().decode(NewsFeed.self, from: data).response?.groups else { return }
+        groups = rawGroups
+      
+        guard let rawProfiles = try? JSONDecoder().decode(NewsFeed.self, from: data).response?.profiles else { return }
+        profiles = rawProfiles
+      
+      getNewsGroup.notify(queue: .main) {
+        completion(items, groups, profiles)
       }
-   }
+    }
   }
-  
 }
-
+}

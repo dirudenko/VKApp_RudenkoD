@@ -95,8 +95,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5d-oT-OAJ">
-                        <rect key="frame" x="16" y="422" width="119" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5d-oT-OAJ">
+                        <rect key="frame" x="16" y="422" width="119" height="66"/>
                         <state key="normal" title="Все фотографии"/>
                         <connections>
                             <action selector="allPhotoButton:" destination="7WB-db-Mch" eventType="touchUpInside" id="mga-Us-dhz"/>
@@ -105,13 +105,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="GHM-je-Jo8" firstAttribute="top" secondItem="EJj-46-HuV" secondAttribute="bottom" constant="5" id="12O-ES-yJZ"/>
+                    <constraint firstItem="EJj-46-HuV" firstAttribute="leading" secondItem="T5d-oT-OAJ" secondAttribute="trailing" constant="-115" id="2zV-i3-ewx"/>
                     <constraint firstAttribute="trailing" secondItem="EJj-46-HuV" secondAttribute="trailing" constant="20" id="5WL-5i-g1z"/>
                     <constraint firstAttribute="trailing" secondItem="evC-hL-RdN" secondAttribute="trailing" constant="20" id="7IU-eN-yeb"/>
                     <constraint firstItem="6y0-EY-sO1" firstAttribute="top" secondItem="dx6-Vy-Coe" secondAttribute="top" constant="20" id="7ll-50-nfE"/>
                     <constraint firstItem="daw-DC-6eS" firstAttribute="centerY" secondItem="XC2-fc-qWe" secondAttribute="centerY" id="CXZ-9R-W0E"/>
                     <constraint firstItem="evC-hL-RdN" firstAttribute="leading" secondItem="MDL-Fl-gQA" secondAttribute="trailing" constant="20" id="GwZ-6w-Sns"/>
                     <constraint firstItem="EJj-46-HuV" firstAttribute="leading" secondItem="dx6-Vy-Coe" secondAttribute="leading" constant="20" id="HXk-Yt-Vlo"/>
-                    <constraint firstItem="EJj-46-HuV" firstAttribute="top" secondItem="T5d-oT-OAJ" secondAttribute="bottom" constant="-222" id="TbS-5b-xza"/>
                     <constraint firstItem="6y0-EY-sO1" firstAttribute="leading" secondItem="fNx-Nc-or1" secondAttribute="trailing" constant="20" id="Tv8-Wi-zLe"/>
                     <constraint firstItem="daw-DC-6eS" firstAttribute="leading" secondItem="XC2-fc-qWe" secondAttribute="trailing" constant="20" id="X5f-Gl-tFy"/>
                     <constraint firstItem="EJj-46-HuV" firstAttribute="top" secondItem="RTn-Tj-dJ1" secondAttribute="bottom" id="YtV-5R-bjN"/>
@@ -123,6 +123,7 @@
                     <constraint firstItem="RTn-Tj-dJ1" firstAttribute="leading" secondItem="dx6-Vy-Coe" secondAttribute="leading" id="jle-P1-WCp"/>
                     <constraint firstItem="MDL-Fl-gQA" firstAttribute="top" secondItem="dx6-Vy-Coe" secondAttribute="top" constant="20" id="kFP-bc-MZ5"/>
                     <constraint firstItem="XC2-fc-qWe" firstAttribute="leading" secondItem="fNx-Nc-or1" secondAttribute="trailing" constant="20" id="lCz-zI-GuQ"/>
+                    <constraint firstItem="RTn-Tj-dJ1" firstAttribute="top" secondItem="MDL-Fl-gQA" secondAttribute="bottom" constant="90" id="lML-3P-dn5"/>
                     <constraint firstAttribute="trailing" secondItem="RTn-Tj-dJ1" secondAttribute="trailing" id="qZV-Q7-GTJ"/>
                     <constraint firstItem="T5d-oT-OAJ" firstAttribute="leading" secondItem="dx6-Vy-Coe" secondAttribute="leading" constant="16" id="qjo-rL-HHO"/>
                     <constraint firstItem="T5d-oT-OAJ" firstAttribute="top" secondItem="MDL-Fl-gQA" secondAttribute="bottom" constant="302" id="uYj-I2-X19"/>

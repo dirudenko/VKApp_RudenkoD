@@ -12,19 +12,22 @@ import SDWebImage
 
 extension UIViewController {
   func getImage(from string: String) -> UIImage? {
+    var image: UIImage?
     guard let url = URL(string: string)
     else {
       print("Unable to create URL")
       return nil
     }
-    var image: UIImage? = nil
+    
     do {
       let data = try Data(contentsOf: url, options: [])
       image = UIImage(data: data)
     }
     catch {
       print(error.localizedDescription)
+    
     }
+    
     return image
   }
   
@@ -33,9 +36,31 @@ extension UIViewController {
     cellImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
     cellImage.sd_setImage(with: url, placeholderImage: UIImage(named: "logo"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cache, urls) in
                 if (error != nil) {
-                  asyncImage = UIImage(named: "logo")!
+                  asyncImage = UIImage(named: "logo") ?? UIImage()
                 } else {
-                  asyncImage = image!
+                  guard let image = image else { return }
+                  asyncImage = image
+                }
+            })
+    return asyncImage
+  }
+  
+  func newAsyncPhoto(tableView: UITableView, url: URL) -> UIImage {
+    var asyncImage = UIImage()
+    let cellImage = UIImageView()
+    cellImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+    cellImage.sd_setImage(with: url, placeholderImage: UIImage(named: "logo"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cache, urls) in
+                if (error != nil) {
+                  DispatchQueue.main.async {
+                    asyncImage = UIImage(named: "logo") ?? UIImage()
+                    tableView.reloadData()
+                  }
+                } else {
+                  DispatchQueue.main.async {
+                  guard let image = image else { return }
+                  asyncImage = image
+                   // tableView.reloadData()
+                  }
                 }
             })
     return asyncImage

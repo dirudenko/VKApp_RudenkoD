@@ -14,13 +14,17 @@ protocol NewsProtocol: AnyObject {
 
 protocol NewsPresenterProtocol: AnyObject {
   init(view: NewsProtocol, networkService: NetworkServicesProtocol)
-  func getNews()
-  var news: Response? {get set}
+  func getNews(filters: PhotoFilters)
+  var items: [ResponseItem]? {get set}
+  var groups: [Group]? {get set}
+  var profiles: [Profile]? {get set}
 }
 
 class NewsPresenter: NewsPresenterProtocol {
   
-  var news: Response?
+  var groups: [Group]?
+  var profiles: [Profile]?
+  var items: [ResponseItem]?
   let view: NewsProtocol
   weak var networkService: NetworkServicesProtocol!
   
@@ -30,10 +34,12 @@ class NewsPresenter: NewsPresenterProtocol {
     self.networkService = networkService
   }
   
-  func getNews() {
-    networkService.getNews() { [weak self]  news in
+  func getNews(filters: PhotoFilters) {
+    networkService.getNews(filters: filters) { [weak self]  items, groups , profiles  in
       guard let self = self else { return }
-      self.news = news
+      self.groups = groups
+      self.items = items
+      self.profiles = profiles
       self.view.success()
     }
    
