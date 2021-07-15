@@ -36,7 +36,6 @@ class DatabaseServiceImpl: DatabaseServiceProtocol {
   
   func read<T: Object>(object: T, tableView: UITableView? = nil, collectionView: UICollectionView? = nil) -> Results<T>? {
     let model = mainRealm.objects(T.self)
-    
     if tableView != nil {
       token = model.observe{ changes in
         guard let tableView = tableView else { return }

@@ -33,7 +33,7 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
     urlComponents.host = "oauth.vk.com"
     urlComponents.path = "/authorize"
     urlComponents.queryItems = [
-      URLQueryItem(name: "client_id", value: "7866841"),
+      URLQueryItem(name: "client_id", value: "7864517"),
       URLQueryItem(name: "display", value: "mobile"),
       URLQueryItem(name: "redirect_uri",
                    value:"https://oauth.vk.com/blank.html"),
@@ -75,10 +75,8 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
       }
     if let selfId = params["user_id"] {
       Session.shared.selfId = selfId
-     // print(Session.shared.selfId)
     }
     if let token = params["access_token"] {
-     // print("TOKEN = ", token as Any)
       KeychainWrapper.standard.set(token, forKey: "vkToken")
       Session.shared.token = token
       showMainTabBar()
