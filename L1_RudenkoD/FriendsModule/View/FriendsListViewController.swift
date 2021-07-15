@@ -12,8 +12,6 @@ class FriendsListViewController: UIViewController {
  
   private var row = Int()
   private let nibIdentifier = "FriendTableViewCell"
-
-  private let networkService = NetworkServices()
   private let databaseService = DatabaseServiceImpl()
   var presenter: FriendsPresenterProtocol!
 
@@ -26,13 +24,12 @@ class FriendsListViewController: UIViewController {
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
     friendsTableView.register(nibFile, forCellReuseIdentifier: nibIdentifier)
     
-    presenter = FriendsPresenter(view: self, networkService: networkService, databaseService: databaseService)
+    presenter = FriendsPresenter(view: self)
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    presenter.getFriends(tableView: friendsTableView)
-   
+    presenter.getFriends()
   }
     
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
