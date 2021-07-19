@@ -20,7 +20,7 @@ protocol GroupPresenterProtocol: AnyObject {
 }
 
 class GroupPresenter: GroupPresenterProtocol {
- 
+  
   var group: Results<GroupsModel>?
   let view: GroupProtocol
   let ref = Database.database().reference(withPath: "user")
@@ -35,19 +35,26 @@ class GroupPresenter: GroupPresenterProtocol {
   }
   
   func getGroup(tableView: UITableView) {
-    networkService.getUserGroups() { [weak self] groups in
-      guard let self = self else { return }
-      for item in groups {
-        self.databaseService.save(object: item, update: true)
+    
+    networkService.getPromiseGroups()
+      .get { [weak self] groups in
+        guard let self = self else { return }
+        for item in groups {
+          self.databaseService.save(object: item, update: true)
+        }
+        self.group = self.databaseService.read(object: GroupsModel(), tableView: tableView, collectionView: nil)
+        guard let group = self.group else { return }
+        for item in group {
+          let fbGroups = FBGroupModel(descr: item.descr, groups: item.name, photo: item.photo50).toAnyObject()
+          self.ref.child(Session.shared.selfId).child("groups").child(String(item.id)).setValue(fbGroups)
+        }
       }
-      self.group = self.databaseService.read(object: GroupsModel(), tableView: tableView, collectionView: nil)
-      guard let group = self.group else { return }
-      for item in group {
-        let fbGroups = FBGroupModel(descr: item.descr, groups: item.name, photo: item.photo50).toAnyObject()
-        self.ref.child(Session.shared.selfId).child("groups").child(String(item.id)).setValue(fbGroups)
+      .done(on: .main) { [weak self] _ in
+        self?.view.success()
       }
-      self.view.success()
-    }
+      .catch { error in
+        print(error)
+      }
   }
 }
 

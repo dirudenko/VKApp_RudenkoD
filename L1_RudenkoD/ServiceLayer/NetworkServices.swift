@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 protocol NetworkServicesProtocol: AnyObject {
   func getFriendList(userId: Int?, completion: @escaping ([FriendsModel]) -> Void)
@@ -14,6 +15,7 @@ protocol NetworkServicesProtocol: AnyObject {
   func getUserGroups(completion: @escaping ([GroupsModel]) -> Void)
   func getPhoto(id: Int,completion: @escaping ([PhotosModel]) -> Void)
   func getNews(filters: PhotoFilters, completion: @escaping ([ResponseItem], [Group], [Profile]) -> Void)
+  func getPromiseGroups() -> Promise<[GroupsModel]>
 }
 
 class NetworkServices: NetworkServicesProtocol {
@@ -99,6 +101,31 @@ class NetworkServices: NetworkServicesProtocol {
     }
   }
   
+  
+  func getPromiseGroups() -> Promise<[GroupsModel]> {
+    let parameters: Parameters = [
+      "extended": 1,
+      "fields": "name,status",
+      "access_token": token,
+      "v": version]
+    let path = "groups.get"
+    let url = baseUrl + path
+
+    return Promise { groups in
+      AF.request(url, method: .get, parameters: parameters).responseData { response in
+        guard let data = response.data else { return }
+        do {
+          let result = try JSONDecoder().decode(GroupsResponse.self, from: data).response.items
+          groups.fulfill(result)
+          return
+        } catch {
+          groups.reject(error)
+          print(error)
+        }
+      }
+    }
+  }
+  
   func getPhoto(id: Int,completion: @escaping ([PhotosModel]) -> Void) {
     let parameters: Parameters = [
       "owner_id": id,
@@ -129,7 +156,7 @@ class NetworkServices: NetworkServicesProtocol {
     var groups = [Group]()
     var profiles = [Profile]()
     let getNewsGroup = DispatchGroup()
-
+    
     let parameters: Parameters = [
       "filters": filters,
       //"count": 2,
@@ -138,24 +165,24 @@ class NetworkServices: NetworkServicesProtocol {
     let path = "newsfeed.get"
     let url = baseUrl + path
     DispatchQueue.global().async(group: getNewsGroup) {
-    AF.request(url, method: .get, parameters: parameters).responseData {
-      response in
-      guard let data = response.data else { return }
-      // print(data.prettyJSON)
-      
+      AF.request(url, method: .get, parameters: parameters).responseData {
+        response in
+        guard let data = response.data else { return }
+        // print(data.prettyJSON)
+        
         guard let rawItem = try? JSONDecoder().decode(NewsFeed.self, from: data).response?.items else { return }
         items = rawItem
-      
+        
         guard let rawGroups = try? JSONDecoder().decode(NewsFeed.self, from: data).response?.groups else { return }
         groups = rawGroups
-      
+        
         guard let rawProfiles = try? JSONDecoder().decode(NewsFeed.self, from: data).response?.profiles else { return }
         profiles = rawProfiles
-      
-      getNewsGroup.notify(queue: .main) {
-        completion(items, groups, profiles)
+        
+        getNewsGroup.notify(queue: .main) {
+          completion(items, groups, profiles)
+        }
       }
     }
   }
-}
 }
