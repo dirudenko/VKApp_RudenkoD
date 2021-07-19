@@ -37,7 +37,7 @@ class DatabaseServiceImpl: DatabaseServiceProtocol {
   func read<T: Object>(object: T, tableView: UITableView? = nil, collectionView: UICollectionView? = nil) -> Results<T>? {
     let model = mainRealm.objects(T.self)
     if tableView != nil {
-      token = model.observe{ changes in
+      token = model.observe(on: DispatchQueue.main, { changes in
         guard let tableView = tableView else { return }
         switch changes {
         case .initial:
@@ -48,29 +48,30 @@ class DatabaseServiceImpl: DatabaseServiceProtocol {
           tableView.deleteRows(at: deletions.map { IndexPath(row: $0,section: 0) },with: .automatic)
           tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
           tableView.endUpdates()
+          break
         case .error(let error):
           print("error", error.localizedDescription)
-        }
-      }
+       }
+      })
     }
     
     if collectionView != nil {
-      token = model.observe { changes in
+      token = model.observe(on: DispatchQueue.main, { changes in
         guard let collectionView = collectionView else { return }
         switch changes {
         case .initial:
           collectionView.reloadData()
         case .update(_, let deletions, let insertions, let modifications):
-//          collectionView.performBatchUpdates({
-//          collectionView.insertItems(at: insertions.map({ IndexPath(row: $0, section: 0) }))
-//          collectionView.deleteItems(at: deletions.map({IndexPath(row: $0, section: 0)}))
-//          collectionView.reloadItems(at: modifications.map({IndexPath(row: $0, section: 0) })) }, completion: {_ in })
-          collectionView.reloadData()
+          collectionView.performBatchUpdates({
+          collectionView.insertItems(at: insertions.map({ IndexPath(row: $0, section: 0) }))
+          collectionView.deleteItems(at: deletions.map({IndexPath(row: $0, section: 0)}))
+          collectionView.reloadItems(at: modifications.map({IndexPath(row: $0, section: 0) })) }, completion: {_ in })
+          //collectionView.reloadData()
         case .error(let error):
           print("error", error.localizedDescription)
         }
       }
-      }
+    )}
       return model
     }
     
