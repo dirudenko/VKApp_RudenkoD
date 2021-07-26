@@ -47,14 +47,14 @@ extension FriendsListViewController: UITableViewDataSource, UITableViewDelegate 
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
     
     guard  let username = presenter.friends?[indexPath.row] else { return UITableViewCell() }
-    let string = URL(string: username.photo50)!
-    let avatar = asyncPhoto(cellImage: cell.avatarImage, url: string)
+    let url = URL(string: username.photo50)!
+    let avatar = UIImage()
     if username.online == 1 {
-      cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.green.cgColor)
+     cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.green.cgColor)
     } else {
       cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.systemBlue.cgColor)
     }
-    cell.configure(name: username.name, image: avatar)
+    cell.configure(name: username.name, url: url)
     return cell
   }
   

@@ -89,7 +89,6 @@ extension NewsTableViewController {
   func findPhotoURL(item: ResponseItem?) -> URL? {
     var url = String()
     guard let item = item else {return URL(string: url)}
-    // for item in item {
     item.photos?.items?.first?.sizes!.forEach {
       if $0.type == "r" {
         url = $0.url!

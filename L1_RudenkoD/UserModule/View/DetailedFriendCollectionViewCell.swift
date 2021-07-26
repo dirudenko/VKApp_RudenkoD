@@ -69,9 +69,9 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
     avatarLabel.avatarAnimation()
   }
   
-  func configure(name: String?, image: UIImage?, about: String?, online: String?) {
-    if let image = image {
-      avatarLabel.image = image
+  func configure(name: String?, url: URL?, about: String?, online: String?) {
+    if let url = url {
+        self.avatarLabel.setImage(at: url)
     }
     if let name = name {
       nameLabel.text = name

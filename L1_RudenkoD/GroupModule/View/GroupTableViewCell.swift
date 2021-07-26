@@ -8,7 +8,7 @@
 import UIKit
 
 class GroupTableViewCell: UITableViewCell {
-
+  
   @IBOutlet weak var groupAvatar: UIImageView!
   @IBOutlet weak var groupName: UILabel!
   @IBOutlet weak var groupDescription: UILabel!
@@ -20,21 +20,18 @@ class GroupTableViewCell: UITableViewCell {
     groupDescription.text = nil
     groupMember.image = nil
   }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        clearCell()
-      let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
-      self.groupAvatar.addGestureRecognizer(tapRecognizer)
-      self.groupAvatar.isUserInteractionEnabled = true
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-      
-    }
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    clearCell()
+    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
+    self.groupAvatar.addGestureRecognizer(tapRecognizer)
+    self.groupAvatar.isUserInteractionEnabled = true
+  }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+  }
   
   @objc func animateAvatar(_ gestureRecognizer: UIGestureRecognizer) {
     groupAvatar.avatarAnimation()
@@ -44,19 +41,19 @@ class GroupTableViewCell: UITableViewCell {
     clearCell()
   }
   
-  func configure(name: String?, image: UIImage?, descr: String?) {
-    
-    if let image = image {
-    groupAvatar.image = image
+  func configure(name: String?, url: URL?, descr: String?) {
+    if let url = url {
+      self.groupAvatar.setImage(at: url)
     }
+    
     if let name = name {
-    groupName.text = name
+      groupName.text = name
     }
     if let descr = descr {
-    groupDescription.text = descr
+      groupDescription.text = descr
     }
   }
 }
-    
+
 
 
