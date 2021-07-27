@@ -17,9 +17,9 @@ class FriendTableViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     clearCell()
-    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
-    avatarImage.addGestureRecognizer(tapRecognizer)
-    avatarImage.isUserInteractionEnabled = true
+    //let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
+    //avatarImage.addGestureRecognizer(tapRecognizer)
+    //avatarImage.isUserInteractionEnabled = true
     gradient()
   }
 

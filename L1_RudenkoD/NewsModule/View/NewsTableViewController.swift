@@ -85,40 +85,6 @@ class NewsTableViewController: UITableViewController {
         }
       }
     }
-    
-    
-    /*
-    switch indexPath.row {
-    case 0:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "NewsSourceCell", for: indexPath) as! NewsSourceCell
-      guard let source = items[indexPath.section].sourceID else { return UITableViewCell() }
-      configureHeader(cell: cell, source: source, indexPath: indexPath, filter: postType)
-      return cell
-      
-    case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTextCell", for: indexPath) as! NewsTextCell
-      configureText(cell: cell, indexPath: indexPath, filter: postType)
-      return cell
-      
-    case 2:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "NewsImageCell", for: indexPath) as! NewsImageCell
-      configurePhoto(cell: cell, indexPath: indexPath, filter: postType)
-      return cell
-      
-    case 3:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "NewsUtilityCell", for: indexPath) as! NewsUtilityCell
-      cell.delegate = self
-      configureUtility(cell: cell, indexPath: indexPath, filter: postType)
-      return cell
-      
-    case 4:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "NewsSeparatorCell", for: indexPath) as! NewsSeparatorCell
-      return cell
-    default:
-      return UITableViewCell()
- 
-    }
-     */
   }
 }
 
@@ -133,7 +99,6 @@ extension NewsTableViewController: NewsProtocol {
       self.groups = groups
       self.tableView.reloadData()
     }
-    
   }
 }
 

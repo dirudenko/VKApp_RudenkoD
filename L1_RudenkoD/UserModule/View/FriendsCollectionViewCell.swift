@@ -43,9 +43,9 @@ class FriendsCollectionViewCell: UICollectionViewCell {
     lastName.text = nil
   }
   
-  func configure(name: String?, image: UIImage?, lName: String?) {
-    if let image = image {
-      avatarImage.image = image
+  func configure(name: String?, url: URL?, lName: String?) {
+    if let url = url {
+        self.avatarImage.setImage(at: url)
     }
     if let name = name {
       firstName.text = name

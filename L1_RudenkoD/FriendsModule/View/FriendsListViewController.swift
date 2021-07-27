@@ -46,8 +46,10 @@ extension FriendsListViewController: UITableViewDataSource, UITableViewDelegate 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
     
-    guard  let username = presenter.friends?[indexPath.row] else { return UITableViewCell() }
-    let url = URL(string: username.photo50)!
+    guard  let username = presenter.friends?[indexPath.row],
+           let url = URL(string: username.photo50)
+    else { return UITableViewCell() }
+    
     let avatar = UIImage()
     if username.online == 1 {
      cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.green.cgColor)
