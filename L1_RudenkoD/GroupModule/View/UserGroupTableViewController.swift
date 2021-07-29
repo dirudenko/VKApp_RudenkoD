@@ -43,7 +43,6 @@ class UserGroupTableViewController: UITableViewController {
     let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as! GroupTableViewCell
     let name = groupsFB[indexPath.row].groups
     let url = URL(string: groupsFB[indexPath.row].photo)!
-    //let avatar =  asyncPhoto(cellImage: cell.groupAvatar, url: string)
     let descr = groupsFB[indexPath.row].descr
     cell.configure(name: name, url: url, descr: descr)
     return cell

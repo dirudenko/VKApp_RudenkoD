@@ -30,9 +30,7 @@ class AsyncOperation: Operation {
       self.didChangeValue(forKey: oldValue.keyPath)
     }
   }
-  
-  let databaseService = DatabaseServiceImpl()
-  
+    
   override var isAsynchronous: Bool {
     return true
   }
@@ -91,7 +89,7 @@ final class GetDataOperation: AsyncOperation {
   }
 }
 
-final class ParseDataOperation: AsyncOperation {
+final class ParseDataOperation: Operation {
   
   private(set) var users: [FriendsModel]?
   
@@ -104,14 +102,14 @@ final class ParseDataOperation: AsyncOperation {
     
     guard let users = try? JSONDecoder().decode(FriendsResponse.self, from: data).response.items else { return }
     self.users = users
-    self.state = .finished
   }
 }
 
-final class SaveDataOperation: AsyncOperation {
+final class SaveDataOperation: Operation {
   
   private(set) var friends: Results<FriendsModel>?
-  
+  private let databaseService = DatabaseServiceImpl()
+
   override func main() {
     guard let operation = self.dependencies.first as? ParseDataOperation,
           let users = operation.users
@@ -119,20 +117,19 @@ final class SaveDataOperation: AsyncOperation {
     for item in users {
     databaseService.save(object: item, update: true)
     }
-      self.state = .finished
     }
   }
 
 
-final class ReadDataOperation: AsyncOperation {
+final class ReadDataOperation: Operation {
   
   private(set) var friends: Results<FriendsModel>?
-  
+  private let databaseService = DatabaseServiceImpl()
+
   override func main() {
     
     guard (self.dependencies.first as? SaveDataOperation) != nil else { return }
-    self.friends = databaseService.read(object: FriendsModel(), tableView: FriendsListViewController().friendsTableView, collectionView: nil)
-    self.state = .finished
+    self.friends = databaseService.read(object: FriendsModel(), tableView: UITableView(), collectionView: nil)
   }
 }
 

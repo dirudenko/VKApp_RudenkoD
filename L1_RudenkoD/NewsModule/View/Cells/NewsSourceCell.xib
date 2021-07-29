@@ -18,6 +18,7 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpo-g2-7uf">
                         <rect key="frame" x="90" y="23" width="43" height="30"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <state key="normal" title="Name">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -28,6 +29,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WcN-3A-Qby">
                                 <rect key="frame" x="0.0" y="1.5" width="50" height="47.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4BK-F8-K90"/>
                                     <constraint firstAttribute="width" constant="50" id="dqC-dT-8Wl"/>
@@ -49,6 +51,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="YZi-6q-eFL" secondAttribute="bottom" constant="12" id="0wz-vw-9Ps"/>
                     <constraint firstItem="YZi-6q-eFL" firstAttribute="leading" secondItem="KKC-FR-hVg" secondAttribute="leadingMargin" id="6eb-sD-fpc"/>
@@ -59,6 +62,7 @@
                     <constraint firstItem="wpo-g2-7uf" firstAttribute="top" secondItem="WcN-3A-Qby" secondAttribute="top" id="ZoY-7y-mSi"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="postedDate" destination="4BK-yx-3wQ" id="6Ek-st-uKS"/>
                 <outlet property="userImage" destination="WcN-3A-Qby" id="vpU-4r-0iS"/>

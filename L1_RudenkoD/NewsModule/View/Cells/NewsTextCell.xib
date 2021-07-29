@@ -17,11 +17,13 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" text="News" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGV-aR-Q0K">
                         <rect key="frame" x="12" y="2" width="390" height="265"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="IGV-aR-Q0K" firstAttribute="leading" secondItem="XLv-6w-aIN" secondAttribute="leading" constant="12" id="G6n-yH-Iow"/>
                     <constraint firstAttribute="bottom" secondItem="IGV-aR-Q0K" secondAttribute="bottom" constant="2" id="bWV-3E-m0N"/>
@@ -29,6 +31,7 @@
                     <constraint firstAttribute="trailing" secondItem="IGV-aR-Q0K" secondAttribute="trailing" constant="12" id="iHf-gi-Ov0"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="newsText" destination="IGV-aR-Q0K" id="2n1-aw-Ipy"/>
             </connections>

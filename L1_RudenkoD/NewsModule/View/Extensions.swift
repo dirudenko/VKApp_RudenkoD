@@ -10,26 +10,33 @@ import UIKit
 extension NewsTableViewController {
   
   func configureHeader(cell: NewsSourceCell, source: Int, indexPath: IndexPath, filter: PhotoFilters) {
-    var name, string: String?
-    if source < 0 {
-      groups.forEach {
-        if $0.id == abs(source) {
-          name = $0.name
-          string = $0.photo100
+    var name, string, posted: String?
+    var url: URL?
+    let dispatchGroup = DispatchGroup()
+    DispatchQueue.global().async(group: dispatchGroup) {
+      if source < 0 {
+        self.groups.forEach {
+          if $0.id == abs(source) {
+            name = $0.name
+            string = $0.photo100
+          }
+        }
+      } else {
+        self.profiles.forEach {
+          if $0.id == source {
+            name = $0.name
+            string = $0.photo100
+          }
         }
       }
-    } else {
-      profiles.forEach {
-        if $0.id == source {
-          name = $0.name
-          string = $0.photo100
-        }
-      }
+      guard let string = string else { return }
+      url = URL(string: string)
+      //let image = asyncPhoto(cellImage: cell.userImage, url: avatarString)
+      posted = self.unixTimeConvertion(unixTimeInt: self.items[indexPath.section].date ?? 0)
     }
-    guard let avatarString = URL(string: string!) else { return }
-    let image = asyncPhoto(cellImage: cell.userImage, url: avatarString)
-    let posted = unixTimeConvertion(unixTimeInt: items[indexPath.section].date ?? 0)
-    cell.configure(image: image, name: name, posted: posted)
+    dispatchGroup.notify(queue: .main) {
+      cell.configure(url: url, name: name, posted: posted)
+    }
   }
   
   func configureText(cell: NewsTextCell, indexPath: IndexPath, filter: PhotoFilters) {
