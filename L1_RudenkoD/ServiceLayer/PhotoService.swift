@@ -85,10 +85,10 @@ extension PhotoService {
     if let filePath = self.getFilePath(at: url),
        let image = self.memoryImageCache[filePath] {
       return completion(image)
-    } else if let image = self.getImageFromCache(at: url)
-    {
-      return completion(image)
-    } else {
+    } else
+    if let image = self.getImageFromCache(at: url) {
+      return completion(image) }
+    else {
       self.loadImage(at: url, completion: completion)
     }
   }

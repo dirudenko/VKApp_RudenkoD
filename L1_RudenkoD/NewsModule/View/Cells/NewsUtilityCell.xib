@@ -33,6 +33,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="v67-Ql-ICx">
                         <rect key="frame" x="12" y="12" width="120" height="20"/>
@@ -87,6 +88,7 @@
                                 <state key="normal" title="Button" image="square.and.arrow.down.on.square.fill" catalog="system"/>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="KsE-65-szl" firstAttribute="leading" secondItem="A8Y-ge-tqy" secondAttribute="trailing" id="GqB-3f-yqF"/>
                             <constraint firstItem="7nz-qo-RxC" firstAttribute="leading" secondItem="Mu3-EM-C6u" secondAttribute="trailing" id="Tbo-1I-Ynk"/>
@@ -96,6 +98,7 @@
                         </constraints>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="v67-Ql-ICx" firstAttribute="leading" secondItem="d3j-y7-hI8" secondAttribute="leading" constant="12" id="9OJ-ln-5I3"/>
                     <constraint firstItem="v67-Ql-ICx" firstAttribute="top" secondItem="d3j-y7-hI8" secondAttribute="top" constant="12" id="KhX-yp-fq1"/>
@@ -103,6 +106,7 @@
                     <constraint firstItem="fax-DE-t8i" firstAttribute="top" secondItem="d3j-y7-hI8" secondAttribute="top" constant="12" id="u0O-IX-V8L"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="commentCounter" destination="KsE-65-szl" id="JVf-JT-Bt7"/>
                 <outlet property="likeButton" destination="Mu3-EM-C6u" id="aae-8c-NkU"/>

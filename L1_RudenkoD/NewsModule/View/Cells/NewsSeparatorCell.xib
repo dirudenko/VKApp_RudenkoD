@@ -31,6 +31,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="6w0-8i-rbI" secondAttribute="bottom" id="lmm-ut-FJK"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="newsSeparator" destination="ffq-nK-vwC" id="lx0-w0-CVG"/>
             </connections>

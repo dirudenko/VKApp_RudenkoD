@@ -22,6 +22,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Je-m9-ESq">
                                 <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="n2Q-JT-KtG"/>
                                     <constraint firstAttribute="width" secondItem="3Je-m9-ESq" secondAttribute="height" multiplier="1:1" id="sIZ-NE-34N"/>
@@ -43,11 +44,13 @@
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pJ-Y3-eY8">
                         <rect key="frame" x="98" y="26" width="41.5" height="21"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="Mfl-cw-xrj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Al3-F1-ldu"/>
                     <constraint firstItem="8pJ-Y3-eY8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="26" id="Ote-1r-SVK"/>

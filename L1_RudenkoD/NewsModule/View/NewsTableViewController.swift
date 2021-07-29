@@ -90,14 +90,16 @@ class NewsTableViewController: UITableViewController {
 
 extension NewsTableViewController: NewsProtocol {
   func success() {
-    guard let items = presenter.items,
-          let profiles = presenter.profiles,
-          let groups = presenter.groups else { return }
-    DispatchQueue.main.async {
+    DispatchQueue.global().async {
+      guard let items = self.presenter.items,
+            let profiles = self.presenter.profiles,
+            let groups = self.presenter.groups else { return }
       self.items = items
       self.profiles = profiles
       self.groups = groups
+      DispatchQueue.main.async {
       self.tableView.reloadData()
+      }
     }
   }
 }

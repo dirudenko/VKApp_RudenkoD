@@ -29,6 +29,7 @@
                     <constraint firstAttribute="trailing" secondItem="28V-kV-4jz" secondAttribute="trailing" id="cHP-Fq-f1T"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="newsImage" destination="28V-kV-4jz" id="ZhZ-LL-nGT"/>
             </connections>

@@ -29,9 +29,10 @@ class NewsSourceCell: UITableViewCell {
         clearCell()
     }
   
-  func configure (image: UIImage?, name: String?, posted: String?) {
-    if let image = image {
-      userImage.maskCircle(anyImage: image)
+  func configure (url: URL?, name: String?, posted: String?) {
+    if let url = url {
+      self.userImage.setImage(at: url)
+     // userImage.maskCircle(anyImage: image)
     }
     if let name = name {
       userName.setTitle(name, for: .normal)

@@ -57,20 +57,13 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
     collectionView.delegate = self
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
     collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
-    //let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
-    //avatarLabel.addGestureRecognizer(tapRecognizer)
-    //avatarLabel.isUserInteractionEnabled = true
     clearCell()
   }
   
   @IBAction func allPhotoButton(_ sender: Any) {
     buttonPressed()
   }
-  
-//  @objc func animateAvatar(_ gestureRecognizer: UIGestureRecognizer) {
-//    avatarLabel.avatarAnimation()
-//  }
-  
+    
   func configure(name: String?, url: URL?, about: String?, online: String?) {
     if let url = url {
         self.avatarLabel.setImage(at: url)

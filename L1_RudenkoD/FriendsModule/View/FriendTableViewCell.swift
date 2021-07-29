@@ -17,18 +17,10 @@ class FriendTableViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     clearCell()
-    //let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
-    //avatarImage.addGestureRecognizer(tapRecognizer)
-    //avatarImage.isUserInteractionEnabled = true
-    gradient()
   }
 
   override func prepareForReuse() {
     clearCell()
-  }
-  
-  @objc func animateAvatar(_ gestureRecognizer: UIGestureRecognizer) {
-    avatarImage.avatarAnimation()
   }
   
   func configure(name: String?, url: URL?) {

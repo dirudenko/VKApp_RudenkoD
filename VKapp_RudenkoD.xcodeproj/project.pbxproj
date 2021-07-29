@@ -198,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				691F6EAA26231F0B00CA7957 /* FriendTableViewCell.swift */,
-				698D1A1D2667ABA400F626A8 /* FriendsCollectionViewCell.xib */,
+				691F6EAB26231F0B00CA7957 /* FriendTableViewCell.xib */,
 				697CCA12262EE6FF00E1F048 /* FriendsListViewController.swift */,
 			);
 			path = View;
@@ -233,8 +233,8 @@
 		6922171F26827DEE00429DB6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				691F6EAB26231F0B00CA7957 /* FriendTableViewCell.xib */,
 				691F6EAF26233D8E00CA7957 /* DetailedFriendCollectionViewController.swift */,
+				698D1A1D2667ABA400F626A8 /* FriendsCollectionViewCell.xib */,
 				691F6EB326233DD900CA7957 /* DetailedFriendCollectionViewCell.xib */,
 				698D1A202667B47600F626A8 /* FriendsCollectionViewCell.swift */,
 				691F6EB226233DD900CA7957 /* DetailedFriendCollectionViewCell.swift */,

@@ -26,8 +26,6 @@ class FriendsPresenter: Operation, FriendsPresenterProtocol {
   let tableview = FriendsListViewController()
   let queue = OperationQueue()
 
- 
-  
   private var request: DataRequest {
       let baseUrl = "https://api.vk.com/method/"
       let token = Session.shared.token
@@ -52,7 +50,7 @@ class FriendsPresenter: Operation, FriendsPresenterProtocol {
   
   func getFriends() {
     
-    queue.qualityOfService = .background
+    queue.qualityOfService = .default
     
     let getData = GetDataOperation(request: request)
     queue.addOperation(getData)
@@ -77,3 +75,4 @@ class FriendsPresenter: Operation, FriendsPresenterProtocol {
     }
   }
 }
+  
