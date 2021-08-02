@@ -7,12 +7,17 @@
 
 import UIKit
 
-class NewsTableViewController: UITableViewController {
+class NewsTableViewController: UITableViewController, UITableViewDataSourcePrefetching {
+  
+  
   
   var items = [ResponseItem]()
   var groups = [Group]()
   var profiles = [Profile]()
   private let networkService = NetworkServices()
+  var nextFrom = ""
+  var isLoading = false
+ 
   
   var presenter: NewsPresenterProtocol!
   
@@ -20,6 +25,8 @@ class NewsTableViewController: UITableViewController {
     super.viewDidLoad()
     makeView()
     presenter = NewsPresenter(view: self, networkService: networkService)
+    setupRefreshControl()
+    tableView.prefetchDataSource = self
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +47,31 @@ class NewsTableViewController: UITableViewController {
     tableView.register(separatorNib, forCellReuseIdentifier: "NewsSeparatorCell")
     tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
   }
+  
+  func setupRefreshControl() {
+    refreshControl = UIRefreshControl()
+    refreshControl?.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
+    tableView.refreshControl = refreshControl
+  }
+  
+  @objc func refreshNews(_ sender: UIRefreshControl) {
+    sender.beginRefreshing()
+    let date = self.items.first?.date ?? Int(Date().timeIntervalSince1970)
+   
+    presenter.getUpdatedNews(mostFreshNewsDate: date) { [weak self] items, groups, profiles in
+        guard let self = self else { return }
+        print("Update complete")
+        self.items = items + self.items
+        self.groups = groups + self.groups
+        self.profiles = profiles + self.profiles
+        sender.endRefreshing()
+        let indexSet = IndexSet(integersIn: 0..<items.count)
+        self.tableView.insertSections(indexSet, with: .automatic)
+    }
+    
+  }
+  
+  
   // MARK: - Table view data source
   
   override func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,7 +79,47 @@ class NewsTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    let news = items[section]
+    return news.attachments != nil ? 5 : 4
+  }
+  
+  func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+    guard let maxSection = indexPaths.map({ $0.section }).max() else { return }
+    if maxSection > items.count - 3,
+       !isLoading {
+      isLoading = true
+      presenter.getInfinityNews(startFrom: nextFrom) { [weak self] items, groups, profiles, nextFrom in
+        guard let self = self else { return }
+        let indexSet = IndexSet(integersIn: self.items.count ..< self.items.count + items.count)
+        self.items.append(contentsOf: items)
+        self.groups.append(contentsOf: groups)
+        self.profiles.append(contentsOf: profiles)
+        self.nextFrom = nextFrom
+        self.tableView.insertSections(indexSet, with: .none)
+        self.isLoading = false
+      }
+  }
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    var aspectRatio = CGFloat()
+    guard let photo = self.items[indexPath.section].attachments else {return UITableView.automaticDimension }
+    
+    for item in photo {
+      item.photo?.sizes?.forEach {
+        if $0.type == "r" {
+          aspectRatio = $0.aspectRatio
+        }
+      }
+    }
+    
+    if  indexPath.row == 2 {
+      let tableWidth = tableView.bounds.width
+      let cellHeight = tableWidth * aspectRatio
+      return cellHeight
+    } else {
+      return UITableView.automaticDimension
+    }
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,6 +134,7 @@ class NewsTableViewController: UITableViewController {
       if indexPath.row == 1 {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTextCell", for: indexPath) as! NewsTextCell
         configureText(cell: cell, indexPath: indexPath, filter: postType)
+        cell.delegate = self
         return cell
       } else {
         if indexPath.row == 2 {
@@ -93,10 +166,13 @@ extension NewsTableViewController: NewsProtocol {
     DispatchQueue.global().async {
       guard let items = self.presenter.items,
             let profiles = self.presenter.profiles,
-            let groups = self.presenter.groups else { return }
+            let groups = self.presenter.groups,
+            let nextFrom = self.presenter.nextFrom
+      else { return }
       self.items = items
       self.profiles = profiles
       self.groups = groups
+      self.nextFrom = nextFrom
       DispatchQueue.main.async {
       self.tableView.reloadData()
       }
@@ -112,5 +188,11 @@ extension NewsTableViewController: NewsButtonsDelegate {
     activityViewController.popoverPresentationController?.sourceView = self.view
     activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.mail, UIActivity.ActivityType.postToFacebook ]
     self.present(activityViewController, animated: true, completion: nil)
+  }
+}
+
+extension NewsTableViewController: NewsTextDelegate {
+  func showMoreButtonPressed() {
+    tableView.reloadRows(at: [], with: .automatic)
   }
 }

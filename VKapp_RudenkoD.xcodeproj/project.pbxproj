@@ -69,7 +69,7 @@
 		69E5E0112679184500BCB5FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69E5E0102679184500BCB5FF /* GoogleService-Info.plist */; };
 		69E97FB2265EA5940083DEAB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E97FB1265EA5940083DEAB /* AuthViewController.swift */; };
 		69E97FB5266221910083DEAB /* Data+PrettyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E97FB4266221910083DEAB /* Data+PrettyJSON.swift */; };
-		69E97FB8266221EA0083DEAB /* UIController+lokeButtonAnim .swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E97FB7266221EA0083DEAB /* UIController+lokeButtonAnim .swift */; };
+		69E97FB8266221EA0083DEAB /* UIController+likeButtonAnim .swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E97FB7266221EA0083DEAB /* UIController+likeButtonAnim .swift */; };
 		69E97FBA266222280083DEAB /* UIImageView+ShadowCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E97FB9266222280083DEAB /* UIImageView+ShadowCircleImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -140,7 +140,7 @@
 		69E5E0102679184500BCB5FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69E97FB1265EA5940083DEAB /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		69E97FB4266221910083DEAB /* Data+PrettyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+PrettyJSON.swift"; sourceTree = "<group>"; };
-		69E97FB7266221EA0083DEAB /* UIController+lokeButtonAnim .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIController+lokeButtonAnim .swift"; sourceTree = "<group>"; };
+		69E97FB7266221EA0083DEAB /* UIController+likeButtonAnim .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIController+likeButtonAnim .swift"; sourceTree = "<group>"; };
 		69E97FB9266222280083DEAB /* UIImageView+ShadowCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ShadowCircleImage.swift"; sourceTree = "<group>"; };
 		B2583E241E5765781BF49B8B /* Pods-VKapp_RudenkoD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKapp_RudenkoD.debug.xcconfig"; path = "Target Support Files/Pods-VKapp_RudenkoD/Pods-VKapp_RudenkoD.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -464,7 +464,7 @@
 			children = (
 				694FD2182634C7E8009CA6DD /* UIView+AnomationsGradient.swift */,
 				69E97FB4266221910083DEAB /* Data+PrettyJSON.swift */,
-				69E97FB7266221EA0083DEAB /* UIController+lokeButtonAnim .swift */,
+				69E97FB7266221EA0083DEAB /* UIController+likeButtonAnim .swift */,
 				695A0CD3266AC6C2003BA234 /* CollectionViewCell.swift */,
 				69E97FB9266222280083DEAB /* UIImageView+ShadowCircleImage.swift */,
 				69CEA4F3269842CE0022B59B /* ENUM.swift */,
@@ -628,7 +628,7 @@
 				6923C72826636F520077A312 /* PhotosModel.swift in Sources */,
 				690F5D1E2679EC39009B2354 /* NewsModel.swift in Sources */,
 				69BF44222622FE6000D03109 /* DataStorage.swift in Sources */,
-				69E97FB8266221EA0083DEAB /* UIController+lokeButtonAnim .swift in Sources */,
+				69E97FB8266221EA0083DEAB /* UIController+likeButtonAnim .swift in Sources */,
 				69C11F2A2643153E002A3E92 /* CustomNavigationController.swift in Sources */,
 				69C11F2C2644032C002A3E92 /* NavigationClosingAnimation.swift in Sources */,
 				692217332683123200429DB6 /* FBGroupModel.swift in Sources */,

@@ -14,7 +14,7 @@ import PromiseKit
   func getUserInfo(id: Int, completion: @escaping (UserModel) -> Void)
   func getUserGroups(completion: @escaping ([GroupsModel]) -> Void)
   func getPhoto(id: Int,completion: @escaping ([PhotosModel]) -> Void)
-  func getNews(filters: PhotoFilters, completion: @escaping ([ResponseItem], [Group], [Profile]) -> Void)
+  func getNews(filters: PhotoFilters, startFrom: String?, startTime: Int?, completion: @escaping ([ResponseItem], [Group], [Profile], String) -> Void)
   func getPromiseGroups() -> Promise<[GroupsModel]>
 }
 
@@ -150,22 +150,31 @@ class NetworkServices: NetworkServicesProtocol {
     }
   }
   
-  func getNews(filters: PhotoFilters, completion: @escaping ([ResponseItem], [Group], [Profile]) -> Void) {
+  func getNews(filters: PhotoFilters, startFrom: String?, startTime: Int?, completion: @escaping ([ResponseItem], [Group], [Profile], String) -> Void) {
     
     var items = [ResponseItem]()
     var groups = [Group]()
     var profiles = [Profile]()
+    var nextFrom: String = ""
     let getNewsGroup = DispatchGroup()
-    
-    let parameters: Parameters = [
+    var parameters: Parameters = [
       "filters": filters,
-      //"count": 2,
+      //"count": 1,
       "access_token": token,
       "v": version]
+  
+    if let startTime = startTime {
+      parameters["start_time"] = startTime
+    }
+    
+    if let startFrom = startFrom {
+      parameters["start_from"] = startFrom
+    }
+    
     let path = "newsfeed.get"
     let url = baseUrl + path
     DispatchQueue.global().async(group: getNewsGroup) {
-      AF.request(url, method: .get, parameters: parameters).responseData {
+      AF.request(url, method: .get, parameters: parameters).responseJSON {
         response in
         guard let data = response.data else { return }
         // print(data.prettyJSON)
@@ -179,8 +188,12 @@ class NetworkServices: NetworkServicesProtocol {
         guard let rawProfiles = try? JSONDecoder().decode(NewsFeed.self, from: data).response?.profiles else { return }
         profiles = rawProfiles
         
+        
+        guard let rawNextFrom = try? JSONDecoder().decode(NewsFeed.self, from: data).response?.nextFrom else { return }
+        nextFrom = rawNextFrom
+        
         getNewsGroup.notify(queue: .main) {
-          completion(items, groups, profiles)
+          completion(items, groups, profiles, nextFrom)
         }
       }
     }

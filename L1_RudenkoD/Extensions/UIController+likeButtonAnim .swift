@@ -44,28 +44,7 @@ extension UIViewController {
             })
     return asyncImage
   }
-  
-  func newAsyncPhoto(tableView: UITableView, url: URL) -> UIImage {
-    var asyncImage = UIImage()
-    let cellImage = UIImageView()
-    cellImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-    cellImage.sd_setImage(with: url, placeholderImage: UIImage(named: "logo"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cache, urls) in
-                if (error != nil) {
-                  DispatchQueue.main.async {
-                    asyncImage = UIImage(named: "logo") ?? UIImage()
-                    tableView.reloadData()
-                  }
-                } else {
-                  DispatchQueue.main.async {
-                  guard let image = image else { return }
-                  asyncImage = image
-                   // tableView.reloadData()
-                  }
-                }
-            })
-    return asyncImage
-  }
-  
+    
   
   func pressLike(isLiked: inout Bool, likeCounter: UILabel, likeButton: UIButton) {
     likeCounterAnimation(likeCounter: likeCounter, isLiked: isLiked)

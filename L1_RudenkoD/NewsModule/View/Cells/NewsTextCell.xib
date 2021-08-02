@@ -15,18 +15,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="269"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" text="News" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGV-aR-Q0K">
-                        <rect key="frame" x="12" y="2" width="390" height="265"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" text="News" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGV-aR-Q0K">
+                        <rect key="frame" x="12" y="2" width="390" height="245"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cj0-t5-ZUR">
+                        <rect key="frame" x="129" y="249" width="157" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="N9o-1c-jlb"/>
+                            <constraint firstAttribute="width" constant="157" id="ZwY-yC-tbH"/>
+                        </constraints>
+                        <state key="normal" title="Show more"/>
+                        <connections>
+                            <action selector="pressButton:" destination="UPE-Hh-7pq" eventType="touchUpInside" id="AMi-oT-2E2"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="cj0-t5-ZUR" firstAttribute="leading" secondItem="XLv-6w-aIN" secondAttribute="leading" constant="129" id="3o4-ua-cjZ"/>
+                    <constraint firstAttribute="bottom" secondItem="IGV-aR-Q0K" secondAttribute="bottom" constant="22" id="5M2-hG-wns"/>
                     <constraint firstItem="IGV-aR-Q0K" firstAttribute="leading" secondItem="XLv-6w-aIN" secondAttribute="leading" constant="12" id="G6n-yH-Iow"/>
-                    <constraint firstAttribute="bottom" secondItem="IGV-aR-Q0K" secondAttribute="bottom" constant="2" id="bWV-3E-m0N"/>
+                    <constraint firstItem="cj0-t5-ZUR" firstAttribute="top" secondItem="IGV-aR-Q0K" secondAttribute="bottom" constant="2" id="Tie-qh-mBS"/>
+                    <constraint firstAttribute="trailing" secondItem="cj0-t5-ZUR" secondAttribute="trailing" constant="128" id="USQ-VY-1e4"/>
                     <constraint firstItem="IGV-aR-Q0K" firstAttribute="top" secondItem="XLv-6w-aIN" secondAttribute="top" constant="2" id="cGL-Zr-cLh"/>
                     <constraint firstAttribute="trailing" secondItem="IGV-aR-Q0K" secondAttribute="trailing" constant="12" id="iHf-gi-Ov0"/>
                 </constraints>
@@ -34,8 +48,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="newsText" destination="IGV-aR-Q0K" id="2n1-aw-Ipy"/>
+                <outlet property="showButton" destination="cj0-t5-ZUR" id="ENE-Ze-GOI"/>
             </connections>
-            <point key="canvasLocation" x="191" y="-95"/>
+            <point key="canvasLocation" x="189.85507246376812" y="-95.424107142857139"/>
         </tableViewCell>
     </objects>
 </document>
