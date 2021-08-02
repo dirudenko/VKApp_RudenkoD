@@ -31,7 +31,6 @@ extension NewsTableViewController {
       }
       guard let string = string else { return }
       url = URL(string: string)
-      //let image = asyncPhoto(cellImage: cell.userImage, url: avatarString)
       posted = self.unixTimeConvertion(unixTimeInt: self.items[indexPath.section].date ?? 0)
     }
     dispatchGroup.notify(queue: .main) {
@@ -86,7 +85,7 @@ extension NewsTableViewController {
     for item in item {
       item.photo?.sizes?.forEach {
         if $0.type == "r" {
-          url = $0.url!
+          url = $0.url
         }
       }
     }
@@ -98,7 +97,7 @@ extension NewsTableViewController {
     guard let item = item else {return URL(string: url)}
     item.photos?.items?.first?.sizes!.forEach {
       if $0.type == "r" {
-        url = $0.url!
+        url = $0.url
       }
       
     }

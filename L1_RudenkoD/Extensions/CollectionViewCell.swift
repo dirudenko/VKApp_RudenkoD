@@ -12,13 +12,14 @@ extension UICollectionViewCell {
   func asyncPhoto(cellImage: UIImageView, url: URL) -> UIImage {
     var asyncImage = UIImage()
     cellImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-    cellImage.sd_setImage(with: url, placeholderImage: UIImage(named: "App-Default"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cache, urls) in
-                if (error != nil) {
-                  asyncImage = UIImage(named: "AppIcon")!
-                } else {
-                  asyncImage = image!
-                }
-            })
+    cellImage.sd_setImage(with: url, placeholderImage: UIImage(named: "logo"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cache, urls) in
+      if (error != nil) {
+        asyncImage = UIImage(named: "logo") ?? UIImage()
+      } else {
+        guard let image = image else { return }
+        asyncImage = image
+      }
+  })
     return asyncImage
   }
 }

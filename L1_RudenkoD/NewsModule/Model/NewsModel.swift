@@ -1,6 +1,6 @@
 
 
-import Foundation
+import UIKit
 
 // MARK: - NewsFeed
 class NewsFeed: Codable {
@@ -241,12 +241,15 @@ class Photo: Codable {
 
 // MARK: - Size
 class Size: Codable {
-    let height: Int?
-    let url: String?
-    let type: String?
-    let width: Int?
+    let height: Int
+    let url: String
+    let type: String
+    let width: Int
+    var aspectRatio: CGFloat {
+      return CGFloat(height)/CGFloat(width)
+    }
 
-    init(height: Int?, url: String?, type: String?, width: Int?) {
+    init(height: Int, url: String, type: String, width: Int) {
         self.height = height
         self.url = url
         self.type = type
