@@ -46,18 +46,20 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    
     getUserRequest.getFriendList(userId: id) {  [weak self] users in
       self?.userFriends = users
       self?.friendsCount.text = String(self?.userFriends.count ?? 0)
       self?.collectionView.reloadData()
     }
+    
     collectionView.dataSource = self
     collectionView.delegate = self
     let nibFile = UINib(nibName: cellReuseIdentifier, bundle: nil)
     collectionView.register(nibFile, forCellWithReuseIdentifier: cellReuseIdentifier)
-    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
-    avatarLabel.addGestureRecognizer(tapRecognizer)
-    avatarLabel.isUserInteractionEnabled = true
+    //let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
+    //avatarLabel.addGestureRecognizer(tapRecognizer)
+    //avatarLabel.isUserInteractionEnabled = true
     clearCell()
   }
   
@@ -65,13 +67,13 @@ class DetailedFriendCollectionViewCell: UICollectionViewCell {
     buttonPressed()
   }
   
-  @objc func animateAvatar(_ gestureRecognizer: UIGestureRecognizer) {
-    avatarLabel.avatarAnimation()
-  }
+//  @objc func animateAvatar(_ gestureRecognizer: UIGestureRecognizer) {
+//    avatarLabel.avatarAnimation()
+//  }
   
-  func configure(name: String?, image: UIImage?, about: String?, online: String?) {
-    if let image = image {
-      avatarLabel.image = image
+  func configure(name: String?, url: URL?, about: String?, online: String?) {
+    if let url = url {
+        self.avatarLabel.setImage(at: url)
     }
     if let name = name {
       nameLabel.text = name
@@ -90,15 +92,16 @@ extension DetailedFriendCollectionViewCell: UICollectionViewDelegate, UICollecti
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return userFriends.count
   }
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath as IndexPath) as! FriendsCollectionViewCell
     let name = userFriends[indexPath.row].firstName
     let lName = userFriends[indexPath.row].lastName
-    let string = URL(string: userFriends[indexPath.row].photo50)!
-    let avatar = asyncPhoto(cellImage: cell.avatarImage, url: string)
+    let url = URL(string: userFriends[indexPath.row].photo50)!
+    let avatar = UIImage()
     cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.systemBlue.cgColor)
     cell.id = userFriends[indexPath.row].id
-    cell.configure(name: name, image: avatar, lName: lName)
+    cell.configure(name: name, url: url, lName: lName)
     cell.delegate = self
     return cell
   }

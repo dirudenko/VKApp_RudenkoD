@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import PromiseKit
 
-protocol NetworkServicesProtocol: AnyObject {
+ protocol NetworkServicesProtocol: AnyObject {
   func getFriendList(userId: Int?, completion: @escaping ([FriendsModel]) -> Void)
   func getUserInfo(id: Int, completion: @escaping (UserModel) -> Void)
   func getUserGroups(completion: @escaping ([GroupsModel]) -> Void)
@@ -20,9 +20,9 @@ protocol NetworkServicesProtocol: AnyObject {
 
 class NetworkServices: NetworkServicesProtocol {
   
-  let baseUrl = "https://api.vk.com/method/"
-  let token = Session.shared.token
-  let version = "5.131"
+  private let baseUrl = "https://api.vk.com/method/"
+  private let token = Session.shared.token
+  private let version = "5.131"
   
   func getFriendList(userId: Int?, completion: @escaping ([FriendsModel]) -> Void) {
     let parameters: Parameters

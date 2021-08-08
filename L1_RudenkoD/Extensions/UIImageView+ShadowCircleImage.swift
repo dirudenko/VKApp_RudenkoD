@@ -18,7 +18,7 @@ extension UIImageView {
   }
   
   func shadow(anyImage: UIImage, anyView: UIView, color: CGColor) {
-    self.image = anyImage
+    //self.image = anyImage
     anyView.backgroundColor = nil
     anyView.layer.cornerRadius = anyView.frame.size.width / 2
     anyView.layer.shadowColor = color

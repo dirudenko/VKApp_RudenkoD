@@ -42,10 +42,10 @@ class UserGroupTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as! GroupTableViewCell
     let name = groupsFB[indexPath.row].groups
-    let string = URL(string: groupsFB[indexPath.row].photo)!
-    let avatar =  asyncPhoto(cellImage: cell.groupAvatar, url: string)
+    let url = URL(string: groupsFB[indexPath.row].photo)!
+    //let avatar =  asyncPhoto(cellImage: cell.groupAvatar, url: string)
     let descr = groupsFB[indexPath.row].descr
-    cell.configure(name: name, image: avatar, descr: descr)
+    cell.configure(name: name, url: url, descr: descr)
     return cell
   }
   

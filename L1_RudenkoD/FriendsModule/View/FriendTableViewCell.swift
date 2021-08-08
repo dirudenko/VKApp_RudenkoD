@@ -13,13 +13,13 @@ class FriendTableViewCell: UITableViewCell {
   @IBOutlet weak var avatarImage: UIImageView!
   @IBOutlet weak var userName: UILabel!
   @IBOutlet weak var cellLabel: UIView!
-  
+    
   override func awakeFromNib() {
     super.awakeFromNib()
     clearCell()
-    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
-    avatarImage.addGestureRecognizer(tapRecognizer)
-    avatarImage.isUserInteractionEnabled = true
+    //let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateAvatar(_:)))
+    //avatarImage.addGestureRecognizer(tapRecognizer)
+    //avatarImage.isUserInteractionEnabled = true
     gradient()
   }
 
@@ -31,10 +31,11 @@ class FriendTableViewCell: UITableViewCell {
     avatarImage.avatarAnimation()
   }
   
-  func configure(name: String?, image: UIImage?) {
-    if let image = image {
-    avatarImage.image = image
+  func configure(name: String?, url: URL?) {
+    if let url = url {
+        self.avatarImage.setImage(at: url)
     }
+    
     if let name = name {
     userName.text = name
     }

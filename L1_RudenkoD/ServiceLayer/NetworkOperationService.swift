@@ -68,7 +68,7 @@ class AsyncOperation: Operation {
   }
 }
 
-class GetDataOperation: AsyncOperation {
+final class GetDataOperation: AsyncOperation {
   
   override func cancel() {
     request.cancel()

@@ -78,7 +78,7 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
         if item.name == name
         { cell.groupMember.image = UIImage(systemName: "checkmark") }
       }
-      cell.configure(name: name, image: image, descr: descr)
+     // cell.configure(name: name, image: image, descr: descr)
     
     }
     else {
@@ -87,13 +87,12 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
         if item.name == name
         { cell.groupMember.image = UIImage(systemName: "checkmark") }
       }
-      cell.configure(name: name, image: nil, descr: nil)
+    //  cell.configure(name: name, image: nil, descr: nil)
     }
     return cell
   }
   
   @objc func dismissKeyboard() {
-      //Causes the view (or one of its embedded text fields) to resign the first responder status.
       view.endEditing(true)
     isAnimated = true
     isSearch = true
