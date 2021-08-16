@@ -13,24 +13,19 @@ class FriendTableViewCell: UITableViewCell {
   @IBOutlet weak var avatarImage: UIImageView!
   @IBOutlet weak var userName: UILabel!
   @IBOutlet weak var cellLabel: UIView!
-    
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     clearCell()
   }
-
+  
   override func prepareForReuse() {
     clearCell()
   }
   
-  func configure(name: String?, url: URL?) {
-    if let url = url {
-        self.avatarImage.setImage(at: url)
-    }
-    
-    if let name = name {
-    userName.text = name
-    }
+  func configure(friendsViewModel: FriendsViewModel) {
+    avatarImage.setImage(at: friendsViewModel.photoURL)
+    userName.text = friendsViewModel.fullName
   }
   
   func clearCell() {

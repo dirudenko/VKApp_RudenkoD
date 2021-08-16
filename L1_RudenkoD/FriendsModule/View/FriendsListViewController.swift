@@ -18,7 +18,7 @@ class FriendsListViewController: UIViewController {
  
   override func viewDidLoad() {
     super.viewDidLoad()
-   // databaseService.deleteAll()
+    databaseService.deleteAll()
     friendsTableView.dataSource = self
     friendsTableView.delegate = self
     let nibFile = UINib(nibName: nibIdentifier, bundle: nil)
@@ -45,18 +45,8 @@ class FriendsListViewController: UIViewController {
 extension FriendsListViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: nibIdentifier, for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
-    
-    guard  let username = presenter.friends?[indexPath.row],
-           let url = URL(string: username.photo50)
-    else { return UITableViewCell() }
-    
-    let avatar = UIImage()
-    if username.online == 1 {
-     cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.green.cgColor)
-    } else {
-      cell.avatarImage.shadow(anyImage: avatar, anyView: cell.viewForShadow, color: UIColor.systemBlue.cgColor)
-    }
-    cell.configure(name: username.name, url: url)
+    let friendsViewModel = presenter.friendViewModels[indexPath.row]
+    cell.configure(friendsViewModel: friendsViewModel)
     return cell
   }
   
@@ -73,14 +63,7 @@ extension FriendsListViewController: UITableViewDataSource, UITableViewDelegate 
     let header = view as! UITableViewHeaderFooterView
     header.textLabel?.textColor = UIColor.systemBlue
   }
-  
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-      guard let user = presenter.friends?[indexPath.row] else { return }
-           self.databaseService.delete(object: user)
-    }
-  }
-  
+    
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     row = indexPath.row
     performSegue(withIdentifier: "FriendInfo", sender: (Any).self)
