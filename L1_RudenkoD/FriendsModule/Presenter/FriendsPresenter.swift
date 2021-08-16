@@ -16,63 +16,39 @@ protocol FriendsProtocol: AnyObject {
 protocol FriendsPresenterProtocol: AnyObject {
   init(view: FriendsProtocol)
   func getFriends()
-  var friends: Results<FriendsModel>? {get set}
+  var friends: [FriendsModelStruct]? {get set}
+  var friendViewModels: [FriendsViewModel] {get set}
 }
 
 class FriendsPresenter: Operation, FriendsPresenterProtocol {
   
-  var friends: Results<FriendsModel>?
+  var friends: [FriendsModelStruct]?
   let view: FriendsProtocol
-  let tableview = FriendsListViewController()
-  let queue = OperationQueue()
-
-  private var request: DataRequest {
-      let baseUrl = "https://api.vk.com/method/"
-      let token = Session.shared.token
-      let version = "5.131"
-      
-      let parameters: Parameters
-        parameters = [
-          "order": "hints",
-          "fields": "nickname,photo_50,online",
-          "access_token": token,
-          "v": version]
-      
-      let path = "friends.get"
-      let url = baseUrl + path
-      return AF.request(url, method: .get, parameters: parameters)
-    
-  }
+  private let adapter = FriendListAdapter()
+  private let friendViewModelFactory = FriendListFactory()
+  var friendViewModels = [FriendsViewModel]()
+  private let networkService = NetworkServices()
+  private let databaseService = DatabaseServiceImpl()
+  
   
   required init(view: FriendsProtocol) {
     self.view = view
   }
   
   func getFriends() {
-    
-    queue.qualityOfService = .default
-    
-    let getData = GetDataOperation(request: request)
-    queue.addOperation(getData)
-    
-    let parseData = ParseDataOperation()
-    parseData.addDependency(getData)
-    queue.addOperation(parseData)
-    
-    let saveData = SaveDataOperation()
-    saveData.addDependency(parseData)
-    queue.addOperation(saveData)
-    
-    
-    let readData = ReadDataOperation()
-    readData.addDependency(saveData)
-    OperationQueue.main.addOperation(readData)
-    readData.completionBlock = { [weak self] in
-      self?.friends = readData.friends
-      OperationQueue.main.addOperation {
-        self?.view.success()
+    self.networkService.getFriendList(userId: nil) { [weak self] friends in
+      guard let self = self else { return }
+      for item in friends {
+        self.databaseService.save(object: item, update: true)
       }
+    }
+    
+    self.adapter.getFriends { [weak self] friends in
+      guard let self = self else { return }
+      self.friends = friends
+      self.friendViewModels = self.friendViewModelFactory.constructFriendListModel(friends: friends)
+      self.view.success()
     }
   }
 }
-  
+

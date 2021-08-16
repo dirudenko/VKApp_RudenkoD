@@ -104,7 +104,7 @@ class NewsTableViewController: UITableViewController, UITableViewDataSourcePrefe
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     var aspectRatio = CGFloat()
     guard let photo = self.items[indexPath.section].attachments else {return UITableView.automaticDimension }
-    
+  
     for item in photo {
       item.photo?.sizes?.forEach {
         if $0.type == "r" {

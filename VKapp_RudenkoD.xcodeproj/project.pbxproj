@@ -65,6 +65,10 @@
 		69CEA4F4269842CE0022B59B /* ENUM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEA4F3269842CE0022B59B /* ENUM.swift */; };
 		69CEA4F826997DFA0022B59B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEA4F726997DFA0022B59B /* Extensions.swift */; };
 		69CEA4FA269D7DF80022B59B /* NetworkOperationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEA4F9269D7DF80022B59B /* NetworkOperationService.swift */; };
+		69E44EA826C834760078A8B3 /* FriendsModelStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E44EA726C834760078A8B3 /* FriendsModelStruct.swift */; };
+		69E44EAB26C835630078A8B3 /* FriendListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E44EAA26C835630078A8B3 /* FriendListAdapter.swift */; };
+		69E44EB726C92D6D0078A8B3 /* FriendListFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E44EB626C92D6D0078A8B3 /* FriendListFactory.swift */; };
+		69E44EB926C92DD80078A8B3 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E44EB826C92DD80078A8B3 /* FriendsViewModel.swift */; };
 		69E5E00F26790AF100BCB5FF /* FBFriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E5E00E26790AF100BCB5FF /* FBFriendsModel.swift */; };
 		69E5E0112679184500BCB5FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69E5E0102679184500BCB5FF /* GoogleService-Info.plist */; };
 		69E97FB2265EA5940083DEAB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E97FB1265EA5940083DEAB /* AuthViewController.swift */; };
@@ -136,6 +140,10 @@
 		69CEA4F3269842CE0022B59B /* ENUM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENUM.swift; sourceTree = "<group>"; };
 		69CEA4F726997DFA0022B59B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		69CEA4F9269D7DF80022B59B /* NetworkOperationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperationService.swift; sourceTree = "<group>"; };
+		69E44EA726C834760078A8B3 /* FriendsModelStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModelStruct.swift; sourceTree = "<group>"; };
+		69E44EAA26C835630078A8B3 /* FriendListAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListAdapter.swift; sourceTree = "<group>"; };
+		69E44EB626C92D6D0078A8B3 /* FriendListFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListFactory.swift; sourceTree = "<group>"; };
+		69E44EB826C92DD80078A8B3 /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		69E5E00E26790AF100BCB5FF /* FBFriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBFriendsModel.swift; sourceTree = "<group>"; };
 		69E5E0102679184500BCB5FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69E97FB1265EA5940083DEAB /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +198,7 @@
 			children = (
 				69E5E00E26790AF100BCB5FF /* FBFriendsModel.swift */,
 				69BF44132622F70300D03109 /* FriendsModel.swift */,
+				69E44EA726C834760078A8B3 /* FriendsModelStruct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -408,6 +417,8 @@
 		695F08C92618D394001DC492 /* VKapp_RudenkoD */ = {
 			isa = PBXGroup;
 			children = (
+				69E44EB526C92D560078A8B3 /* Factory */,
+				69E44EA926C835420078A8B3 /* Adapter */,
 				695F08D32618D395001DC492 /* Assets.xcassets */,
 				6958798B2658295900A14C88 /* CustomAnimations */,
 				69E97FB32662215E0083DEAB /* Extensions */,
@@ -457,6 +468,23 @@
 				695F08D02618D394001DC492 /* Main.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		69E44EA926C835420078A8B3 /* Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				69E44EAA26C835630078A8B3 /* FriendListAdapter.swift */,
+			);
+			path = Adapter;
+			sourceTree = "<group>";
+		};
+		69E44EB526C92D560078A8B3 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				69E44EB626C92D6D0078A8B3 /* FriendListFactory.swift */,
+				69E44EB826C92DD80078A8B3 /* FriendsViewModel.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		69E97FB32662215E0083DEAB /* Extensions */ = {
@@ -619,10 +647,12 @@
 				6939018C26946C9B007C2DB5 /* NewsSeparatorCell.swift in Sources */,
 				69CEA4F4269842CE0022B59B /* ENUM.swift in Sources */,
 				695A0CD6266EAB00003BA234 /* DatabaseServiceProtocol.swift in Sources */,
+				69E44EAB26C835630078A8B3 /* FriendListAdapter.swift in Sources */,
 				692217372683188B00429DB6 /* NewsPresenter.swift in Sources */,
 				698D1A212667B47600F626A8 /* FriendsCollectionViewCell.swift in Sources */,
 				69BF44262622FF7900D03109 /* TabBarController.swift in Sources */,
 				699656FE26245702008650B8 /* UserGroupTableViewController.swift in Sources */,
+				69E44EB726C92D6D0078A8B3 /* FriendListFactory.swift in Sources */,
 				6993A8122666995F00938293 /* NetworkServices.swift in Sources */,
 				6939018826945025007C2DB5 /* NewsImageCell.swift in Sources */,
 				6923C72826636F520077A312 /* PhotosModel.swift in Sources */,
@@ -635,6 +665,7 @@
 				69CEA4FA269D7DF80022B59B /* NetworkOperationService.swift in Sources */,
 				697CCA13262EE6FF00E1F048 /* FriendsListViewController.swift in Sources */,
 				694FD2192634C7E8009CA6DD /* UIView+AnomationsGradient.swift in Sources */,
+				69E44EB926C92DD80078A8B3 /* FriendsViewModel.swift in Sources */,
 				691F6EB426233DD900CA7957 /* DetailedFriendCollectionViewCell.swift in Sources */,
 				6996570626246925008650B8 /* AllGroupsTableViewController.swift in Sources */,
 				695A0CDA26709BF8003BA234 /* UserModel.swift in Sources */,
@@ -652,6 +683,7 @@
 				699657022624595D008650B8 /* GroupTableViewCell.swift in Sources */,
 				69E5E00F26790AF100BCB5FF /* FBFriendsModel.swift in Sources */,
 				695F08CD2618D394001DC492 /* SceneDelegate.swift in Sources */,
+				69E44EA826C834760078A8B3 /* FriendsModelStruct.swift in Sources */,
 				69C11F28264311EA002A3E92 /* CustomAnimators.swift in Sources */,
 				69CEA4F826997DFA0022B59B /* Extensions.swift in Sources */,
 				698BAA7926A6DC970052C977 /* PhotoService.swift in Sources */,
